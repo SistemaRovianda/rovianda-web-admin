@@ -1,0 +1,45 @@
+<form
+  [formGroup]="form"
+  fxLayout="column"
+  fxLayoutAlign="center stretch"
+  (ngSubmit)="onSubmit()"
+  class="mat-body"
+  fxLayoutGap="5px"
+>
+  <mat-form-field fxFlex>
+    <mat-label>Usuario</mat-label>
+    <input name="email" formControlName="email" matInput type="text" />
+    <mat-icon matSuffix>person</mat-icon>
+    <mat-error>
+      <span *ngIf="form.hasError('required', 'email')">
+        Este campo es requerido.
+      </span>
+      <span *ngIf="form.hasError('email', 'email')">
+        Este no es un correo electrónico válido.
+      </span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field fxFlex>
+    <mat-label>Contraseña</mat-label>
+    <input
+      name="password"
+      [type]="shouldHidePassword ? 'password' : 'text'"
+      formControlName="password"
+      matInput
+    />
+    <span class="clickable" matSuffix (click)="togglePassword()">
+      <mat-icon>
+        {{ passwordVisibilityIcon }}
+      </mat-icon>
+    </span>
+    <mat-error>
+      Este campo es requerido.
+    </mat-error>
+  </mat-form-field>
+  <div fxLayoutAlign="end center" fxLayoutGap="15px">
+    <a class="link text-muted" routerLink="/">
+      Recuperar contraseña
+    </a>
+  </div>
+  <button hidden="hidden" type="submit" #submitButton></button>
+</form>

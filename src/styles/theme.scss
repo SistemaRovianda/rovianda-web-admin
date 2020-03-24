@@ -1,0 +1,48 @@
+@import "variables";
+
+// Compute font config
+@include mat-core($fontConfig);
+
+$theme-primary: mat-palette($mat-primary, main, lighter, darker);
+$theme-accent: mat-palette($mat-accent, main, lighter, darker);
+$theme-warn: mat-palette($mat-warn, main, lighter, darker);
+
+$theme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
+$primary: map-get($theme, primary);
+
+@mixin login-background($theme) {
+  $color-primary: mat-color($primary);
+  .login__background {
+    height: 100vh;
+    background: linear-gradient(
+      to right,
+      $color-primary 0%,
+      $color-primary 70%,
+      #fff7e1 70%,
+      #ffffff 70%,
+      #ffffff 92%
+    );
+  }
+}
+
+@mixin mat-text($theme) {
+  .text-white {
+    color: #fff;
+  }
+
+  .text-primary {
+    color: mat-color($primary);
+  }
+}
+
+@mixin mat-button($theme) {
+  button.mat-flat-button.mat-button-base.mat-primary {
+    color: #fff;
+  }
+}
+
+// Theme Init
+@include angular-material-theme($theme);
+@include login-background($theme);
+@include mat-text($theme);
+@include mat-button($theme);

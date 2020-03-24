@@ -1,0 +1,56 @@
+<div fxFlex class="login__background " fxLayout="row">
+  <div fxFlex="60" fxLayoutAlign="center center" fxLayout="column">
+    <div fxFlex="80" fxLayoutAlign="center center">
+      <div fxFlex="500px" fxLayoutGap="15px">
+        <h1 class="title text-white">Bienvenido</h1>
+        <p class="mat-body text-white">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus
+          molestiae ipsa delectus cum et, necessitatibus, officia, tempora
+          debitis placeat magni obcaecati nulla nesciunt sequi nobis voluptates
+          ipsum itaque? Dicta, necessitatibus?
+        </p>
+
+        <div class="figure" fxLayoutAlign="start end">
+          <div class="circle" fxLayoutAlign="center center">
+            <div class="circle-container"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div fxFlex class="figure" fxLayoutAlign="start end">
+      <div class="cuarto-circulo" fxLayoutAlign="start end">
+        <div class="cuarto-circulo-container"></div>
+      </div>
+    </div>
+  </div>
+  <div fxFlex="40" fxLayoutAlign="center center">
+    <mat-card fxLayout="column" fxFlex="75" style="padding: 0;">
+      <div fxLayoutAlign="end center">
+        <h1 class="mat-h1 text-primary" fxFlex style="padding: 0 20px;">
+          Login
+        </h1>
+        <div class="figure-login"></div>
+      </div>
+
+      <div
+        fxLayout="column"
+        fxLayoutGap="15px"
+        style="padding:0 20px 40px 20px;"
+      >
+        <login-form #form (onSubmit)="onSubmit($event)"></login-form>
+
+        <div class="text-white">
+          <button
+            (click)="form.onSubmit()"
+            mat-flat-button
+            color="primary"
+            [disabled]="form.shouldDisable()"
+          >
+            Iniciar sesión
+          </button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

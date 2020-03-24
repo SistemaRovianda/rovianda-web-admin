@@ -1,0 +1,23 @@
+@import "styles/main.scss";
+
+body {
+  min-height: 100vh;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.text-muted {
+  font-family: "Inter";
+  color: rgba($color: #000000, $alpha: 0.35);
+}
+
+.link {
+  text-decoration: none;
+}
