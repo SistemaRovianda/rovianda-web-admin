@@ -1,0 +1,14 @@
+<div *ngFor="let entity of entity; let i = index">
+  <div class="tag">
+    <div fxLayout="column" fxLayoutGap="10px">
+      <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+        <div>
+          {{ entity.date | date: "dd/MM/yyyy" }}
+        </div>
+        <div>
+          {{ entity.status }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

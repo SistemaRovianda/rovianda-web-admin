@@ -1,0 +1,21 @@
+<form
+  [formGroup]="form"
+  fxLayout="row"
+  fxLayoutAlign="center center"
+  (ngSubmit)="onSubmit()"
+  class="mat-body"
+>
+  <mat-form-field fxFlex class="search" style="margin-left:15px">
+    <input type="text" matInput formControlName="query" placeholder="Buscar" />
+  </mat-form-field>
+  <div></div>
+  <button
+    class="btn-search"
+    type="submit"
+    #submitButton
+    mat-flat-button
+    color="primary"
+  >
+    <mat-icon fxShow="true">search</mat-icon>
+  </button>
+</form>

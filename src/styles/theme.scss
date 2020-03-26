@@ -41,8 +41,76 @@ $primary: map-get($theme, primary);
   }
 }
 
+@mixin mat-toolbar($theme) {
+  mat-toolbar.mat-toolbar {
+    background-color: #ffffff;
+    color: #575552;
+  }
+
+  a.nav {
+    text-decoration: none;
+    color: #dadada;
+  }
+
+  a.nav.mat-list-item.active {
+    color: mat-color($primary);
+  }
+}
+
+@mixin search-theme($theme) {
+  mat-form-field.search {
+    height: 60px;
+    width: 300px;
+
+    &.mat-form-field {
+      min-width: 50%;
+    }
+
+    & .mat-form-field-wrapper {
+      margin: 0.6em 0;
+
+      & .mat-form-field-flex {
+        & .mat-form-field-infix {
+          background-color: white !important;
+          border-radius: 3px 0 0 3px;
+        }
+
+        & .mat-form-field-infix {
+          input.mat-input-element {
+            padding: 0 15px;
+          }
+
+          & .mat-form-field-label-wrapper {
+            & .mat-form-field-label {
+              color: mat-color($primary);
+              padding: 0 15px;
+            }
+          }
+        }
+      }
+
+      & .mat-form-field-underline {
+        height: 0;
+      }
+    }
+  }
+
+  button.btn-search.mat-flat-button.mat-button-base.mat-primary {
+    height: min-content;
+    padding-top: 2.5px;
+    margin-bottom: 3px;
+    border-radius: 0 5px 5px 0;
+
+    .mat-button-ripple.mat-ripple {
+      height: auto;
+    }
+  }
+}
+
 // Theme Init
 @include angular-material-theme($theme);
 @include login-background($theme);
 @include mat-text($theme);
 @include mat-button($theme);
+@include mat-toolbar($theme);
+@include search-theme($theme);

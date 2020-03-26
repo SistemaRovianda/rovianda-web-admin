@@ -1,0 +1,49 @@
+<mat-toolbar class="mat-toolbar">
+  <div
+    fxFlex
+    class="mat-h3"
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+    style="padding: 0 20px; height: 64px;
+    margin: 0;"
+  >
+    <div fxLayoutGap="25px" fxLayout="row">
+      <div>
+        <a mat-list-item routerLinkActive="active">
+          <div fxLayoutAlign="center center">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+            Salir
+          </div>
+        </a>
+      </div>
+      <div fxLayout="row" fxLayoutGap="15px">
+        <a
+          class="nav"
+          mat-list-item
+          routerLink="history"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          Historial
+        </a>
+        <a
+          class="nav"
+          mat-list-item
+          routerLink="maintenance"
+          routerLinkActive="active"
+        >
+          Mantenimiento
+        </a>
+      </div>
+    </div>
+
+    <img class="logo" src="\assets\images\grupo-6.svg" alt="logo" />
+  </div>
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav-content fxFlexFill>
+    <div class="main-container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

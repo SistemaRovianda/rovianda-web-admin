@@ -13,6 +13,12 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.logo {
+  width: 125px;
+  height: auto;
+  color: #575552;
+}
+
 .text-muted {
   font-family: "Inter";
   color: rgba($color: #000000, $alpha: 0.35);
@@ -20,4 +26,8 @@ body {
 
 .link {
   text-decoration: none;
+}
+
+.page {
+  height: calc(100vh - 64px);
 }

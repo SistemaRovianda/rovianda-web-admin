@@ -1,0 +1,59 @@
+<div class="page" fxLayoutAlign="center center">
+  <div fxFlex fxLayout="column" fxLayoutGap="10px">
+    <div fxFlex fxLayoutAlign="center center">
+      <search-form [query]="query$ | async"></search-form>
+    </div>
+    <div
+      fxFlex
+      fxLayout="column"
+      fxLayout.gt-sm="row"
+      fxLayoutAlign="space-evenly stretch"
+    >
+      <div fxFlex.gt-xs="40%">
+        <mat-card fxFlex fxLayout="column" fxLayoutGap="10px">
+          <div class="list">
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <h2 class="mat-title text-primary">
+                Fecha
+              </h2>
+              <h2 class="mat-title text-primary">
+                Estado
+              </h2>
+            </div>
+            <history-list [entity]="entity$"></history-list>
+          </div>
+          <div fxLayoutAlign="center center" fxLayoutGap="10px">
+            <div>
+              <button type="button" mat-flat-button color="primary">
+                Descargar historial
+              </button>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+
+      <div fxFlex.gt-xs="45%">
+        <mat-card fxFlex fxLayout="column" fxLayoutGap="10px">
+          <div class="list">
+            <!-- <div fxLayoutAlign="center">
+              <mat-spinner diameter="30"></mat-spinner>
+            </div> -->
+            <h2 class="mat-title text-primary">
+              Documento
+            </h2>
+
+            <div [fxHide]="entity$">
+              No existen documentos
+            </div>
+
+            <div *ngIf="entity$ ">
+              <div *ngFor="let document of documents$">
+                <document-list [document]="document"></document-list>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

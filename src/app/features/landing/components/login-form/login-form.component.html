@@ -6,10 +6,16 @@
   class="mat-body"
   fxLayoutGap="5px"
 >
-  <mat-form-field fxFlex>
-    <mat-label>Usuario</mat-label>
-    <input name="email" formControlName="email" matInput type="text" />
-    <mat-icon matSuffix>person</mat-icon>
+  <mat-form-field fxFlex style="margin-left: 5px;">
+    <mat-icon matPrefix svgIcon="user" aria-hidden="false">|</mat-icon>
+    <mat-label style="margin-left: 5px;" class="input ">Usuario</mat-label>
+    <input
+      style="margin-left: 5px;"
+      name="email"
+      formControlName="email"
+      matInput
+      type="text"
+    />
     <mat-error>
       <span *ngIf="form.hasError('required', 'email')">
         Este campo es requerido.
@@ -20,18 +26,25 @@
     </mat-error>
   </mat-form-field>
   <mat-form-field fxFlex>
-    <mat-label>Contraseña</mat-label>
+    <mat-icon
+      class="clickable"
+      matPrefix
+      svgIcon="padlock"
+      aria-hidden="false"
+      (click)="togglePassword()"
+    >
+      <!-- <mat-icon>
+        {{ passwordVisibilityIcon }}
+      </mat-icon> -->
+    </mat-icon>
+    <mat-label style="margin-left: 5px;">Contraseña</mat-label>
     <input
+      style="margin-left: 5px;"
       name="password"
       [type]="shouldHidePassword ? 'password' : 'text'"
       formControlName="password"
       matInput
     />
-    <span class="clickable" matSuffix (click)="togglePassword()">
-      <mat-icon>
-        {{ passwordVisibilityIcon }}
-      </mat-icon>
-    </span>
     <mat-error>
       Este campo es requerido.
     </mat-error>

@@ -8,6 +8,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { RouterModule } from "@angular/router";
 import { LoginFormComponent } from "./login-form.component";
+import { HttpClientModule } from "@angular/common/http";
 
 const COMMON_MODULES = [
   CommonModule,
