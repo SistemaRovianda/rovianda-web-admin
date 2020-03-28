@@ -95,11 +95,12 @@ $primary: map-get($theme, primary);
     }
   }
 
-  button.btn-search.mat-flat-button.mat-button-base.mat-primary {
+  button.btn-search.mat-flat-button.mat-button-base {
     height: min-content;
     padding-top: 2.5px;
     margin-bottom: 3px;
     border-radius: 0 5px 5px 0;
+    color: mat-color($primary);
 
     .mat-button-ripple.mat-ripple {
       height: auto;

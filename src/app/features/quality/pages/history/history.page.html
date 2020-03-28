@@ -1,4 +1,4 @@
-<div class="page" fxLayoutAlign="center center">
+<div fxLayoutAlign="center center">
   <div fxFlex fxLayout="column" fxLayoutGap="10px">
     <div fxFlex fxLayoutAlign="center center">
       <search-form [query]="query$ | async"></search-form>
@@ -8,6 +8,8 @@
       fxLayout="column"
       fxLayout.gt-sm="row"
       fxLayoutAlign="space-evenly stretch"
+      style="padding: 10px;"
+      fxLayoutGap="10px"
     >
       <div fxFlex.gt-xs="40%">
         <mat-card fxFlex fxLayout="column" fxLayoutGap="10px">

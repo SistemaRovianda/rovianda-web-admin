@@ -30,4 +30,6 @@ body {
 
 .page {
   height: calc(100vh - 64px);
+  overflow: auto;
+  padding: 10px;
 }
