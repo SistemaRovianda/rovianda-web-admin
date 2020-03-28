@@ -33,6 +33,10 @@ $primary: map-get($theme, primary);
   .text-primary {
     color: mat-color($primary);
   }
+
+  .text-dark {
+    color: #7b7b7b;
+  }
 }
 
 @mixin mat-button($theme) {

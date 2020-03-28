@@ -1,1 +1,48 @@
-<p>maintenance works!</p>
+<div fxLayoutAlign="center center">
+  <div fxFlex fxLayout="column" fxLayoutGap="10px">
+    <div
+      fxFlex
+      fxLayout="column"
+      fxLayout.gt-sm="row"
+      fxLayoutAlign="space-evenly stretch"
+      style="padding: 10px;"
+      fxLayoutGap="10px"
+    >
+      <div fxFlex.gt-xs="40%">
+        <mat-card fxFlex fxLayout="column" fxLayoutGap="10px">
+          <div class="list">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <h2 class="mat-title text-dark">
+                Registros
+              </h2>
+            </div>
+            <records [entity]="entity$"></records>
+          </div>
+        </mat-card>
+      </div>
+
+      <div fxFlex.gt-xs="45%">
+        <mat-card fxFlex fxLayout="column" fxLayoutGap="10px">
+          <div class="list">
+            <!-- <div fxLayoutAlign="center">
+                <mat-spinner diameter="30"></mat-spinner>
+              </div> -->
+            <h2 class="mat-title text-dark">
+              Detalles
+            </h2>
+
+            <div [fxHide]="entity$">
+              No existen documentos
+            </div>
+
+            <div *ngIf="entity$ ">
+              <div>
+                <maintenance-detail [detail]="detail$"></maintenance-detail>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

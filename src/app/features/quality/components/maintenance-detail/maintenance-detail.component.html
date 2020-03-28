@@ -1,0 +1,22 @@
+<div fxFlex fxLayout="column" fxLayoutGap="30px" fxLayoutAlign="center center">
+  <div>
+    <div class="image" fxLayoutAlign="center center">
+      <mat-icon>image</mat-icon>
+    </div>
+    <span class="text-muted">Captura del mantenimiento</span>
+  </div>
+  <div class="text-dark">
+    <h2 class="mat-title">
+      {{ detail.title }}
+    </h2>
+    <p>{{ detail.name }}</p>
+  </div>
+
+  <div
+    class="text-dark mat-body mat-small"
+    fxLayoutAlign="center center"
+    style="padding-bottom: 25px;"
+  >
+    <p fxFlex="80">{{ detail.description }}</p>
+  </div>
+</div>
