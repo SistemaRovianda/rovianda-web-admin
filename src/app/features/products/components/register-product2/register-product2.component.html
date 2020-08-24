@@ -1,0 +1,91 @@
+<mat-card>
+    <div class="content-filter">
+        <div class="filter">
+            <mat-form-field class="example-full-width">
+                <input type="text" placeholder="Ingresa un ingrediente" aria-label="Number" matInput
+                    [formControl]="myControl" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                    <mat-option *ngFor="let option of (filteredOptions | async)" [value]="option">
+                        {{option.nameProduct}} {{option.mark}} {{option.variant}} {{option.presentation}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+        <div class="button">
+            <button mat-raised-button style="align-content: space-between;" (click)="print()"
+                [disabled]="myControl.value.length">
+                Agregar
+            </button>
+        </div>
+    </div>
+
+    <div class="content-ingredients">
+        <div class="ingredients">
+            <ng-template #elseBlock>
+                <div class="no-data">
+                    Agrega un ingrediente.
+                </div>
+            </ng-template>
+
+            <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                <!-- Position Column -->
+                <ng-container matColumnDef="number">
+                    <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+                    <mat-cell *matCellDef="let i=index"> {{i + 1}} </mat-cell>
+                </ng-container>
+
+                <!-- nameIngredient Column -->
+                <ng-container matColumnDef="nameIngredient">
+                    <mat-header-cell *matHeaderCellDef> Ingrediente </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.nameProduct}} </mat-cell>
+                </ng-container>
+
+                <!-- mark Column -->
+                <ng-container matColumnDef="mark">
+                    <mat-header-cell *matHeaderCellDef> Marca </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.mark}} </mat-cell>
+                </ng-container>
+
+                <!-- variant Column -->
+                <ng-container matColumnDef="variant">
+                    <mat-header-cell *matHeaderCellDef> Variante </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.variant}} </mat-cell>
+                </ng-container>
+                <!-- presentation Column -->
+                <ng-container matColumnDef="presentation">
+                    <mat-header-cell *matHeaderCellDef> Presentación </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.presentation}} </mat-cell>
+                </ng-container>
+                <!-- accions column -->
+                <ng-container matColumnDef="accions">
+                    <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <a mat-button color="warn" style="align-content: space-between;" (click)="delete(element)">
+                            Eliminar
+                        </a>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+
+            <!-- <table *ngIf="ingredients!=''; else elseBlock">
+                <tbody >
+                    <tr *ngFor="let element of ingredients; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{element.nameProduct}}</td>
+                        <td>{{element.mark}}</td>
+                        <td>{{element.variant}}</td>
+                        <td>{{element.presentation}}</td>
+                        <td>
+                            <a mat-button color="warn" style="align-content: space-between;" (click)="delete(element)">
+                                Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table> -->
+        </div>
+    </div>
+</mat-card>

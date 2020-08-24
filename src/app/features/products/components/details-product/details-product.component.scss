@@ -1,0 +1,34 @@
+.content-card {
+    width: 100%;
+    height: 90%;
+    .card {
+        //594 * 627
+        width: 100%;
+        height: 100%;
+        // font-family: Montserrat;
+        .content-title {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            text-align: center;
+            .content-clave, .content-product{
+                display: flex;
+                flex-direction: column;
+            }
+        }
+        .ingredients, .presentations{
+            display: flex;
+            flex-direction: row;
+            min-height: 200px;
+            max-height: 200px;
+            background-color: #f7f7f7;
+            overflow: auto;
+            table{
+                width: 100%;
+                td{
+                    width: auto;
+                }
+            }
+        }
+    }
+}

@@ -6,7 +6,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { SearchFormComponent } from "./search-form.component";
-
+import { MatSelectModule } from '@angular/material/select';
 const COMMON_IMPORTS = [
   FormsModule,
   CommonModule,
@@ -14,7 +14,8 @@ const COMMON_IMPORTS = [
   MatButtonModule,
   FlexLayoutModule,
   ReactiveFormsModule,
-  MatIconModule
+  MatIconModule,
+  MatSelectModule
 ];
 const COMMON_DECLARATIONS = [SearchFormComponent];
 

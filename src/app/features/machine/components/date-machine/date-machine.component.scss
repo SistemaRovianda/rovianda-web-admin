@@ -1,0 +1,17 @@
+.content {
+    mat-card {
+        min-width: 600px;
+        min-height: 160px;
+        .title {
+        }
+        .date {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            font-size: 12px;
+            .button {
+                margin-top: 5px;
+            }
+        }
+    }
+}

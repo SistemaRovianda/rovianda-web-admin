@@ -1,0 +1,42 @@
+<div class="content">
+    <div class="content-form1">
+        <div class="content-data-general">
+            <h2>Datos generales</h2>
+            <app-register-product1 [objDetails]="objDetails" (emitterForm)="dataGeneric($event)"></app-register-product1>
+        </div>
+        <div class="content-ingredients">
+            <div class="title">
+                <h2>Ingredientes</h2>
+                <div class="button">
+                    <button mat-raised-button style="align-content: space-between;" (click)="print()">
+                        <img src="../../../../../assets/icons/plus-solid.svg" alt="">
+                        Registrar ingrediente
+                    </button>
+                </div>
+            </div>
+            <app-register-product2 [change]="change" (updateingredients)="objIngredients($event)"></app-register-product2>
+        </div>
+    </div>
+    <div class="content-form2">
+        <div class="content-presentations">
+            <div class="title">
+                <h2>Presentaciones</h2>
+                <div class="button">
+                    <button mat-raised-button style="align-content: space-between;" (click)="openDialog()">
+                        <img src="../../../../../assets/icons/plus-solid.svg" alt="">
+                        Nueva presentación
+                    </button>
+                </div>
+            </div>
+            <div class="content-table">
+                <app-register-product3 [ELEMENT_DATA]="options" (updatePresentation)="objPresentation($event)"></app-register-product3>
+            </div>
+        </div>
+        <div class="content-buttons">
+                <button class="cancelButton" mat-raised-button color="accent" (click)="cancel()">Cancelar</button>
+                <button mat-raised-button #disableButton color="primary" (click)="sendData()">Agregar</button> 
+        </div>
+    </div>
+</div>
+
+<!-- disableButton.disabled=true -->

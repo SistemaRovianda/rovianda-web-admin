@@ -6,7 +6,7 @@ import {
   EventEmitter,
   Output
 } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, FormControl } from "@angular/forms";
 
 @Component({
   selector: "search-form",
@@ -17,16 +17,24 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 export class SearchFormComponent implements OnInit {
   form: FormGroup;
 
+  selectedType=[
+    {value: "MEAT", title: "Cárnicos"},
+    {value: "DRIEF", title: "Secos"},
+    {value: "PACKING", title: "Empaques"},
+  ]
+
   @Input() set query(query: string) {
     if (query) {
-      this.form.patchValue({ query }, { emitEvent: false });
+      this.form.patchValue({ query: query }, { emitEvent: false });
     }
   }
 
   @Output("onSubmit") submit = new EventEmitter();
 
+  
   constructor(formBuilder: FormBuilder) {
     this.form = formBuilder.group({
+      typeSearch:new FormControl(''),
       query: ""
     });
   }
@@ -34,6 +42,10 @@ export class SearchFormComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit() {
-    this.submit.emit(this.form.value);
+    let valueForm= this.form.value
+    if(valueForm.typeSearch != '' && valueForm.query != ''){
+      console.log(valueForm)
+      this.submit.emit(this.form.value);
+    }
   }
 }

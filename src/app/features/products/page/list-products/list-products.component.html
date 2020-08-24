@@ -1,0 +1,15 @@
+<div class="content">
+    <div class="content-button">
+        <button class="button" mat-raised-button (click)="navigateCreateProduct()">
+            <img src="../../../../../assets/icons/plus-solid.svg">
+              Nuevo producto
+        </button>
+    </div>
+    <div class="content-list">
+        <app-table (identificator)="detailsProduct($event)"></app-table>
+    </div>
+    <div class="content-detail" *ngIf="dataDetailsProduct">
+        <h2>Detalles del producto</h2>
+        <app-details-product [dataDetails]="dataDetailsProduct"></app-details-product>
+    </div>
+</div>

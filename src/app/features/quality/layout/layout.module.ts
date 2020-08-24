@@ -27,7 +27,6 @@ const COMMON_MODULES = [
   MatMenuModule,
   MatBadgeModule,
   MatSidenavModule,
-
   MatListModule
 ];
 

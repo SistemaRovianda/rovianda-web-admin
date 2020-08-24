@@ -1,3 +1,40 @@
 .list {
   padding: 40px 0 20px 0;
 }
+
+.search {
+  margin-top: 10px;
+}
+
+.content-der {
+  display: flex;
+  flex-direction: column;
+  .card-documents {
+    margin-top: 20px;
+  }
+}
+
+.content-all-docs {
+  max-height: 250px;
+  min-height: 250px;
+  overflow: overlay;
+}
+
+.content-history{
+  max-height: 600px;
+  min-height: 600px;
+  overflow: overlay;
+}
+
+.content-documents-packaing {
+  width: 100%;
+  height: 100%;
+  .content-reports-date {
+    width: 100%;
+    height: 50%;
+  }
+  .content-documents {
+    width: 100%;
+    height: 50%;
+  }
+}

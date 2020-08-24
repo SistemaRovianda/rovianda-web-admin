@@ -1,0 +1,45 @@
+<div class="content-dialog">
+  <h4>Registrar Ingrediente</h4>
+  <div class="content-input" [formGroup]="form">
+    <div class="content-izq">
+      <mat-form-field class="example-full-width">
+        <mat-label>Producto*</mat-label>
+        <input matInput formControlName="product" placeholder="Ingrese el producto">
+        <mat-error *ngIf="form.controls.product.invalid">
+          {{getErrorProduct()}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Marca*</mat-label>
+        <input type="text" matInput formControlName="mark" placeholder="Ingrese la marca">
+        <mat-error *ngIf="form.controls.mark.invalid">
+          {{getErrorMark()}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="content-der">
+      <mat-form-field class="example-full-width">
+        <mat-label>Variante*</mat-label>
+        <input type="text" formControlName="variant" matInput placeholder="Ingrese la variante">
+        <mat-error *ngIf="form.controls.variant.invalid">
+          {{getErrorVariant()}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Presentación*</mat-label>
+        <input type="text" formControlName="presentation" matInput placeholder="Ingrese la presentación">
+        <mat-error *ngIf="form.controls.presentation.invalid">
+          {{getErrorPresentation()}}
+        </mat-error>
+      </mat-form-field>
+
+      <div class="buttons">
+        <button mat-raised-button color="accent" #disableButtonCancel (click)="onNoClick(); disableButtonCancel.disabled = true">Cancelar</button>
+        <button mat-raised-button color="primary" #disableButton [disabled]="form.invalid" (click)="onClickUser(); disableButton.disabled = true">Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>

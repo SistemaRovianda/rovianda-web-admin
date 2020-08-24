@@ -5,6 +5,15 @@
   (ngSubmit)="onSubmit()"
   class="mat-body"
 >
+<mat-form-field appearance="fill">
+  <mat-label>Tipo de búsqueda</mat-label>
+  <mat-select formControlName="typeSearch">
+    <mat-option *ngFor="let item of selectedType" [value]="item.value" >
+      {{item.title}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
   <mat-form-field fxFlex class="search" style="margin-left:15px">
     <input type="text" matInput formControlName="query" placeholder="Buscar" />
   </mat-form-field>

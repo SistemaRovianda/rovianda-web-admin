@@ -1,0 +1,16 @@
+.content-message {
+    width: 300px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    .content-title {
+        text-align: center;
+    }
+    .content-text {
+        text-align: justify;
+    }
+    .content-button {
+        text-align: center;
+        margin-top: 20px;
+    }
+}

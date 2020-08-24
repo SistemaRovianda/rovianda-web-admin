@@ -1,15 +1,15 @@
-<div *ngFor="let entity of entity; let i = index">
+<div *ngFor="let item of entity; let i = index" (click)="sendData(item)">
   <div class="tag">
     <div fxLayout="column" fxLayoutGap="10px">
-      <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxFlex fxLayout="row" fxLayoutAlign="space-between center" *ngIf="entity">
         <div fxLayoutAlign="center center" fxLayoutGap="5px">
           <mat-icon>report_problem</mat-icon>
           <span>
-            {{ entity.status }}
+            {{ item.titleFailure }}
           </span>
         </div>
         <div>
-          {{ entity.date | date: "dd/MM/yyyy" }}
+          {{ item.date | date: "dd/MM/yyyy" }}
         </div>
       </div>
     </div>

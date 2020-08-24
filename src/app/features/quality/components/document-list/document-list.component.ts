@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 
 @Component({
   selector: "document-list",
@@ -7,7 +7,18 @@ import { Component, OnInit, Input } from "@angular/core";
 })
 export class DocumentListComponent implements OnInit {
   @Input() document;
+  @Output() sendDocument= new EventEmitter;
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
+
+  downloadpdf(objDownload:any){
+    Object.assign(objDownload, {type:'pdf'})
+    this.sendDocument.emit(objDownload);
+  }
+  downloadExcel(objDownload:any){
+    Object.assign(objDownload, {type:'Excel'})
+    this.sendDocument.emit(objDownload);
+  }
 }

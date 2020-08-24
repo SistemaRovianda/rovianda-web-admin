@@ -1,0 +1,25 @@
+mat-table {
+  width: 100%;
+  height: 400px;
+  background-color: #ffffff;
+}
+
+.content-table {
+    .presentatios {
+      display: flex;
+      flex-direction: row;
+      min-height: 250px;
+      max-height: 200px;
+      overflow: auto;
+      table {
+        width: 100%;
+        td {
+          width: auto;
+        }
+      }
+      .no-data {
+        align-self: center;
+        margin: auto;
+      }
+    }
+  }

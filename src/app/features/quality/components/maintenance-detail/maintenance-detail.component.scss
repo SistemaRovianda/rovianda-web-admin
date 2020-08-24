@@ -1,5 +1,11 @@
 .image {
-  width: 200px;
-  height: 150px;
+  max-width: 241px;
+  max-height: 175px;
+  min-width: 240px;
+  min-height: 174px;
   background-color: #ededed;
+}
+
+p{
+  text-align: center;
 }

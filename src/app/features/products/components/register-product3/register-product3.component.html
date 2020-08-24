@@ -1,0 +1,46 @@
+<div class="content-table">
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="count">
+            <mat-header-cell *matHeaderCellDef> Consecutivo </mat-header-cell>
+            <mat-cell *matCellDef="let i=index"> {{i+1}} </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="presentation">
+            <mat-header-cell *matHeaderCellDef> Presentación </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.presentation}} </mat-cell>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="typePresentation">
+            <mat-header-cell *matHeaderCellDef> Tipo </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.typePresentation}} </mat-cell>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="pricePresentation">
+            <mat-header-cell *matHeaderCellDef> Precio </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.pricePresentation | currency:'CAD':'symbol-narrow'}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="accions">
+            <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+            <mat-cell *matCellDef="let i=index">
+                <a mat-button color="warn" style="align-content: space-between;" (click)="delete(i)">
+                    Eliminar
+                </a>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <ng-template #elseBlock>
+        <div class="no-data">
+            Agrega una presentación del producto.
+        </div>
+    </ng-template>
+</div>

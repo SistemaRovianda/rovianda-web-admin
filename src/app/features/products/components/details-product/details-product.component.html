@@ -1,0 +1,54 @@
+<div class="content-card" *ngIf="dataDetails">
+    <mat-card class="card">
+        <div class="content-title">
+            <div class="content-clave">
+                <div class="clave">
+                    <h4>Clave</h4>
+                </div>
+                <div class="result">
+                    {{dataDetails.code}}
+                </div>
+            </div>
+            <div class="content-product">
+                <div class="clave">
+                    <h4>Nombre del producto</h4>
+                </div>
+                <div class="result">
+                    {{dataDetails.nameProduct}}
+                </div>
+            </div>
+        </div>
+        <mat-card-content>
+            <div class="content-ingredients">
+                <h3>Ingredientes</h3>
+                <div class="ingredients">
+                    <table>
+                        <tbody >
+                            <tr *ngFor="let element of dataDetails.ingredents; let i = index">
+                                <td>{{i+1}}</td>
+                                <td>{{element.description}}</td>
+                                <td>{{element.mark}}</td>
+                                <td>{{element.variant}}</td>
+                                <td>{{element.presentation}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="content-presentations">
+                <h3>Presentaciones</h3>
+                <div class="presentations">
+                    <table>
+                        <tbody >
+                            <tr *ngFor="let element of dataDetails.presentations; let i = index">
+                                <td>{{i+1}}</td>
+                                <td>{{element.presentation}} {{element.typePresentation}}</td>
+                                <td>{{element.pricePresentation | currency:'CAD':'symbol-narrow'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

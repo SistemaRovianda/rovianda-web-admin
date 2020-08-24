@@ -1,7 +1,7 @@
 <div fxLayoutAlign="center center">
   <div fxFlex fxLayout="column" fxLayoutGap="10px">
-    <div fxFlex fxLayoutAlign="center center">
-      <search-form [query]="query$ | async"></search-form>
+    <div fxFlex fxLayoutAlign="center center" class="search">
+      <search-form (onSubmit)="objSearch($event)"></search-form>
     </div>
     <div
       fxFlex
@@ -11,46 +11,72 @@
       style="padding: 10px;"
       fxLayoutGap="10px"
     >
-      <div fxFlex.gt-xs="40%">
+      <div class="content-history" fxFlex.gt-xs="40%">
         <mat-card fxFlex fxLayout="column" fxLayoutGap="10px">
+          
           <div class="list">
             <div fxLayout="row" fxLayoutAlign="space-between">
               <h2 class="mat-title text-primary">
-                Fecha
+                Acción
               </h2>
               <h2 class="mat-title text-primary">
-                Estado
+                Fecha
               </h2>
             </div>
-            <history-list [entity]="entity$"></history-list>
+            <div class="packaging" *ngIf="hasPackaging$ | async">
+              <app-search-packaging [packaging]="packaging"></app-search-packaging>
+            </div>
+            <div class="drief" *ngIf="hasDrief$ | async">
+              <app-search-drief [drief]="drief"></app-search-drief>
+            </div>
+            <div class="meat" *ngIf="hasMeat$ | async">
+              <history-list [meat]="meat"></history-list>
+            </div>
+            <!-- <div fxLayoutAlign="center" *ngIf="!((hasPackaging$ | async)  && (hasDrief$ | async)  && (hasMeat$ | async))">
+              <mat-spinner diameter="30"></mat-spinner>
+              
+              Sin datos búscados.
+            </div> -->
           </div>
-          <div fxLayoutAlign="center center" fxLayoutGap="10px">
+          <!-- <div fxLayoutAlign="center center" fxLayoutGap="10px">
             <div>
               <button type="button" mat-flat-button color="primary">
                 Descargar historial
               </button>
             </div>
-          </div>
+          </div> -->
         </mat-card>
       </div>
 
-      <div fxFlex.gt-xs="45%">
-        <mat-card fxFlex fxLayout="column" fxLayoutGap="10px">
+      <div fxFlex.gt-xs="45%" class="content-der">
+
+        <div class="content-dates">
+          <app-date-reports (dates)="objdates($event)"></app-date-reports>
+        </div>
+
+        <mat-card fxFlex fxLayout="column" fxLayoutGap="10px" class="card-documents">
           <div class="list">
-            <!-- <div fxLayoutAlign="center">
-              <mat-spinner diameter="30"></mat-spinner>
-            </div> -->
             <h2 class="mat-title text-primary">
-              Documento
+              Documentos para descargar
             </h2>
+            <div class="content-all-docs" *ngIf="(hasPackaging$ | async) || (hasDrief$ | async) || (hasMeat$ | async)">
+              
+              <div class="content-documents-meat">
+                <div *ngFor="let document of documentsMeat$">
+                  <document-list [document]="document" (sendDocument)="downloadFileMeat($event)"></document-list>
+                </div>
+              </div>
+              
+              <div class="content-documents-drief" *ngIf="(hasDrief$ | async) && drief"> <!--Terminado-->
+                <div *ngFor="let document of documentsDrief$">
+                  <document-list [document]="document" (sendDocument)="downloadFileDrief($event)"></document-list>
+                </div>
+              </div>
 
-            <div [fxHide]="entity$">
-              No existen documentos
-            </div>
-
-            <div *ngIf="entity$ ">
-              <div *ngFor="let document of documents$">
-                <document-list [document]="document"></document-list>
+              <div class="content-documents-packaing" *ngIf="(hasPackaging$ | async) && packaging">
+                <div  class="content-documents" *ngFor="let document of documentsPacking$">
+                  <document-list [document]="document" (sendDocument)="downloadFilePacking($event)"></document-list>
+                </div>
               </div>
             </div>
           </div>

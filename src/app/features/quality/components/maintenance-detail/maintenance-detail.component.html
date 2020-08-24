@@ -1,15 +1,16 @@
-<div fxFlex fxLayout="column" fxLayoutGap="30px" fxLayoutAlign="center center">
+<div fxFlex fxLayout="column" fxLayoutGap="30px" fxLayoutAlign="center center" *ngIf="detail">
   <div>
     <div class="image" fxLayoutAlign="center center">
-      <mat-icon>image</mat-icon>
+      <mat-icon *ngIf="!detail.image">image</mat-icon>
+      <img src="{{detail.image}}">
     </div>
-    <span class="text-muted">Captura del mantenimiento</span>
+    <span class="text-muted text">Captura del mantenimiento</span>
   </div>
   <div class="text-dark">
     <h2 class="mat-title">
-      {{ detail.title }}
+      {{ detail.user }}
     </h2>
-    <p>{{ detail.name }}</p>
+    <p>{{ detail.titleFailure }}</p>
   </div>
 
   <div

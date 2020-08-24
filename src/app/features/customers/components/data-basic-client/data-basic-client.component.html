@@ -1,0 +1,48 @@
+<div class="content">
+    <div class="title">
+        Datos generales
+    </div>
+    <div class="content-form1" [formGroup]="form">
+        <mat-form-field class="example-full-width">
+            <mat-label>Clave</mat-label>
+            <input matInput formControlName="keyClient" placeholder="clave del cliente" (ngModelChange)="sendData()">
+            <mat-error *ngIf="form.controls.keyClient.invalid">
+                {{getErrorKeyClient()}}
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Nombre cliente</mat-label>
+            <input matInput formControlName="client" placeholder="Nombre del cliente" (ngModelChange)="sendData()">
+            <mat-error *ngIf="form.controls.client.invalid">
+                {{getErrorClient()}}
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>RFC</mat-label>
+            <input matInput formControlName="rfc" placeholder="RFC del cliente" (ngModelChange)="sendData()">
+            <mat-error *ngIf="form.controls.rfc.invalid">
+                {{getErrorRFC()}}
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Limite de crédito</mat-label>
+            <input matInput formControlName="currentCredit" placeholder="crédito del cliente" (ngModelChange)="sendData()">
+            <mat-error *ngIf="form.controls.currentCredit.invalid">
+                {{getErrorCurrentCredit()}}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input type="text" #autoComplInput placeholder="vendedor" aria-label="Number" matInput [formControl]="userSale"
+                [matAutocomplete]="auto" (ngModelChange)="sendData()">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let option of (filteredOptions | async)" [value]="option">
+                    {{option.fullName}}
+                </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="true">
+                {{getErrorSale()}} 
+              </mat-error>
+        </mat-form-field>
+    </div>
+</div>

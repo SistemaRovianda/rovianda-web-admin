@@ -1,43 +1,36 @@
 <mat-toolbar class="mat-toolbar">
-  <div
-    fxFlex
-    class="mat-h3"
-    fxLayout="row"
-    fxLayoutAlign="space-between center"
-    style="padding: 0 20px; height: 64px;
-    margin: 0;"
-  >
+  <div fxFlex class="mat-h3" fxLayout="row" fxLayoutAlign="space-between center" style="padding: 0 20px; height: 64px;
+    margin: 0;">
+    <img class="logo" src="\assets\images\grupo-6.svg" alt="logo" />
+
     <div fxLayoutGap="25px" fxLayout="row">
-      <div>
-        <a mat-list-item routerLinkActive="active">
-          <div fxLayoutAlign="center center">
-            <mat-icon>keyboard_arrow_left</mat-icon>
-            Salir
-          </div>
-        </a>
-      </div>
       <div fxLayout="row" fxLayoutGap="15px">
-        <a
-          class="nav"
-          mat-list-item
-          routerLink="history"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-        >
+        <div class="content-links-products" routerLinkActive="active" >
+          <a class="nav" mat-list-item routerLinkActive="active" routerLink="/products/edit-product" style="display: none" > Productos </a>
+          <a class="nav" mat-list-item routerLinkActive="active" routerLink="/products/list-products" >Productos </a>
+        </div>
+        <a class="nav" mat-list-item routerLink="/quality/history" routerLinkActive="active">
           Historial
         </a>
-        <a
-          class="nav"
-          mat-list-item
-          routerLink="maintenance"
-          routerLinkActive="active"
-        >
+        <a class="nav" mat-list-item routerLink="/quality/maintenance" routerLinkActive="active">
           Mantenimiento
+        </a>
+        <a class="nav" mat-list-item routerLink="/customers/create-client" routerLinkActive="active">
+          Clientes
+        </a>
+        <a class="nav" mat-list-item routerLink="/machines/machine" routerLinkActive="active">
+          Maquinas
         </a>
       </div>
     </div>
-
-    <img class="logo" src="\assets\images\grupo-6.svg" alt="logo" />
+    <div>
+      <a mat-list-item routerLinkActive="active">
+        <div fxLayoutAlign="center center">
+          <!-- <mat-icon>keyboard_arrow_left</mat-icon> -->
+          Cerrar sesión
+        </div>
+      </a>
+    </div>
   </div>
 </mat-toolbar>
 <mat-sidenav-container>

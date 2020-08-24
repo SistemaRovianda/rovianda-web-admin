@@ -1,0 +1,29 @@
+<div class="content">
+    <div class="title">
+        Datos del tipo de cliente
+    </div>
+    <div class="content-check">
+        <div class="content-type">
+            <div class="subtitle">
+                Tipo de cliente
+            </div>
+            <div class="check">
+                <mat-radio-group>
+                    <mat-radio-button class="radioButton" (click)="valid('false')" [value]="false">contado</mat-radio-button>
+                    <mat-radio-button class="radioButton" #checkType (click)="valid('true')" [value]="true">credito</mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+        <div class="content-days">
+            <div class="subtitle">
+                Días de crédito
+            </div>
+            <div class="check" [formGroup]="form">
+                <div *ngFor="let item of arrdays" >
+                    <mat-checkbox [checked]="reset" class="example-margin" #checkboxes formArrayName="daysCredit" 
+                    [disabled]="!typeClient.value" (change)="updateChkbxArray(item.id, $event.checked)" value="item.id">{{item.day}}</mat-checkbox>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

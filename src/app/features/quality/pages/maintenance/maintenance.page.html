@@ -16,7 +16,7 @@
                 Registros
               </h2>
             </div>
-            <records [entity]="entity$"></records>
+            <records [entity]="entity$" (maintenance)="details($event)"></records>
           </div>
         </mat-card>
       </div>
@@ -35,7 +35,7 @@
               No existen documentos
             </div>
 
-            <div *ngIf="entity$ ">
+            <div *ngIf="entity$">
               <div>
                 <maintenance-detail [detail]="detail$"></maintenance-detail>
               </div>

@@ -1,0 +1,23 @@
+.content {
+    padding: 20px;
+    padding-bottom: 0px;
+    .title {
+        font-size: 20px;
+        font-weight: 600;
+        text-align: start;
+        color: #575552;
+
+    }
+    .content-form {
+        display: flex;
+        flex-direction: column;
+        .row {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            mat-form-field {
+                width: 250px;
+            }
+        }
+    }
+}

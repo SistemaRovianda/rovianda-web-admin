@@ -1,0 +1,29 @@
+<div class="content">
+    <mat-card>
+        <div class="title">
+            <h5>Mostrar información</h5>
+        </div>
+        <div class="date" [formGroup]="form">
+            <div class="start">
+                <mat-label><strong>De:</strong></mat-label>
+                <mat-form-field color="accent" appearance="fill">
+                    <input matInput [matDatepicker]="dateStart" formControlName="dateStart">
+                    <mat-datepicker-toggle matSuffix [for]="dateStart"></mat-datepicker-toggle>
+                    <mat-datepicker #dateStart color="primary"></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="end">
+                <mat-label><strong>Hasta:</strong></mat-label>
+                <mat-form-field color="accent" appearance="fill">
+                    <input matInput [matDatepicker]="dateEnd" formControlName="dateEnd">
+                    <mat-datepicker-toggle matSuffix [for]="dateEnd"></mat-datepicker-toggle>
+                    <mat-datepicker #dateEnd color="primary"></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="button">
+                <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="sendData()">Mostrar</button>
+            </div>
+        </div>
+    </mat-card>
+
+</div>

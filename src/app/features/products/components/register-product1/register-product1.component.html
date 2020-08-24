@@ -1,0 +1,18 @@
+<mat-card>
+    <div class="form" [formGroup]="form">
+        <mat-form-field class="example-full-width">
+            <mat-label>Clave</mat-label>
+            <input type="text" matInput formControlName="code" (ngModelChange)="sendData()">
+            <mat-error *ngIf="form.controls.code.invalid">
+              {{getErrorCode()}}
+            </mat-error>
+          </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Nombre del producto</mat-label>
+            <input type="text" matInput formControlName="nameProduct" (ngModelChange)="sendData()">
+            <mat-error *ngIf="form.controls.nameProduct.invalid">
+              {{getErrorNameProduct()}}
+            </mat-error>
+          </mat-form-field>
+    </div>
+</mat-card>

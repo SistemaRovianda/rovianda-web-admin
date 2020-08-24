@@ -5,8 +5,19 @@
   fxLayoutAlign="space-between center"
   class="tag"
 >
-  <div>{{ document.name }}</div>
-  <div>
-    <button mat-flat-button color="primary">Descargar</button>
+  <div class="title">{{ document.name }}</div>
+  <div class="buttons">
+    <button mat-flat-button color="primary"(click)="downloadExcel(document)" >
+      <span class="material-icons">
+        vertical_align_bottom
+        </span>
+        Excel
+      </button>
+    <button mat-flat-button color="primary"(click)="downloadpdf(document)" >
+      <span class="material-icons">
+        vertical_align_bottom
+        </span>
+        PDF
+      </button>
   </div>
 </div>
