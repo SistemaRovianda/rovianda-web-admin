@@ -9,6 +9,7 @@ import { CreateProductModule } from './page/create-product/create-product.module
 import { EditProductComponent } from './page/edit-product/edit-product.component';
 import { EditProductModule } from './page/edit-product/edit-product.module';
 import { CommonModule } from '@angular/common';
+import { GuardAuthGuard } from '../guards/guard-auth.guard';
 
 const routes: Routes = [
   {
@@ -17,15 +18,18 @@ const routes: Routes = [
     children: [
       {
         path: "list-products",
-        component: ProductsComponent
+        component: ProductsComponent,
+        canActivate:[GuardAuthGuard]
       },
       {
         path: "create-product",
-        component: CreateProductComponent
+        component: CreateProductComponent,
+        canActivate:[GuardAuthGuard]
       },
       {
         path: "edit-product",
-        component: EditProductComponent
+        component: EditProductComponent,
+        canActivate:[GuardAuthGuard]
       },
     ]
   }

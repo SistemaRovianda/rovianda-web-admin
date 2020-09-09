@@ -9,6 +9,7 @@ export class SearchDriefComponent implements OnInit {
 
   private dataDrief:any;
   @Input() public set drief(data:any){
+    console.log(data)
     this.dataDrief=data;
     if(this.dataDrief)
     this.assignedData(this.dataDrief.outputs)
@@ -22,6 +23,7 @@ export class SearchDriefComponent implements OnInit {
   }
 
   assignedData(events:any){
+    console.log(events);
     this.dataSource = events;
   }
 

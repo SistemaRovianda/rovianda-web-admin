@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ServicesClientsService } from 'src/app/features/services/services-clients.service';
+import { DialogComponent } from '../../../../features/products/components/dialog/dialog.component';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-register-client',
@@ -7,7 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterClientComponent implements OnInit {
 
-  constructor() { }
+  constructor( 
+    private servicesClient:ServicesClientsService,
+    // public dialogRef: MatDialogRef<DialogComponent>,
+    public dialog: MatDialog,
+    ) { 
+
+  }
 
   objdataGeneric: any;
   objaddress: any;
@@ -52,9 +61,27 @@ export class RegisterClientComponent implements OnInit {
           daysCredit: this.objchecks.daysCredit.filter(Boolean),
           addressClient: this.objaddress
         }
+        //falta consumir el servicio
+        this.servicesClient.postCustomerCreated(obj).subscribe((data)=>{
+          this.openDialogConfirm(
+            {title:'Cliente Agregado', msg:`Se agrego el cliente correctamente.`}
+          );
+        }, (err)=>{
+          this.openDialogConfirm(
+            {title:'Error al agregar cliente', msg:`No se ha podido agregar al cliente.`}
+          );
+        })
         console.log(obj);
       }
     }
   }
 
+
+  openDialogConfirm(data) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data=data;
+    this.dialog.open(DialogComponent, dialogConfig);
+  }
 }

@@ -8,10 +8,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AddPresentationComponent } from '../../components/add-presentation/add-presentation.component';
 
 //angular material
-import { MatButtonModule, MatFormFieldModule, MatInputModule, MatDialogRef, MatDialogModule, MatDialog, MAT_DIALOG_DATA, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatDialogRef, MatDialogModule, MatDialog, MAT_DIALOG_DATA, MAT_DIALOG_DEFAULT_OPTIONS, MatIconModule } from '@angular/material';
 import { AddIngredientComponent } from '../../components/add-ingredient/add-ingredient.component';
 
 import { EditProductComponent } from './edit-product.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { AlifeFileToBase64Module } from 'alife-file-to-base64';
 
 
 
@@ -26,7 +28,10 @@ import { EditProductComponent } from './edit-product.component';
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule,
+    FlexLayoutModule,
+    AlifeFileToBase64Module
   ],
   entryComponents:[
     AddPresentationComponent,

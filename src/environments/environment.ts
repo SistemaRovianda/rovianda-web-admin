@@ -7,6 +7,9 @@ export const environment = {
   basePath:"https://us-central1-rovianda-88249.cloudfunctions.net/app/rovianda"
 };
 
+
+
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

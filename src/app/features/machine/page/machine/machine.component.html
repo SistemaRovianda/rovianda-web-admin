@@ -1,10 +1,28 @@
 <div class="content">
-    <div class="content-dates">
-        <app-date-machine (dates)="objDates($event)"></app-date-machine>
-    </div>
-    <div class="content-table">
+  <div class="content-dates">
+    <app-date-machine (dates)="objDates($event)"></app-date-machine>
+  </div>
+  <div class="content-table">
+
+    <!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
 
-        
-    </div>
+      <ng-container matColumnDef="store">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+      </ng-container>
+      <div *ngFor="let item  of displayedColumns">
+        {{item}}
+         <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+    </div> 
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table> -->
+
+  </div>
 </div>

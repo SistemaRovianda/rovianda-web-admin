@@ -5,6 +5,7 @@ import { ServicesProductsService } from 'src/app/features/services/services-prod
 import { listProduct } from 'src/app/features/models/model-products';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
+// import { SessionStorageService } from 'src/app/features/services/session-storage-service';
 
 @Component({
   selector: 'app-table',
@@ -20,7 +21,8 @@ export class TableComponent implements OnInit {
 
   constructor(
     private serviceProduct:ServicesProductsService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    // private serviceAuth:SessionStorageService
   ) {}
 
   ngOnInit() {
@@ -32,7 +34,10 @@ export class TableComponent implements OnInit {
   }
 
   funtionDetail(id:number){
+    // this.serviceAuth.clear();
+          // localStorage.setItem('user', null);
     this.identificator.emit(id);
+    // this.serviceAuth.get('uid')
   }
 
   openDialog(data) {

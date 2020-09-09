@@ -91,6 +91,7 @@ export class CreateProductComponent implements OnInit {
     this.objDataIngredients = {};
     this.objDataPresentations = {};
     this.ban = true
+    this.resetImg()
     this.route.navigate(['products', 'list-products']);
   }
 

@@ -12,6 +12,7 @@ export class HistoryListComponent implements OnInit {
 
   @Input() public set meat(val: any){
     this._meat=val;
+    console.log(this._meat);
     this.receiver()
   }
 

@@ -13,8 +13,11 @@
     >
       <div class="content-history" fxFlex.gt-xs="40%">
         <mat-card fxFlex fxLayout="column" fxLayoutGap="10px">
-          
           <div class="list">
+            <div class="contentNext" *ngIf="banButtons">
+              <button mat-stroked-button color="primary"(click)="countLess()" >&lt;</button>
+                <button mat-stroked-button color="primary"(click)="countMore()" >></button>
+            </div>
             <div fxLayout="row" fxLayoutAlign="space-between">
               <h2 class="mat-title text-primary">
                 Acción

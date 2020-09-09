@@ -19,4 +19,8 @@ export class MaintenanceService {
   getAllStores(){
     return this.http.get(`${this.endpoint}/maintenance/stores`)
   }
+
+  postStoreDevices(objdates:any){
+    return this.http.post(`${this.endpoint}/maintenance/store/device`, objdates)
+  }
 }

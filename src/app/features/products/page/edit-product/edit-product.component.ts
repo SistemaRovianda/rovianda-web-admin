@@ -22,6 +22,9 @@ export class EditProductComponent implements OnInit {
   objDataPresentations: Object = {};
   ban: boolean = false
   objDetails: any;
+  dataImg: any;
+  saveBaseImg: any;
+  urlImage:string;
   constructor(
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<DialogComponent>,
@@ -38,7 +41,7 @@ export class EditProductComponent implements OnInit {
     await this.serviceProduct.getDetailsProduct(this.id).subscribe((data: any) => {
       let ingredients = data.ingredents
       let change: any[] = [];
-      let obj: any
+      let obj: any;
       for (let element of ingredients) {
         obj = {
           id: element.ingredientId,
@@ -55,6 +58,7 @@ export class EditProductComponent implements OnInit {
       this.objDataGeneric = this.objDetails;
       this.objDataIngredients = data.ingredents;
       this.objDataPresentations = this.options;
+      this.dataImg= data.image
     })
   }
 
@@ -118,7 +122,8 @@ export class EditProductComponent implements OnInit {
     this.objDataGeneric = undefined;
     this.objDataIngredients = {};
     this.objDataPresentations = {};
-    this.ban = true
+    this.ban = true;
+    this.resetImg()
     this.route.navigate(['products', 'list-products']);
   }
 
@@ -134,15 +139,16 @@ export class EditProductComponent implements OnInit {
     if (this.objDataGeneric != undefined)
       if (Object.keys(this.objDataGeneric).length &&
         Object.keys(this.objDataIngredients).length &&
-        Object.keys(this.objDataPresentations).length) {
+        Object.keys(this.objDataPresentations).length && this.dataImg != null) {
         let send = {
           code: this.objDataGeneric.clave,
           nameProduct: this.objDataGeneric.name,
           ingredients: this.objDataIngredients,
           presentation: this.objDataPresentations,
           status: true,
+          image: this.saveBaseImg || ''
         }
-        // console.log(JSON.stringify(send))
+        // console.log(send)
         this.serviceProduct.putProductRovianda(this.id, send).subscribe(() => {
           this.route.navigate(['products', 'list-products']);
           this.openDialogConfirm(
@@ -158,5 +164,23 @@ export class EditProductComponent implements OnInit {
         this.ban = true;
   }
 
+  onFileChanges(event) {
+    if (event.length != 0)
+     if(event[0].type == "image/jpeg" || event[0].type == "image/png") {
+      this.dataImg = event[0].base64;
+      this.saveBaseImg = this.dataImg.replace(/^data:image\/[a-z]+;base64,/, "");
+      this.Valid()
+    } else {
+      this.Valid()
+
+    }
+  }
+
+  resetImg() {
+    this.dataImg = null;
+    this.saveBaseImg = null;
+    this.urlImage=null
+    this.Valid()
+    }
 
 }

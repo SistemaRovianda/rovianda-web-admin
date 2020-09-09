@@ -52,7 +52,16 @@
         style="padding:40px 20px 40px 20px;"
       >
         <login-form #form (onSubmit)="onSubmit($event)"></login-form>
-
+        <div class="error" *ngIf="ban">
+          <mat-error>
+            Usuario o contraseña incorrectos.
+          </mat-error>
+        </div>
+        <div class="error" *ngIf="ban2">
+          <mat-error>
+            El usuario no es administrador.
+          </mat-error>
+        </div>
         <div class="text-white">
           <button
             (click)="form.onSubmit()"

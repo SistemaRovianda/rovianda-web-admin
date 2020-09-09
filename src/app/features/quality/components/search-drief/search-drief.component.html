@@ -41,7 +41,7 @@
                 <!-- Symbol Column -->
                 <ng-container matColumnDef="lot">
                   <mat-header-cell *matHeaderCellDef> Lote </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.lot}} </mat-cell>
+                  <mat-cell *matCellDef="let element"> {{element.lot || 'N/A'}} </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="observations">

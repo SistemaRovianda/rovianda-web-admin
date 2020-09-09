@@ -32,9 +32,25 @@
                 <app-register-product3 [ELEMENT_DATA]="options" (updatePresentation)="objPresentation($event)"></app-register-product3>
             </div>
         </div>
-        <div class="content-buttons">
+        <div class="content-buttons-image">
+            <input #inputImg class="inputImg" alife-file-to-base64 
+            (onFileChanged)="onFileChanges($event)" type="file" style="display: none;">
+            <div class="image" fxLayoutAlign="center center" (click)="inputImg.click()">
+                <div class="iconImage" *ngIf="!dataImg; else blockElse">
+                    <mat-icon>image</mat-icon>
+                    <p>Seleccione una imagen</p>
+                </div>
+                <ng-template class="showImg" #blockElse>
+                    <div class="image" (click)="resetImg()">
+                        <img [src]="dataImg" class="image">
+                    </div>
+                </ng-template>
+            </div>
+            <div class="content-buttons">
                 <button class="cancelButton" mat-raised-button color="accent" (click)="cancel()">Cancelar</button>
-                <button mat-raised-button #disableButton color="primary" (click)="sendData()">Agregar</button> 
+                <button mat-raised-button #disableButton color="primary" [disabled]="ban"
+                    (click)="sendData()">Actualizar</button>
+            </div>
         </div>
     </div>
 </div>

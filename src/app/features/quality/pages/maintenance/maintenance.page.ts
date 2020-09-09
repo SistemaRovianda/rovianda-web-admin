@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ["./maintenance.page.scss"]
 })
 export class MaintenancePageComponent implements OnInit {
-  entity$ 
+  entity$:any=[];
   // = [
   //   { date: "12/02/2019", titleFailure: "prueba" },
   //   { date: "12/02/2019", titleFailure: "prueba" },
@@ -17,7 +17,7 @@ export class MaintenancePageComponent implements OnInit {
   //   { date: "12/02/2019", titleFailure: "prueba" }
   // ];
 
-  detail$ 
+  detail$:any; 
   // = {
   //   image: "",
   //   title: "Titulo de la falla",

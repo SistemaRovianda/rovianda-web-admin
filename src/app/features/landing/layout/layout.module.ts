@@ -5,13 +5,15 @@ import { MatCardModule } from "@angular/material/card";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { LoginFormModule } from "../components/login-form/login-form.module";
 import { MatButtonModule } from "@angular/material/button";
-
+import { MatFormFieldModule } from '@angular/material/form-field';
 const COMMON_MODULES = [
   CommonModule,
   FlexLayoutModule,
   MatCardModule,
   LoginFormModule,
-  MatButtonModule
+  MatButtonModule,
+  MatCardModule,
+  MatFormFieldModule
 ];
 
 const COMMON_DECLARATIONS = [LayoutComponent];

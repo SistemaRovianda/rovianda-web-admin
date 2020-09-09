@@ -5,6 +5,15 @@ export interface usersSale{
     job: string
 }
 
+export interface User {
+    uid?: string;
+    token?: string;
+    currentToken?: string;
+    name?: string;
+    email?: string;
+    rol?: string;
+  }
+
 export const Days=[
     {id:1, day: "Lunes"},
     {id:2, day: "Martes"},

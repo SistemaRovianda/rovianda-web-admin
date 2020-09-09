@@ -16,4 +16,8 @@ export class ServicesClientsService {
   getUsersSales(rol: string){
     return this.http.get(`${this.endpoint}/user/rol/${rol}`)
   }
+
+  postCustomerCreated(obj:any){
+    return this.http.post(`${this.endpoint}/customer/create`,obj)
+  }
 }

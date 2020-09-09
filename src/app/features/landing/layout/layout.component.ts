@@ -1,17 +1,33 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-
+import { Router, RouterEvent, RouterModule, RouterLinkActive } from "@angular/router";
+import { AuthService } from '../../services/auth.service';
 @Component({
   selector: "app-layout",
   templateUrl: "./layout.component.html",
   styleUrls: ["./layout.component.scss"],
 })
 export class LayoutComponent implements OnInit {
-  constructor(private router: Router) {}
+  ban: boolean;
+  ban2: boolean;
+  constructor(private router: Router, public authService: AuthService) {}
 
   ngOnInit() {}
 
   onSubmit(payload: any) {
-    this.router.navigate(["/quality/history"]);
+    this.authService.signIn(payload.email,payload.password).subscribe((data)=>{
+      this.authService.getUserData(data.uid).subscribe((dataUser)=>{
+        console.log(dataUser)
+        if(dataUser.rol == 'ADMINISTRATOR'){
+          this.router.navigateByUrl("/products/list-products");  
+        }else{
+          this.ban2 = true;
+        }
+      },(err)=>{
+        console.log('nada')
+      })
+    }, (err)=>{
+      this.ban= true
+    })
+
   }
 }

@@ -17,6 +17,9 @@
               </h2>
             </div>
             <records [entity]="entity$" (maintenance)="details($event)"></records>
+            <div class="NotFound" [fxHide]="entity$.length">
+              No se encontraron mantenimientos recientes.
+            </div>
           </div>
         </mat-card>
       </div>
@@ -31,7 +34,7 @@
               Detalles
             </h2>
 
-            <div [fxHide]="entity$">
+            <div [fxHide]="entity$.length">
               No existen documentos
             </div>
 

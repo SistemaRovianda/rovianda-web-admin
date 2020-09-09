@@ -1,0 +1,24 @@
+<div class="content">
+    <div class="list-fridges">
+        <app-list-fridges [source]="listFridges" (deleteItem)="deleteItem($event)"></app-list-fridges>
+    </div>
+    <div class="create-fridges">
+        <mat-card>
+            <div class="title">
+                <h5>Crear Congelador</h5>
+            </div>
+            <div class="inputTemp">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Temperatura</mat-label>
+                    <input matInput [formControl]="temp">
+                    <mat-error *ngIf="temp.invalid">
+                        {{getErrorFridge()}}
+                      </mat-error>
+                  </mat-form-field>
+                  <div class="content-button">
+                    <button mat-raised-button color="primary" [disabled]="temp.invalid" (click)="sendData()">Registrar</button>
+                  </div>
+            </div>
+        </mat-card>
+    </div>
+</div>

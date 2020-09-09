@@ -21,14 +21,17 @@
         <a class="nav" mat-list-item routerLink="/machines/machine" routerLinkActive="active">
           Maquinas
         </a>
+        <a class="nav" mat-list-item routerLink="/fridge/fridge" routerLinkActive="active">
+          Congeladores
+        </a>
       </div>
     </div>
     <div>
-      <a mat-list-item routerLinkActive="active">
-        <div fxLayoutAlign="center center">
-          <!-- <mat-icon>keyboard_arrow_left</mat-icon> -->
-          Cerrar sesión
-        </div>
+      <a mat-list-item routerLinkActive="active" (click)="logout()">
+        Cerrar sesión
+        <!-- <div fxLayoutAlign="center center" >
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </div> -->
       </a>
     </div>
   </div>

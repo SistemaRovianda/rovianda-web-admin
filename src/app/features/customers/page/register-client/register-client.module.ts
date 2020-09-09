@@ -11,11 +11,13 @@ import { TypeClientComponent } from '../../components/type-client/type-client.co
 //Angular material
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material';
+import { MatButtonModule, MatDialogRef } from '@angular/material';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatListModule } from '@angular/material/list';
 import { MatRadioModule } from '@angular/material';
+import { DialogComponent } from 'src/app/features/products/components/dialog/dialog.component';
+import { TableModule } from 'src/app/features/products/components/table/table.module';
 
 
 @NgModule({
@@ -30,10 +32,13 @@ import { MatRadioModule } from '@angular/material';
     MatAutocompleteModule,
     MatCheckboxModule,
     MatListModule,
-    MatRadioModule
+    MatRadioModule,
+    TableModule
   ],
   exports:[RegisterClientComponent],
-  entryComponents:[DataBasicClientComponent, AddressClientComponent, TypeClientComponent],
-  providers: []
+  entryComponents:[DataBasicClientComponent, AddressClientComponent, TypeClientComponent, DialogComponent],
+  providers: [
+    // { provide: MatDialogRef, useValue: {hasBackdrop: false} },
+  ]
 })
 export class RegisterClientModule { }

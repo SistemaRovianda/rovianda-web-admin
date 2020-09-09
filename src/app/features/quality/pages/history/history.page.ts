@@ -4,6 +4,7 @@ import { HistoriesService } from 'src/app/features/services/histories.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MessagesComponent } from '../../components/messages/messages.component';
 import { ReportsService } from 'src/app/features/services/reports.service';
+import { meatIds } from 'src/app/features/models/model-meat';
 
 @Component({
   selector: "app-history",
@@ -23,6 +24,10 @@ export class HistoryPageComponent implements OnInit {
   packaging: any;
   meat: any;
   objdate: any = {};
+  allDrief: any;
+  coundDrief: any;
+  banButtons: boolean = false;
+  allPackaging: any;
   constructor(
     private serviceHistories: HistoriesService,
     private serviceRoports: ReportsService,
@@ -37,51 +42,51 @@ export class HistoryPageComponent implements OnInit {
       this.hasPackaging$.next(false);
       this.hasMeat$.next(false);
       this.getHistoryDrief(event.query);
-      this.getDocumentsDrief(event.query);
     } else if (event.typeSearch == 'PACKING') {
       this.hasDrief$.next(false);
       this.hasPackaging$.next(true);
       this.hasMeat$.next(false);
       this.getHistoryPackaging(event.query);
-      this.getDocumentsPacking(event.query);
     } else if (event.typeSearch == 'MEAT') {
       this.hasDrief$.next(false);
       this.hasPackaging$.next(false);
       this.hasMeat$.next(true);
       this.getHistoryMeat(event.query);
-      this.getDocumentsMeat(event.query);
     }
   }
   getDocumentsDrief(DocumentsId: string) {
-    this.documentsMeat$=undefined;
-  this.documentsPacking$=undefined;
+    this.documentsMeat$ = undefined;
+    this.documentsPacking$ = undefined;
     this.documentsDrief$ = [
       { name: "Recepción de materia prima secos", id: DocumentsId },
       { name: "Bitácora de control de pep's almacén", id: DocumentsId },
     ];
   }
-  getDocumentsMeat(DocumentsId: string) {
-    this.documentsDrief$=undefined;
-    this.documentsPacking$=undefined;
+  getDocumentsMeat(DocumentsId: meatIds) {
+    this.documentsDrief$ = undefined;
+    this.documentsPacking$ = undefined;
     this.documentsMeat$ = [
-      { name: "Recepcion materia prima cárnicos", id: DocumentsId },
-      { name: "Bitácora de control de calidad formulación", id: DocumentsId },
-      { name: "Bitácora de control de calidad sala de trabajo", id: DocumentsId },
-      { name: "Bitácora de control de calidad cocimiento del producto", id: DocumentsId },
-      { name: "Bitácora de control de rebanado y empacado", id: DocumentsId },
-      { name: "Inspección de producto terminado y salida", id: DocumentsId }
+      { name: "Recepcion materia prima cárnicos", id: DocumentsId.entranceMeat },
+      { name: "Bitácora de control de calidad formulación", id: DocumentsId.formulation },
+      { name: "Bitácora de control de calidad sala de trabajo", id: DocumentsId.process },
+      { name: "Bitácora de control de calidad cocimiento del producto", id: DocumentsId.oven },
+      { name: "Bitácora de control de rebanado y empacado", id: DocumentsId.packingDate },
+      { name: "Inspección de producto terminado y salida", id: DocumentsId.inspection }
     ];
   }
   getDocumentsPacking(DocumentsId: string) {
-    this.documentsMeat$=undefined;
-    this.documentsDrief$=undefined;
+    this.documentsMeat$ = undefined;
+    this.documentsDrief$ = undefined;
     this.documentsPacking$ = [
       { name: "Bitácora de control de calidad almacén empaques", id: DocumentsId },
     ];
   }
 
   async getHistoryPackaging(loteId: string) {
-    await this.serviceHistories.getHistoryPackaging(loteId).subscribe(data => this.packaging = data, (err) => {
+    await this.serviceHistories.getHistoryPackaging(loteId).subscribe(data => {
+      this.allPackaging = data;
+      this.selectPacking(0);
+    }, (err) => {
       this.openDialog(
         { title: 'Resultados', msg: `No se encontro ninguna búsqueda con el lote: ${loteId}` })
       this.drief = undefined;
@@ -90,8 +95,17 @@ export class HistoryPageComponent implements OnInit {
     })
   }
 
-  async getHistoryDrief(loteId: string) {
-    await this.serviceHistories.getHistoryDrief(loteId).subscribe(data => this.drief = data, (err) => {
+  selectPacking(count) {
+    this.packaging = this.allPackaging[count];
+    this.getDocumentsPacking(this.packaging.entrancePackingId);
+  }
+
+  getHistoryDrief(loteId: string) {
+    this.serviceHistories.getHistoryDrief(loteId).subscribe((data: any) => {
+      this.allDrief = data;
+      (this.allDrief.length > 1) ? this.banButtons = true : this.banButtons = false;
+      this.selectDrief(0);
+    }, (err) => {
       this.openDialog(
         { title: 'Resultados', msg: `No se encontro ninguna búsqueda con el lote: ${loteId}` })
       this.drief = undefined;
@@ -100,14 +114,9 @@ export class HistoryPageComponent implements OnInit {
     })
   }
 
-  async getHistoryMeat(loteId: string) {
-    await this.serviceHistories.getHistoryMeat(loteId).subscribe(data => this.meat = data, (err) => {
-      this.openDialog(
-        { title: 'Resultados', msg: `No se encontro ninguna búsqueda con el lote: ${loteId}` })
-      this.drief = undefined;
-      this.packaging = undefined
-      this.meat = undefined
-    })
+  selectDrief(count) {
+    this.drief = this.allDrief[count];
+    this.getDocumentsDrief(this.drief.entranceDriefId);
   }
 
   openDialog(data) {
@@ -125,14 +134,12 @@ export class HistoryPageComponent implements OnInit {
   downloadFileDrief(event) {
     if (event.name == 'Recepción de materia prima secos') {
       if (event.type == 'Excel') {
-        this.serviceRoports.getReportExcelEntranceDrief('114').subscribe((data) => {
+        this.serviceRoports.getReportExcelEntranceDrief(event.id).subscribe((data) => {
           this.downloadFile(data, event.name, 'xlsx')
-          console.log(data)
         })
       } else if (event.type == 'pdf') {
-        this.serviceRoports.getReportpdfentranceDrief('114').subscribe((data) => {
+        this.serviceRoports.getReportpdfentranceDrief(event.id).subscribe((data) => {
           this.downloadFile(data, event.name, 'pdf')
-          console.log(data);
         })
       }
     } else if (event.name == 'Bitácora de control de pep\'s almacén') {
@@ -153,14 +160,13 @@ export class HistoryPageComponent implements OnInit {
   }
 
   downloadFilePacking(event) {
-    console.log(event)
     if (event.type == 'pdf') {
       if (Object.keys(this.objdate).length) {
         this.serviceRoports.getReportPDFpackingDates(this.objdate).subscribe((data) => {
           this.downloadFile(data, event.name, 'pdf')
         })
       } else {
-        this.serviceRoports.getReportPDFPackingForId('84').subscribe((data) => {
+        this.serviceRoports.getReportPDFPackingForId(event.id).subscribe((data) => {
           this.downloadFile(data, event.name, 'pdf')
         })
       }
@@ -170,96 +176,149 @@ export class HistoryPageComponent implements OnInit {
           this.downloadFile(data, event.name, 'xlsx')
         })
       } else {
-        this.serviceRoports.getReportExcelPackingForId('84').subscribe((data) => {
+        this.serviceRoports.getReportExcelPackingForId(event.id).subscribe((data) => {
           this.downloadFile(data, event.name, 'xlsx')
         })
       }
     }
   }
 
-  async downloadFileMeat(event){
-    if(event.name == 'Recepcion materia prima cárnicos'){
+  getHistoryMeat(loteId: string) {
+    this.serviceHistories.getHistoryMeat(loteId).subscribe(data =>{
+      this.meat = data
+      let obj:meatIds = {
+        entranceMeat: this.meat.entranceMeat[0]? this.meat.entranceMeat[0].entranceMeatId: null,
+        fridge: this.meat.fridge[0]? this.meat.fridge[0].coolingId: null,
+        formulation: this.meat.formulation[0]? this.meat.formulation[0].formulationId : null,
+        process: this.meat.formulation[0]? this.meat.process[0].processId: null,
+        oven: this.meat.oven[0]? this.meat.oven[0].ovenId : null,
+        packingDate: this.meat.packingDate[0]? this.meat.packingDate[0].packaginId: null,
+        inspection: 40
+      }
+      this.meat.entranceMeat
+      this.getDocumentsMeat(obj);
+    } , (err) => {
+      this.openDialog(
+        { title: 'Resultados', msg: `No se encontro ninguna búsqueda con el lote: ${loteId}` })
+      this.drief = undefined;
+      this.packaging = undefined
+      this.meat = undefined
+    })
+  }
+
+  async downloadFileMeat(event) {
+    if (event.name == 'Recepcion materia prima cárnicos') {
       await this.downloadReception(event);
-    }else if(event.name == 'Bitácora de control de calidad formulación'){
+    } else if (event.name == 'Bitácora de control de calidad formulación') {
       await this.downloadformulation(event)
-    }else if(event.name == 'Bitácora de control de calidad sala de trabajo'){
+    } else if (event.name == 'Bitácora de control de calidad sala de trabajo') {
       await this.downloadRoomWork(event);
-    }else if(event.name == 'Bitácora de control de calidad cocimiento del producto'){
+    } else if (event.name == 'Bitácora de control de calidad cocimiento del producto') {
       await this.downloadProductOven(event)
-    }else if(event.name == 'Bitácora de control de rebanado y empacado'){
+    } else if (event.name == 'Bitácora de control de rebanado y empacado') {
       await this.downloadPackaging(event)
-    }else if(event.name == 'Inspección de producto terminado y salida'){
+    } else if (event.name == 'Inspección de producto terminado y salida') {
       await this.downloadInspection(event)
     }
   }
 
-  downloadReception(event){
-    if(event.type == 'Excel'){
-      this.serviceRoports.getReportExcelReception('86').subscribe((data)=>{
+  downloadReception(event) {
+    if (event.type == 'Excel') {
+      this.serviceRoports.getReportExcelReception(event.id).subscribe((data) => {
         this.downloadFile(data, event.name, 'xlsx');
+      }, (err)=>{
+        this.openDialog(
+          { title: 'Error', msg: `No se ha encontrado la información.` })
       })
-    }else if (event.type == 'pdf'){
-      this.serviceRoports.getReportPdfReception('86').subscribe((data)=>{
+    } else if (event.type == 'pdf') {
+      this.serviceRoports.getReportPdfReception(event.id).subscribe((data) => {
         this.downloadFile(data, event.name, 'pdf');
+      }, (err)=>{
+        this.openDialog(
+          { title: 'Error', msg: `No se ha encontrado la información.` })
       })
     }
   }
 
-  downloadformulation(event){
-    if(event.type == 'Excel'){
-      this.serviceRoports.getReportExcelFormulation('').subscribe((data)=>{
+  downloadformulation(event) {
+    if (event.type == 'Excel') {
+      this.serviceRoports.getReportExcelFormulation(event.id).subscribe((data) => {
         this.downloadFile(data, event.name, 'xlsx');
+      }, (err)=>{
+        this.openDialog(
+          { title: 'Error', msg: `No se ha encontrado la información.` })
       })
-    }else if (event.type == 'pdf'){
-      this.serviceRoports.getReportPdfFormulation('').subscribe((data)=>{
+    } else if (event.type == 'pdf') {
+      this.serviceRoports.getReportpdfFormulation(event.id).subscribe((data) => {
         this.downloadFile(data, event.name, 'pdf');
+      }, (err)=>{
+        this.openDialog(
+          { title: 'Error', msg: `No se ha encontrado la información.` })
       })
     }
   }
-  downloadRoomWork(event){
-    if(event.type == 'Excel'){
-      this.serviceRoports.getReportExcelRoomWork('').subscribe((data)=>{
+  downloadRoomWork(event) {
+    if (event.type == 'Excel') {
+      this.serviceRoports.getReportExcelRoomWork(event.id).subscribe((data) => {
         this.downloadFile(data, event.name, 'xlsx');
+      }, (err)=>{
+        this.openDialog(
+          { title: 'Error', msg: `No se ha encontrado la información.` })
       })
-    }else if (event.type == 'pdf'){
-      this.serviceRoports.getReportPdfRoomWork('').subscribe((data)=>{
+    } else if (event.type == 'pdf') {
+      this.serviceRoports.getReportPdfRoomWork(event.id).subscribe((data) => {
         this.downloadFile(data, event.name, 'pdf');
+      }, (err)=>{
+        this.openDialog(
+          { title: 'Error', msg: `No se ha encontrado la información.` })
       })
     }
   }
-  downloadProductOven(event){
-    if(Object.keys(this.objdate).length){
-      if(event.type == 'Excel'){
-        this.serviceRoports.getReportExcelOven(this.objdate).subscribe((data)=>{
+  downloadProductOven(event) {
+    if (Object.keys(this.objdate).length) {
+      if (event.type == 'Excel') {
+        this.serviceRoports.getReportExcelOven(this.objdate).subscribe((data) => {
           this.downloadFile(data, event.name, 'xlsx');
+        }, (err)=>{
+          this.openDialog(
+            { title: 'Error', msg: `No se ha encontrado la información.` })
         })
-      }else if (event.type == 'pdf'){
-        this.serviceRoports.getReportPdfOven(this.objdate).subscribe((data)=>{
+      } else if (event.type == 'pdf') {
+        this.serviceRoports.getReportPdfOven(this.objdate).subscribe((data) => {
           this.downloadFile(data, event.name, 'pdf');
+        }, (err)=>{
+          this.openDialog(
+            { title: 'Error', msg: `No se ha encontrado la información.` })
         })
       }
-    }else{
+    } else {
       this.openDialog({ title: 'Error', msg: `Faltan datos para generar este reporte. Ingrese las fechas por favor.` })
     }
   }
 
-  downloadPackaging(event){
-    if(event.type == 'Excel'){
-      this.serviceRoports.getReporTPdfPackaging('').subscribe((data)=>{
+  downloadPackaging(event) {
+    if (event.type == 'Excel') {
+      this.serviceRoports.getReportExcelPackaging(event.id).subscribe((data) => {
         this.downloadFile(data, event.name, 'xlsx');
+      }, (err)=>{
+        this.openDialog(
+          { title: 'Error', msg: `No se ha encontrado la información.` })
       })
-    }else if (event.type == 'pdf'){
-      this.serviceRoports.getReporTPdfPackaging('').subscribe((data)=>{
+    } else if (event.type == 'pdf') {
+      this.serviceRoports.getReportPdfPackaging(event.id).subscribe((data) => {
         this.downloadFile(data, event.name, 'pdf');
+      }, (err)=>{
+        this.openDialog(
+          { title: 'Error', msg: `No se ha encontrado la información.` })
       })
     }
   }
 
-  downloadInspection(event){
-    if(event.type == 'Excel'){
+  downloadInspection(event) {
+    if (event.type == 'Excel') {
 
-    }else if (event.type == 'pdf'){
-      
+    } else if (event.type == 'pdf') {
+
     }
   }
 

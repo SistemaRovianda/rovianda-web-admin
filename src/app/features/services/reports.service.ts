@@ -1,25 +1,31 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+// import { SessionStorageService } from './session-storage-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReportsService {
   endpoint: string;
-
-  constructor(private http: HttpClient) {
-    this.endpoint = environment.basePath
+  user:string;
+  constructor(private http: HttpClient,
+    // private sessionStorage: SessionStorageService
+    ) {
+    this.endpoint = environment.basePath;
+    this.user= localStorage.getItem("user");
   }
 
   //drief
   getReportpdfentranceDrief(driefId: string) {
-    let options = { params: new HttpParams().set('uid', 'PjsC69VezAeJKlKlRmXW5Vkoq5Z2') }
+    // console.log(this.sessionStorage.get('uid'))
+
+    let options = { params: new HttpParams().set('uid', this.user) }
     return this.http.get(`${this.endpoint}/report/entry/drief/${driefId}`, { ...options, responseType: "blob" });
   }
 
   getReportExcelEntranceDrief(driefId: string) {
-    let options = { params: new HttpParams().set('uid', 'PjsC69VezAeJKlKlRmXW5Vkoq5Z2') }
+    let options = { params: new HttpParams().set('uid', this.user) }
     return this.http.get(`${this.endpoint}/report/document/entry/drief/${driefId}`, { ...options, responseType: "blob" });
   }
 
@@ -41,7 +47,7 @@ export class ReportsService {
 
   //packing
   getReportPDFpackingDates(obj){
-    let options = { params: new HttpParams().set('uid', 'PjsC69VezAeJKlKlRmXW5Vkoq5Z2') }
+    let options = { params: new HttpParams().set('uid', this.user) }
     return this.http.get(`${this.endpoint}/report/entry/packing/${obj.dateStart}/${obj.dateEnd}`, { ...options, responseType: "blob" })
   }
 
@@ -50,64 +56,64 @@ export class ReportsService {
   }
 
   getReportExcelPackingDates(obj){
-    let options = { params: new HttpParams().set('uid', 'PjsC69VezAeJKlKlRmXW5Vkoq5Z2') }
+    let options = { params: new HttpParams().set('uid', this.user) }
     return this.http.get(`${this.endpoint}/report/document/entry/packing/${obj.dateStart}/${obj.dateEnd}`,  { ...options, responseType: "blob" })
   }
 
   getReportExcelPackingForId(pakingId:string){
-    let options = { params: new HttpParams().set('uid', 'PjsC69VezAeJKlKlRmXW5Vkoq5Z2') }
+    let options = { params: new HttpParams().set('uid', this.user) }
     return this.http.get(`${this.endpoint}/report/document/entry/packing/${pakingId}`, {...options,responseType: "blob"})
   }
 
   //meat aquí termina dios y continuo solo yo :'v
 
     getReportExcelReception(meatId:string){
-      let options = { params: new HttpParams().set('uid', 'PjsC69VezAeJKlKlRmXW5Vkoq5Z2') }
+      let options = { params: new HttpParams().set('uid', this.user) }
       return this.http.get(`${this.endpoint}/report/document/entry/meat/${meatId}`, {...options,responseType: "blob"})
     }
 
     getReportPdfReception(meatId:string){
-      let options = { params: new HttpParams().set('uid', 'PjsC69VezAeJKlKlRmXW5Vkoq5Z2') }
+      let options = { params: new HttpParams().set('uid', this.user) }
       return this.http.get(`${this.endpoint}/report/entry/meat/${meatId}`, {...options,responseType: "blob"})
     }
 
-    getReportExcelFormulation(formulationId:string){
-      let options = { params: new HttpParams().set('uid', 'PjsC69VezAeJKlKlRmXW5Vkoq5Z2') }
+    getReportpdfFormulation(formulationId:string){
+      let options = { params: new HttpParams().set('uid', this.user) }
       return this.http.get(`${this.endpoint}/report/formulation/${formulationId}`, {...options,responseType: "blob"})
     }
 
-    getReportPdfFormulation(formulationId:string){
-      let options = { params: new HttpParams().set('uid', 'PjsC69VezAeJKlKlRmXW5Vkoq5Z2') }
+    getReportExcelFormulation(formulationId:string){
+      let options = { params: new HttpParams().set('uid', this.user) }
       return this.http.get(`${this.endpoint}/report/document/formulation/${formulationId}`, {...options,responseType: "blob"})
     }
 
     getReportExcelRoomWork(processId: string){
-      let options = { params: new HttpParams().set('uid', 'PjsC69VezAeJKlKlRmXW5Vkoq5Z2') }
+      let options = { params: new HttpParams().set('uid', this.user) }
       return this.http.get(`${this.endpoint}/report/document/process/${processId}`, {...options,responseType: "blob"})
     }
 
     getReportPdfRoomWork(processId: string){
-      let options = { params: new HttpParams().set('uid', 'PjsC69VezAeJKlKlRmXW5Vkoq5Z2') }
+      let options = { params: new HttpParams().set('uid', this.user) }
       return this.http.get(`${this.endpoint}/report/process/${processId}`, {...options,responseType: "blob"})
     }
 
     getReportPdfOven(obj){
-      let options = { params: new HttpParams().set('uid', 'PjsC69VezAeJKlKlRmXW5Vkoq5Z2') }
+      let options = { params: new HttpParams().set('uid', this.user) }
       return this.http.get(`${this.endpoint}/report/oven/${obj.dateStart}/${obj.dateEnd}`,{...options,responseType: "blob"})
     }
 
     getReportExcelOven(obj){
-      let options = { params: new HttpParams().set('uid', 'PjsC69VezAeJKlKlRmXW5Vkoq5Z2') }
+      let options = { params: new HttpParams().set('uid', this.user) }
       return this.http.get(`${this.endpoint}/report/document/oven/${obj.dateStart}/${obj.dateEnd}`,{...options,responseType: "blob"})
     }
 
-    getReporTPdfPackaging(packaginId){
-      let options = { params: new HttpParams().set('uid', 'PjsC69VezAeJKlKlRmXW5Vkoq5Z2') }
+    getReportPdfPackaging(packaginId){
+      let options = { params: new HttpParams().set('uid', this.user) }
       return this.http.get(`${this.endpoint}/report/packagin/${packaginId}`,{...options,responseType: "blob"})
     }
 
-    getReporTExcelPackaging(packaginId){
-      let options = { params: new HttpParams().set('uid', 'PjsC69VezAeJKlKlRmXW5Vkoq5Z2') }
+    getReportExcelPackaging(packaginId){
+      let options = { params: new HttpParams().set('uid', this.user) }
       return this.http.get(`${this.endpoint}/report/document/packagin/${packaginId}`,{...options,responseType: "blob"})
     }
 

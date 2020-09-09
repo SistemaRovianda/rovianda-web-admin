@@ -2,16 +2,16 @@
   <div class="dates" *ngIf="_meat != undefined && _meat != null">
       <div class="reception" >
           <div class="text">Fecha de recepción</div>
-          <div class="value">{{ (_meat.receptionDate | date: "dd/MM/yyyy" ) || 'Sin registro'}}</div>
+          <div class="value">{{ (_meat.entranceMeat[0].receptionDate | date: "dd/MM/yyyy" ) || 'Sin registro'}}</div>
       </div>
       <div class="dates">
           <div class="dateOpen">
               <div class="text">Fecha de apertura</div>
-              <div class="value">{{ (_meat.fridge.openingDate | date: "dd/MM/yyyy" ) || 'Sin registro'}} </div>
+              <div class="value">{{ (_meat.fridge[0].openingDate | date: "dd/MM/yyyy" ) || 'Sin registro'}} </div>
           </div>
           <div class="dateEnd">
               <div class="text">Fecha de cierre</div>
-              <div class="value">{{ (_meat.fridge.closedDate | date: "dd/MM/yyyy" ) || 'Sin registro'}}</div>
+              <div class="value">{{ (_meat.fridge[0].closedDate | date: "dd/MM/yyyy" ) || 'Sin registro'}}</div>
           </div>
       </div>
   </div>

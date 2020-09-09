@@ -21,7 +21,8 @@ import { DialogComponent } from '../dialog/dialog.component';
     RouterModule
   ],
   exports:[
-    TableComponent
+    TableComponent,
+    DialogComponent
   ],
   entryComponents:[
     DialogComponent 

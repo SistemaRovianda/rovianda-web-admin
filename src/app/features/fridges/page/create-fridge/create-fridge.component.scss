@@ -1,0 +1,35 @@
+.content{
+    width: 100%;
+    height: 90%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    .list-fridges{
+        margin: 30px;
+        grid-row-start: 1;
+        grid-column-start: 1;
+    }
+    .create-fridges{
+        margin: 30px;
+        grid-row: 1;
+        grid-column: 2;
+        .inputTemp{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            .example-full-width{
+                width: 90%;
+            }
+            .example-full-width{
+                align-self: center;
+            }
+            .content-button{
+                text-align: center;
+                button{
+                    width: 300px;
+                }
+            }
+        }
+    }
+
+}
