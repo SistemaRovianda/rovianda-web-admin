@@ -4,6 +4,17 @@
   min-width: 240px;
   min-height: 174px;
   background-color: #ededed;
+
+  &__container {
+    max-width: 241px;
+    max-height: 175px;
+    min-width: 240px;
+    min-height: 174px;
+    overflow: hidden;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
 }
 img{
   min-width: 240px;
@@ -12,6 +23,6 @@ img{
   max-height: 175px;
 }
 
-p{
+p {
   text-align: center;
 }

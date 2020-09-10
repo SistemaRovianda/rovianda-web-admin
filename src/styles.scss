@@ -31,9 +31,14 @@ body {
 .page {
   height: calc(100vh - 64px);
   overflow: auto;
-  padding: 10px;
+  padding-top: 10px;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

@@ -1,23 +1,46 @@
-<div class="content">
-    <div class="content-card">
-        <mat-card class="curtomer-card">
-            <div class="content-title">
-                <p>Registrar cliente</p>
-            </div>
-            <mat-card-content>
-                <div class="content-data-generic">
-                    <app-data-basic-client (dataGeneric)="dataGeneric($event)"></app-data-basic-client>
-                </div>
-                <div class="content-address-customer">
-                    <app-address-client (addressSend)="dataAddress($event)"></app-address-client>
-                </div>
-                <div class="content-type-customer">
-                    <app-type-client (objTypeCredit)="check($event)"></app-type-client>
-                </div>
-                <div class="buttons">
-                    <button mat-raised-button #disableButton color="primary" [disabled]="ban" (click)="sendData()">Agregar</button> 
-                </div>
-            </mat-card-content>
-        </mat-card>
-    </div>
+<div fxLayout="row" fxLayoutAlign="center start" class="page">
+  <div
+    fxLayoutGap="10px"
+    fxLayout="row"
+    style="padding: 28px 16px"
+    fxLayoutAlign="center start"
+  >
+    <mat-card
+      class="curtomer-card"
+      fxFlex="80"
+      fxFlex.gt-md="100"
+      fxLayout="column"
+      fxLayoutGap="10px"
+    >
+      <div class="content-title mat-title">
+        <p>Registrar cliente</p>
+      </div>
+      <mat-card-content fxLayout="column" fxLayoutGap="10px">
+        <div class="content-data-generic">
+          <app-data-basic-client
+            (dataGeneric)="dataGeneric($event)"
+          ></app-data-basic-client>
+        </div>
+        <div class="content-address-customer">
+          <app-address-client
+            (addressSend)="dataAddress($event)"
+          ></app-address-client>
+        </div>
+        <div class="content-type-customer">
+          <app-type-client (objTypeCredit)="check($event)"></app-type-client>
+        </div>
+        <div class="buttons">
+          <button
+            mat-raised-button
+            #disableButton
+            color="primary"
+            [disabled]="ban"
+            (click)="sendData()"
+          >
+            Agregar
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

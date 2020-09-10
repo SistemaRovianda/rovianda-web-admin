@@ -1,64 +1,101 @@
-<div class="content">
-    <div class="title">
-        Dirección fiscal
-    </div>
+<div class="content" fxLayoutGap="10px" style="margin-bottom: 35px">
+  <div class="title">Dirección fiscal</div>
 
-    <div class="content-form" [formGroup]="form">
-        <div class="row">
-            <mat-form-field class="example-full-width">
-                <mat-label>Estado</mat-label>
-                <input matInput formControlName="state" placeholder="Ingresa el estado" (ngModelChange)="sendData()">
-                <mat-error *ngIf="form.controls.state.invalid">
-                    {{getErrorState()}}
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-                <mat-label>Municipio</mat-label>
-                <input matInput formControlName="municipality" placeholder="Ingresa el municipio" (ngModelChange)="sendData()">
-                <mat-error *ngIf="form.controls.municipality.invalid">
-                    {{getErrorMunicipality()}}
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-                <mat-label>Localidad</mat-label>
-                <input matInput formControlName="location" placeholder="Ingresa la localidad" (ngModelChange)="sendData()">
-                <mat-error *ngIf="form.controls.location.invalid">
-                    {{getErrorLocation()}}
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="row">
-            <mat-form-field class="example-full-width">
-                <mat-label>Colonia</mat-label>
-                <input matInput formControlName="suburb" placeholder="Ingresa la colonia" (ngModelChange)="sendData()">
-                <mat-error *ngIf="form.controls.suburb.invalid">
-                    {{getErrorSuburb()}}
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-                <mat-label>Calle</mat-label>
-                <input matInput formControlName="street" placeholder="Ingresa la calle" (ngModelChange)="sendData()">
-                <mat-error *ngIf="form.controls.street.invalid">
-                    {{getErrorStreet()}}
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-                <mat-label>No. exterior</mat-label>
-                <input matInput formControlName="numberExt" placeholder="Ingresa el número ext." (ngModelChange)="sendData()">
-                <mat-error *ngIf="form.controls.numberExt.invalid">
-                    {{getErrorNumberExt()}}
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="row">
-            <mat-form-field class="example-full-width">
-                <mat-label>Referencia</mat-label>
-                <input matInput formControlName="reference" placeholder="Ingresa las referencias" (ngModelChange)="sendData()">
-                <mat-error *ngIf="form.controls.reference.invalid">
-                    {{getErrorReference()}}
-                </mat-error>
-            </mat-form-field>
-        </div>
+  <div
+    class="content-form"
+    [formGroup]="form"
+    fxLayoutGap="10px"
+    fxLayout="column"
+  >
+    <div class="row" fxLayoutGap="10px">
+      <mat-form-field class="example-full-width">
+        <mat-label>Estado</mat-label>
+        <input
+          matInput
+          formControlName="state"
+          placeholder="Ingresa el estado"
+          (ngModelChange)="sendData()"
+        />
+        <mat-error *ngIf="form.controls.state.invalid">
+          {{ getErrorState() }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Municipio</mat-label>
+        <input
+          matInput
+          formControlName="municipality"
+          placeholder="Ingresa el municipio"
+          (ngModelChange)="sendData()"
+        />
+        <mat-error *ngIf="form.controls.municipality.invalid">
+          {{ getErrorMunicipality() }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Localidad</mat-label>
+        <input
+          matInput
+          formControlName="location"
+          placeholder="Ingresa la localidad"
+          (ngModelChange)="sendData()"
+        />
+        <mat-error *ngIf="form.controls.location.invalid">
+          {{ getErrorLocation() }}
+        </mat-error>
+      </mat-form-field>
     </div>
-
+    <div class="row" fxLayoutGap="10px">
+      <mat-form-field class="example-full-width">
+        <mat-label>Colonia</mat-label>
+        <input
+          matInput
+          formControlName="suburb"
+          placeholder="Ingresa la colonia"
+          (ngModelChange)="sendData()"
+        />
+        <mat-error *ngIf="form.controls.suburb.invalid">
+          {{ getErrorSuburb() }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Calle</mat-label>
+        <input
+          matInput
+          formControlName="street"
+          placeholder="Ingresa la calle"
+          (ngModelChange)="sendData()"
+        />
+        <mat-error *ngIf="form.controls.street.invalid">
+          {{ getErrorStreet() }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>No. exterior</mat-label>
+        <input
+          matInput
+          formControlName="numberExt"
+          placeholder="Ingresa el número ext."
+          (ngModelChange)="sendData()"
+        />
+        <mat-error *ngIf="form.controls.numberExt.invalid">
+          {{ getErrorNumberExt() }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="row" fxLayoutGap="10px">
+      <mat-form-field class="example-full-width">
+        <mat-label>Referencia</mat-label>
+        <input
+          matInput
+          formControlName="reference"
+          placeholder="Ingresa las referencias"
+          (ngModelChange)="sendData()"
+        />
+        <mat-error *ngIf="form.controls.reference.invalid">
+          {{ getErrorReference() }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
 </div>

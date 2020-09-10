@@ -1,23 +1,37 @@
-<div fxFlex fxLayout="column" fxLayoutGap="30px" fxLayoutAlign="center center" *ngIf="detail">
-  <div>
-    <div class="image" fxLayoutAlign="center center">
-      <mat-icon *ngIf="!detail.image">image</mat-icon>
-      <img src="{{detail.image}}">
-    </div>
-    <span class="text-muted text">Captura del mantenimiento</span>
-  </div>
-  <div class="text-dark">
-    <h2 class="mat-title">
-      {{ detail.user }}
-    </h2>
-    <p>{{ detail.titleFailure }}</p>
-  </div>
-
+<div fxLayout="row" fxLayoutAlign="center center">
   <div
-    class="text-dark mat-body mat-small"
+    fxFlex
+    fxLayout="column"
+    fxLayoutGap="30px"
     fxLayoutAlign="center center"
-    style="padding-bottom: 25px;"
+    *ngIf="detail"
   >
-    <p fxFlex="80">{{ detail.description }}</p>
+    <div>
+      <div class="image" fxLayoutAlign="center center">
+        <mat-icon *ngIf="!detail.image">image</mat-icon>
+        <!-- <img [attribute.] width="100%" height="auto" src="{{ detail.image }}" /> -->
+
+        <div
+          [style.background-image]="detail.urlDefault"
+          class="image__container"
+          fxLayoutAlign="center"
+        ></div>
+      </div>
+      <span class="text-muted text">Captura del mantenimiento</span>
+    </div>
+    <div class="text-dark">
+      <h2 class="mat-title">
+        {{ detail.user }}
+      </h2>
+      <p>{{ detail.titleFailure }}</p>
+    </div>
+
+    <div
+      class="text-dark mat-body mat-small"
+      fxLayoutAlign="center center"
+      style="padding-bottom: 25px"
+    >
+      <p fxFlex="80">{{ detail.description }}</p>
+    </div>
   </div>
 </div>

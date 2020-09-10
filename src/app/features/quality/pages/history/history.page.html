@@ -8,7 +8,7 @@
       fxLayout="column"
       fxLayout.gt-sm="row"
       fxLayoutAlign="space-evenly stretch"
-      style="padding: 10px;"
+      style="padding: 10px"
       fxLayoutGap="10px"
     >
       <div class="content-history" fxFlex.gt-xs="40%">
@@ -19,15 +19,31 @@
                 <button mat-stroked-button color="primary"(click)="countMore()" >></button>
             </div>
             <div fxLayout="row" fxLayoutAlign="space-between">
-              <h2 class="mat-title text-primary">
-                Acción
-              </h2>
-              <h2 class="mat-title text-primary">
-                Fecha
-              </h2>
+              <h2 fxFlex="70" class="mat-title text-primary">Acción</h2>
+              <h2 fxFlex="30" class="mat-title text-primary">Fecha</h2>
             </div>
+            <div
+              *ngIf="!(hasPackaging$ | async) && !(hasDrief$ | async) && !(hasMeat$ | async) || !((drief) || (packaging) || meat) && !(isLoading$|async)"
+              class="alert"
+              fxLayout="row"
+              fxLayoutGap="10px"
+            >
+              <div>
+                <mat-icon class="icon-alert">error</mat-icon>
+              </div>
+              <div>No se han encontrado elementos.</div>
+            </div>
+
+            <div fxLayoutAlign="center center">
+              <mat-spinner
+                *ngIf="(isLoading$|async) && !((drief) || (packaging) || meat) "
+              ></mat-spinner>
+            </div>
+
             <div class="packaging" *ngIf="hasPackaging$ | async">
-              <app-search-packaging [packaging]="packaging"></app-search-packaging>
+              <app-search-packaging
+                [packaging]="packaging"
+              ></app-search-packaging>
             </div>
             <div class="drief" *ngIf="hasDrief$ | async">
               <app-search-drief [drief]="drief"></app-search-drief>
@@ -35,11 +51,6 @@
             <div class="meat" *ngIf="hasMeat$ | async">
               <history-list [meat]="meat"></history-list>
             </div>
-            <!-- <div fxLayoutAlign="center" *ngIf="!((hasPackaging$ | async)  && (hasDrief$ | async)  && (hasMeat$ | async))">
-              <mat-spinner diameter="30"></mat-spinner>
-              
-              Sin datos búscados.
-            </div> -->
           </div>
           <!-- <div fxLayoutAlign="center center" fxLayoutGap="10px">
             <div>
@@ -52,33 +63,74 @@
       </div>
 
       <div fxFlex.gt-xs="45%" class="content-der">
-
         <div class="content-dates">
           <app-date-reports (dates)="objdates($event)"></app-date-reports>
         </div>
 
-        <mat-card fxFlex fxLayout="column" fxLayoutGap="10px" class="card-documents">
+        <mat-card
+          fxFlex
+          fxLayout="column"
+          fxLayoutGap="10px"
+          class="card-documents"
+        >
           <div class="list">
-            <h2 class="mat-title text-primary">
-              Documentos para descargar
-            </h2>
-            <div class="content-all-docs" *ngIf="(hasPackaging$ | async) || (hasDrief$ | async) || (hasMeat$ | async)">
-              
+            <h2 class="mat-title text-primary">Documentos para descargar</h2>
+            <div
+              *ngIf="!(hasPackaging$ | async) && !(hasDrief$ | async) && !(hasMeat$ | async) || !((drief) || (packaging) || meat) && !(isLoading$|async)"
+              class="alert"
+              fxLayout="row"
+              fxLayoutGap="10px"
+            >
+              <div>
+                <mat-icon class="icon-alert">error</mat-icon>
+              </div>
+              <div>No se han encontrado elementos.</div>
+            </div>
+
+            <div fxLayoutAlign="center center">
+              <mat-spinner
+                *ngIf="(isLoading$|async) && !(documentsMeat$ || (documentsDrief$) || documentsPacking$) "
+              ></mat-spinner>
+            </div>
+
+            <div
+              class="content-all-docs"
+              *ngIf="(hasPackaging$ | async) || (hasDrief$ | async) || (hasMeat$ | async)"
+            >
               <div class="content-documents-meat">
                 <div *ngFor="let document of documentsMeat$">
-                  <document-list [document]="document" (sendDocument)="downloadFileMeat($event)"></document-list>
-                </div>
-              </div>
-              
-              <div class="content-documents-drief" *ngIf="(hasDrief$ | async) && drief"> <!--Terminado-->
-                <div *ngFor="let document of documentsDrief$">
-                  <document-list [document]="document" (sendDocument)="downloadFileDrief($event)"></document-list>
+                  <document-list
+                    [document]="document"
+                    (sendDocument)="downloadFileMeat($event)"
+                  ></document-list>
                 </div>
               </div>
 
-              <div class="content-documents-packaing" *ngIf="(hasPackaging$ | async) && packaging">
-                <div  class="content-documents" *ngFor="let document of documentsPacking$">
-                  <document-list [document]="document" (sendDocument)="downloadFilePacking($event)"></document-list>
+              <div
+                class="content-documents-drief"
+                *ngIf="(hasDrief$ | async) && drief"
+              >
+                <!--Terminado-->
+                <div *ngFor="let document of documentsDrief$">
+                  <document-list
+                    [document]="document"
+                    (sendDocument)="downloadFileDrief($event)"
+                  ></document-list>
+                </div>
+              </div>
+
+              <div
+                class="content-documents-packaing"
+                *ngIf="(hasPackaging$ | async) && packaging"
+              >
+                <div
+                  class="content-documents"
+                  *ngFor="let document of documentsPacking$"
+                >
+                  <document-list
+                    [document]="document"
+                    (sendDocument)="downloadFilePacking($event)"
+                  ></document-list>
                 </div>
               </div>
             </div>

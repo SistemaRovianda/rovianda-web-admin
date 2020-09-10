@@ -1,25 +1,30 @@
-<div fxLayoutAlign="center center">
+<div fxLayoutAlign="start center">
   <div fxFlex fxLayout="column" fxLayoutGap="10px">
     <div
       fxFlex
       fxLayout="column"
       fxLayout.gt-sm="row"
       fxLayoutAlign="space-evenly stretch"
-      style="padding: 10px;"
+      style="padding: 10px"
       fxLayoutGap="10px"
     >
       <div fxFlex.gt-xs="40%">
         <mat-card fxFlex fxLayout="column" fxLayoutGap="10px">
           <div class="list">
             <div fxLayout="row" fxLayoutAlign="start center">
-              <h2 class="mat-title text-dark">
-                Registros
-              </h2>
+              <h2 class="mat-title text-dark">Registros</h2>
             </div>
-            <records [entity]="entity$" (maintenance)="details($event)"></records>
-            <div class="NotFound" [fxHide]="entity$.length">
+            <records
+              [entity]="entity$"
+              (maintenance)="details($event)"
+            ></records>
+            <div class="NotFound" [fxHide]="entity$|async">
               No se encontraron mantenimientos recientes.
             </div>
+            <records
+              [entity]="entity$|async"
+              (maintenance)="details($event)"
+            ></records>
           </div>
         </mat-card>
       </div>
@@ -30,15 +35,23 @@
             <!-- <div fxLayoutAlign="center">
                 <mat-spinner diameter="30"></mat-spinner>
               </div> -->
-            <h2 class="mat-title text-dark">
-              Detalles
-            </h2>
+            <h2 class="mat-title text-dark">Detalles</h2>
 
-            <div [fxHide]="entity$.length">
-              No existen documentos
+            <!-- <div [fxHide]="detail$">No existen documentos</div> -->
+
+            <div
+              class="alert"
+              fxLayout="row"
+              fxLayoutGap="10px"
+              [fxHide]="detail$"
+            >
+              <div>
+                <mat-icon class="icon-alert">error</mat-icon>
+              </div>
+              <div>No se han encontrado elementos.</div>
             </div>
 
-            <div *ngIf="entity$">
+            <div *ngIf="entity$|async">
               <div>
                 <maintenance-detail [detail]="detail$"></maintenance-detail>
               </div>

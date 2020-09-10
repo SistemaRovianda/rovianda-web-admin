@@ -1,9 +1,8 @@
-<div class="content">
-  <div class="content-dates">
+<div class="content" fxLayout="row" fxLayoutAlign="center start">
+  <div class="content-dates" fxFlex.gt-md="900px">
     <app-date-machine (dates)="objDates($event)"></app-date-machine>
   </div>
   <div class="content-table">
-
     <!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
 
@@ -23,6 +22,5 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table> -->
-
   </div>
 </div>
