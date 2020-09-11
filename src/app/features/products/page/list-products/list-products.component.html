@@ -1,5 +1,5 @@
-<div fxLayoutAlign="center center" fxFlex>
-  <div class="content" fxLayout="column">
+<div fxLayout="column" fxLayoutAlign="center center" fxFlex fxLayoutGap="10px">
+  <div class="content" fxLayout="column" fxLayoutGap="10px">
     <div class="content-button">
       <button
         class="button"
@@ -15,8 +15,9 @@
     </div>
     <div class="content-detail" *ngIf="dataDetailsProduct" fxLayout="column">
       <h2>Detalles del producto</h2>
-      <div>
+      <div fxFlex>
         <app-details-product
+          fxFlex
           [dataDetails]="dataDetailsProduct"
         ></app-details-product>
       </div>

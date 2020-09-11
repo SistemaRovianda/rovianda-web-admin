@@ -1,8 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 import { MaintenanceService } from "src/app/features/services/maintenance.service";
-import { HttpClient } from "@angular/common/http";
-import { Observable, BehaviorSubject } from "rxjs";
-import { map, filter } from "rxjs/operators";
 import { Maintenance } from "src/app/features/shared/models/maintenance.model";
 
 @Component({
@@ -31,6 +29,5 @@ export class MaintenancePageComponent implements OnInit {
     };
 
     this.detail$ = payload;
-    console.log(payload);
   }
 }

@@ -5,6 +5,7 @@
     [formGroup]="form"
     fxLayout="column"
     fxLayout.gt-md="row"
+    fxLayoutGap="10px"
   >
     <mat-form-field class="example-full-width">
       <mat-label>Clave</mat-label>
@@ -18,7 +19,75 @@
         {{ getErrorKeyClient() }}
       </mat-error>
     </mat-form-field>
+
     <mat-form-field class="example-full-width">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error>
+        <span *ngIf="form.hasError('required', 'name')">
+          Este campo es requerido.
+        </span>
+
+        <span *ngIf="form.hasError('whitespace', 'name')">
+          No has introducido caracteres.
+        </span>
+
+        <span
+          *ngIf="
+            !form.hasError('whitespace', 'name') &&
+            form.hasError('pattern', 'name')
+          "
+        >
+          No es un formato válido.
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Primer apellido</mat-label>
+      <input matInput formControlName="firstSurname" />
+      <mat-error>
+        <span *ngIf="form.hasError('required', 'firstSurname')">
+          Este campo es requerido.
+        </span>
+        <span *ngIf="form.hasError('whitespace', 'firstSurname')">
+          No has introducido caracteres.
+        </span>
+
+        <span
+          *ngIf="
+            !form.hasError('whitespace', 'firstSurname') &&
+            form.hasError('pattern', 'firstSurname')
+          "
+        >
+          No es un formato válido.
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Segundo apellido</mat-label>
+      <input matInput formControlName="lastSurname" />
+      <mat-error>
+        <span *ngIf="form.hasError('required', 'lastSurname')">
+          Este campo es requerido.
+        </span>
+
+        <span *ngIf="form.hasError('whitespace', 'lastSurname')">
+          No has introducido caracteres.
+        </span>
+
+        <span
+          *ngIf="
+            !form.hasError('whitespace', 'lastSurname') &&
+            form.hasError('pattern', 'lastSurname')
+          "
+        >
+          No es un formato válido.
+        </span>
+      </mat-error>
+    </mat-form-field>
+    <!-- <mat-form-field class="example-full-width">
       <mat-label>Nombre cliente</mat-label>
       <input
         matInput
@@ -29,7 +98,7 @@
       <mat-error *ngIf="form.controls.client.invalid">
         {{ getErrorClient() }}
       </mat-error>
-    </mat-form-field>
+    </mat-form-field> -->
     <mat-form-field class="example-full-width">
       <mat-label>RFC</mat-label>
       <input
@@ -37,6 +106,9 @@
         formControlName="rfc"
         placeholder="RFC del cliente"
         (ngModelChange)="sendData()"
+        #input
+        [value]="input.value.toUpperCase()"
+        type="text"
       />
       <mat-error *ngIf="form.controls.rfc.invalid">
         {{ getErrorRFC() }}
@@ -59,7 +131,7 @@
       <input
         type="text"
         #autoComplInput
-        placeholder="vendedor"
+        placeholder="Vendedor"
         aria-label="Number"
         matInput
         [formControl]="userSale"

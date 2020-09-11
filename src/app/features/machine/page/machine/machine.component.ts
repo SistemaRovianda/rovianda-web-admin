@@ -38,9 +38,12 @@ export class MachineComponent implements OnInit {
   objDates(event) {
     console.log(event);
     let obj: any = {
-      dateInit: event.dateStart,
+      dateInit: event.dateInit,
       dateEnd: event.dateEnd,
     };
+
+    console.log(obj);
+
     this.serviceMaintenance.postStoreDevices(obj).subscribe((data) => {
       console.log(data);
       this.objcolumns(data);

@@ -12,7 +12,7 @@ export class DateMachineComponent implements OnInit {
 
   constructor() {
     this.form = new FormGroup({
-      dateIni: new FormControl({ disabled: true, value: "" }, [
+      dateStart: new FormControl({ disabled: true, value: "" }, [
         Validators.required,
       ]),
       dateEnd: new FormControl({ disabled: true, value: "" }, [
@@ -25,10 +25,9 @@ export class DateMachineComponent implements OnInit {
 
   sendData() {
     let obj = {
-      dateInit: JSON.stringify(new Date(this.form.get("dateIni").value)).slice(
-        1,
-        11
-      ),
+      dateInit: JSON.stringify(
+        new Date(this.form.get("dateStart").value)
+      ).slice(1, 11),
       dateEnd: JSON.stringify(new Date(this.form.get("dateEnd").value)).slice(
         1,
         11

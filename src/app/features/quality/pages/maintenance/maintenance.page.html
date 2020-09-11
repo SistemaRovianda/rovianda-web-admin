@@ -14,12 +14,18 @@
             <div fxLayout="row" fxLayoutAlign="start center">
               <h2 class="mat-title text-dark">Registros</h2>
             </div>
-            <records
-              [entity]="entity$"
-              (maintenance)="details($event)"
-            ></records>
-            <div class="NotFound" [fxHide]="entity$|async">
-              No se encontraron mantenimientos recientes.
+            <div
+              class="alert"
+              fxLayout="row"
+              fxLayoutGap="10px"
+              [fxHide]="entity$|async"
+            >
+              <div>
+                <div>
+                  <mat-icon class="icon-alert">error</mat-icon>
+                </div>
+              </div>
+              <div>No se encontraron mantenimientos recientes.</div>
             </div>
             <records
               [entity]="entity$|async"
