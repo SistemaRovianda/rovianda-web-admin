@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ServicesClientsService } from "src/app/features/services/services-clients.service";
 import { DialogComponent } from "../../../../features/products/components/dialog/dialog.component";
 import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
+import { RegisterContactsComponent } from '../../components/register-contacts/register-contacts.component';
 
 @Component({
   selector: "app-register-client",
@@ -9,6 +10,7 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
   styleUrls: ["./register-client.component.scss"],
 })
 export class RegisterClientComponent implements OnInit {
+  dialogValues: any[]= [];
   constructor(
     private servicesClient: ServicesClientsService,
     // public dialogRef: MatDialogRef<DialogComponent>,
@@ -24,20 +26,21 @@ export class RegisterClientComponent implements OnInit {
 
   dataGeneric(event: any) {
     this.objdataGeneric = event;
-    this.valid();
+    this.valid('generico');
   }
 
   dataAddress(event: any) {
     this.objaddress = event;
-    this.valid();
+    this.valid('dirección');
   }
 
   check(event: any) {
     this.objchecks = event;
-    this.valid();
+    this.valid('checks');
   }
 
-  valid() {
+  valid(lugar) {
+    console.log(lugar)
     this.objdataGeneric != undefined &&
     this.objaddress != undefined &&
     this.objchecks != undefined
@@ -63,31 +66,37 @@ export class RegisterClientComponent implements OnInit {
         let obj: any = {
           keyClient: this.objdataGeneric.keyClient,
           name: this.objdataGeneric.name,
-          firstSurname: this.objdataGeneric.firstSurname,
-          lastSurname: this.objdataGeneric.lastSurname,
-          // client: this.objdataGeneric.client,
-          typeClient: this.objchecks.typeClient,
+          email: this.objdataGeneric.email,
+          curp: this.objdataGeneric.curp,
+          phone: this.objdataGeneric.phone,
+          rfc: this.objdataGeneric.rfc,
           currentCredit: Number(this.objdataGeneric.currentCredit),
           saleuid: this.objdataGeneric.saleuid,
-          rfc: this.objdataGeneric.rfc,
-          daysCredit: this.objchecks.daysCredit.filter(Boolean),
+          // client: this.objdataGeneric.client,
+          typeClient: this.objchecks.typeClient,
+          daysCredit: this.objchecks.daysCredit,
+          dayCharge: this.objdataGeneric.dayCharge,
           addressClient: this.objaddress,
+          cfdi: this.objdataGeneric.cfdi,
+          paymentSat:this.objdataGeneric.paymentSat,
+          contacts: this.dialogValues,
+          clasification: this.objdataGeneric.clasification
         };
         //falta consumir el servicio
-        this.servicesClient.postCustomerCreated(obj).subscribe(
-          (data) => {
-            this.openDialogConfirm({
-              title: "Cliente Agregado",
-              msg: `Se agrego el cliente correctamente.`,
-            });
-          },
-          (err) => {
-            this.openDialogConfirm({
-              title: "Error al agregar cliente",
-              msg: `No se ha podido agregar al cliente.`,
-            });
-          }
-        );
+        // this.servicesClient.postCustomerCreated(obj).subscribe(
+        //   (data) => {
+        //     this.openDialogConfirm({
+        //       title: "Cliente Agregado",
+        //       msg: `Se agrego el cliente correctamente.`,
+        //     });
+        //   },
+        //   (err) => {
+        //     this.openDialogConfirm({
+        //       title: "Error al agregar cliente",
+        //       msg: `No se ha podido agregar al cliente.`,
+        //     });
+        //   }
+        // );
         console.log(obj);
       }
     }
@@ -99,5 +108,18 @@ export class RegisterClientComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.data = data;
     this.dialog.open(DialogComponent, dialogConfig);
+  }
+
+  openDialog(){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = this.dialogValues;
+    const dialogRef=this.dialog.open(RegisterContactsComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.dialogValues.push(result);
+      }
+    });
   }
 }

@@ -1,0 +1,35 @@
+.content {
+    width: 1000px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    .content-title {
+        text-align: center;
+    }
+    .content-text {
+        text-align: justify;
+    }
+    .content-button {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .row {
+        display: flex;
+        justify-content: space-evenly;
+        mat-form-field {
+          width: 250px;
+        }
+      }
+}
+
+.contentList{
+    margin-top: 20px;
+    min-height: 250px;
+    max-height: 300px;
+    overflow: auto;
+    table {
+        width: 100%;
+      }
+}
+
+

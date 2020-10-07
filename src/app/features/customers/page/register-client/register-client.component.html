@@ -8,7 +8,7 @@
     <mat-card
       class="curtomer-card"
       fxFlex="80"
-      fxFlex.gt-md="100"
+      fxFlex.gt-md="90"
       fxLayout="column"
       fxLayoutGap="10px"
     >
@@ -32,6 +32,14 @@
         <div class="buttons" fxFlex fxLayoutAlign="center">
           <button
             mat-raised-button
+            color="secondary"
+            (click)="openDialog()"
+            style="margin-left: 20px;"
+          >
+            Registrar contactos
+          </button>
+          <button
+            mat-raised-button
             #disableButton
             color="primary"
             [disabled]="ban"
@@ -39,6 +47,7 @@
           >
             Agregar
           </button>
+
         </div>
       </mat-card-content>
     </mat-card>

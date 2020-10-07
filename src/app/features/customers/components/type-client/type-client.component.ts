@@ -21,7 +21,7 @@ export class TypeClientComponent implements OnInit {
     private fb: FormBuilder,
   ) {
     this.form = this.fb.group({
-      daysCredit: this.fb.array([])
+      daysCredit: new FormControl('')
     })
   }
 
@@ -37,20 +37,20 @@ export class TypeClientComponent implements OnInit {
   }
 
   sendData() {
+    console.log(this.typeClient.value)
     if (this.typeClient.value) {
-      console.log('uno')
       if (this.form.get('daysCredit').value != 0) {
         this.checkTypefun();
         let obj = {
-          typeClient: this.typeClient.value,
+          typeClient: "CREDITO",
           daysCredit: this.form.get('daysCredit').value
         }
+        console.log(obj)
         this.objTypeCredit.emit(obj)
       }
     } else {
-      console.log('dos')
       let obj = {
-        typeClient: false,
+        typeClient: "CONTADO",
         daysCredit: []
       }
       this.form.get('daysCredit').reset()
@@ -62,15 +62,18 @@ export class TypeClientComponent implements OnInit {
   uncheckAll() { this.checkboxes.forEach(element => element.checked = false) }
   checkTypefun() { this.checkType.forEach(element => element.checked = true) }
 
-  updateChkbxArray(id, isChecked) {
-    const chkArray = <FormArray>this.form.get('daysCredit');
-    if (isChecked) {
-      chkArray.push(new FormControl(id));
+  updateChkbxArray(id) {
+    console.log(id)
+    // this.valid(1)
+    // const chkArray = 
+    this.form.get('daysCredit').setValue(id);
+    // if (isChecked) {
+      // chkArray.push(new FormControl(id));
+    //   this.sendData()
+    // } else {
+      // let idx = chkArray.controls.findIndex(x => x.value == id);
+      // chkArray.removeAt(idx);
       this.sendData()
-    } else {
-      let idx = chkArray.controls.findIndex(x => x.value == id);
-      chkArray.removeAt(idx);
-      this.sendData()
-    }
+    // }
   }
 }

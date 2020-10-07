@@ -13,11 +13,23 @@ export class ServicesClientsService {
     this.endpoint = environment.basePath;
   }
 
+  getNumberCreateClient(){
+    return this.http.get(`${this.endpoint}/customer/customer-count`)
+  }
+
   getUsersSales(rol: string){
     return this.http.get(`${this.endpoint}/user/rol/${rol}`)
   }
 
   postCustomerCreated(obj:any){
     return this.http.post(`${this.endpoint}/customer/create`,obj)
+  }
+
+  getCatalogPagosSat(){
+    return this.http.get(`${this.endpoint}/catalogo-pagos-sat`)
+  }
+
+  getCatalogCfdi(){
+    return this.http.get(`${this.endpoint}/catalogos-de-cfdi`)
   }
 }

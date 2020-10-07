@@ -1,154 +1,179 @@
-<div class="content">
+<div class="content" fxLayoutGap="10px" style="margin-bottom: 35px">
   <div class="title">Datos generales</div>
-  <div
-    class="content-form1"
-    [formGroup]="form"
-    fxLayout="column"
-    fxLayout.gt-md="row"
-    fxLayoutGap="10px"
-  >
-    <mat-form-field class="example-full-width">
-      <mat-label>Clave</mat-label>
-      <input
-        matInput
-        formControlName="keyClient"
-        placeholder="clave del cliente"
-        (ngModelChange)="sendData()"
-      />
-      <mat-error *ngIf="form.controls.keyClient.invalid">
-        {{ getErrorKeyClient() }}
-      </mat-error>
+
+  <div class="content-form1" [formGroup]="form" fxLayoutGap="10px" fxLayout="column">
+
+    <div class="row" fxLayoutGap="30px">
+      <mat-form-field class="example-full-width">
+        <mat-label>Clave</mat-label>
+        <input matInput formControlName="keyClient" (ngModelChange)="sendData()"/>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="name" placeholder="Ingresa el nombre" (ngModelChange)="sendData()"/>
+        <mat-error>
+          <span *ngIf="form.hasError('required', 'name')">
+            Este campo es requerido.
+          </span>
+
+          <span *ngIf="form.hasError('whitespace', 'name')">
+            No has introducido caracteres.
+          </span>
+
+          <span *ngIf="
+              !form.hasError('whitespace', 'name') &&
+              form.hasError('pattern', 'name')
+            ">
+            No es un formato válido.
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>correo electrónico</mat-label>
+        <input matInput formControlName="email" placeholder="Ingresa el correo electrónico" (ngModelChange)="sendData()"/>
+        <mat-error>
+          <span *ngIf="form.hasError('required', 'email')">
+            Este campo es requerido.
+          </span>
+          <span *ngIf="form.hasError('whitespace', 'email')">
+            No has introducido caracteres.
+          </span>
+
+          <span *ngIf="
+              !form.hasError('whitespace', 'email') &&
+              form.hasError('email', 'email')
+            ">
+            No es un formato válido.
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>CURP</mat-label>
+        <input matInput formControlName="curp" placeholder="Ingresa la curp" (ngModelChange)="sendData()"/>
+        <mat-error>
+          <span *ngIf="form.hasError('required', 'curp')">
+            Este campo es requerido.
+          </span>
+
+          <span *ngIf="form.hasError('whitespace', 'curp')">
+            No has introducido caracteres.
+          </span>
+
+          <span *ngIf="
+              !form.hasError('whitespace', 'curp') &&
+              form.hasError('pattern', 'curp')
+            ">
+            No es un formato válido.
+          </span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row" fxLayoutGap="30px">
+      <mat-form-field class="example-full-width">
+        <mat-label>Teléfono</mat-label>
+        <input matInput formControlName="phone" (ngModelChange)="sendData()"/>
+        <mat-error>
+          <span *ngIf="form.hasError('required', 'phone')">
+            Este campo es requerido.
+          </span>
+
+          <span *ngIf="form.hasError('whitespace', 'phone')">
+            No has introducido caracteres.
+          </span>
+
+          <span *ngIf="
+              !form.hasError('whitespace', 'phone') &&
+              form.hasError('digitsValidator', 'phone')
+            ">
+            No es un formato válido.
+          </span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>RFC</mat-label>
+        <input matInput formControlName="rfc" placeholder="RFC del cliente" (ngModelChange)="sendData()" #input
+          [value]="input.value.toUpperCase()" type="text" />
+        <mat-error *ngIf="form.controls.rfc.invalid">
+          {{ getErrorRFC() }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Limite de crédito</mat-label>
+        <input matInput formControlName="currentCredit" placeholder="crédito del cliente"
+          (ngModelChange)="sendData()" />
+        <mat-error *ngIf="form.controls.currentCredit.invalid">
+          {{ getErrorCurrentCredit() }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input type="text" #autoComplInput placeholder="Vendedor" aria-label="Number" matInput [formControl]="userSale"
+          [matAutocomplete]="auto" (ngModelChange)="sendData()" />
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{ option.fullName }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="true">
+          {{ getErrorSale() }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="row" fxLayoutGap="30px">
+      <mat-form-field class="example-full-width">
+        <mat-label>Clasificación</mat-label>
+        <input matInput formControlName="clasification" (ngModelChange)="sendData()"/>
+        <mat-error>
+          <span *ngIf="form.hasError('required', 'clasification')">
+            Este campo es requerido.
+          </span>
+  
+          <span *ngIf="form.hasError('whitespace', 'clasification')">
+            No has introducido caracteres.
+          </span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Día de revisión</mat-label>
+        <input matInput formControlName="dayCharge" (ngModelChange)="sendData()"/>
+        <mat-error>
+          <span *ngIf="form.hasError('required', 'dayCharge')">
+            Este campo es requerido.
+          </span>
+  
+          <span *ngIf="form.hasError('whitespace', 'dayCharge')">
+            No has introducido caracteres.
+          </span>
+          <span *ngIf="form.hasError('minlength', 'dayCharge') && !form.hasError('whitespace', 'dayCharge')">
+            Mínimo un digito.
+          </span>
+          <span *ngIf="form.hasError('pattern', 'dayCharge') && !form.hasError('whitespace', 'dayCharge')">
+            Solo números.
+          </span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Catalogo de pagos</mat-label>
+        <mat-select formControlName="paymentSat" name="paymentSat" (ngModelChange)="sendData()">
+            <mat-option *ngFor="let item of paymentSat" [value]="item.cPaymentShape">
+              {{item.cPaymentShape}} {{item.description}}
+            </mat-option>
+        </mat-select>
     </mat-form-field>
-
-    <mat-form-field class="example-full-width">
-      <mat-label>Nombre</mat-label>
-      <input matInput formControlName="name" />
-      <mat-error>
-        <span *ngIf="form.hasError('required', 'name')">
-          Este campo es requerido.
-        </span>
-
-        <span *ngIf="form.hasError('whitespace', 'name')">
-          No has introducido caracteres.
-        </span>
-
-        <span
-          *ngIf="
-            !form.hasError('whitespace', 'name') &&
-            form.hasError('pattern', 'name')
-          "
-        >
-          No es un formato válido.
-        </span>
-      </mat-error>
+      <mat-form-field appearance="fill">
+        <mat-label>CFDI</mat-label>
+        <mat-select formControlName="cfdi" name="paymentSat" (ngModelChange)="sendData()">
+            <mat-option *ngFor="let item of typesCfdi" [value]="item.cCFDIUse">
+              {{item.cCFDIUse}} {{item.description}}
+            </mat-option>
+        </mat-select>
     </mat-form-field>
-
-    <mat-form-field class="example-full-width">
-      <mat-label>Primer apellido</mat-label>
-      <input matInput formControlName="firstSurname" />
-      <mat-error>
-        <span *ngIf="form.hasError('required', 'firstSurname')">
-          Este campo es requerido.
-        </span>
-        <span *ngIf="form.hasError('whitespace', 'firstSurname')">
-          No has introducido caracteres.
-        </span>
-
-        <span
-          *ngIf="
-            !form.hasError('whitespace', 'firstSurname') &&
-            form.hasError('pattern', 'firstSurname')
-          "
-        >
-          No es un formato válido.
-        </span>
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field class="example-full-width">
-      <mat-label>Segundo apellido</mat-label>
-      <input matInput formControlName="lastSurname" />
-      <mat-error>
-        <span *ngIf="form.hasError('required', 'lastSurname')">
-          Este campo es requerido.
-        </span>
-
-        <span *ngIf="form.hasError('whitespace', 'lastSurname')">
-          No has introducido caracteres.
-        </span>
-
-        <span
-          *ngIf="
-            !form.hasError('whitespace', 'lastSurname') &&
-            form.hasError('pattern', 'lastSurname')
-          "
-        >
-          No es un formato válido.
-        </span>
-      </mat-error>
-    </mat-form-field>
-    <!-- <mat-form-field class="example-full-width">
-      <mat-label>Nombre cliente</mat-label>
-      <input
-        matInput
-        formControlName="client"
-        placeholder="Nombre del cliente"
-        (ngModelChange)="sendData()"
-      />
-      <mat-error *ngIf="form.controls.client.invalid">
-        {{ getErrorClient() }}
-      </mat-error>
-    </mat-form-field> -->
-    <mat-form-field class="example-full-width">
-      <mat-label>RFC</mat-label>
-      <input
-        matInput
-        formControlName="rfc"
-        placeholder="RFC del cliente"
-        (ngModelChange)="sendData()"
-        #input
-        [value]="input.value.toUpperCase()"
-        type="text"
-      />
-      <mat-error *ngIf="form.controls.rfc.invalid">
-        {{ getErrorRFC() }}
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Limite de crédito</mat-label>
-      <input
-        matInput
-        formControlName="currentCredit"
-        placeholder="crédito del cliente"
-        (ngModelChange)="sendData()"
-      />
-      <mat-error *ngIf="form.controls.currentCredit.invalid">
-        {{ getErrorCurrentCredit() }}
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field class="example-full-width">
-      <input
-        type="text"
-        #autoComplInput
-        placeholder="Vendedor"
-        aria-label="Number"
-        matInput
-        [formControl]="userSale"
-        [matAutocomplete]="auto"
-        (ngModelChange)="sendData()"
-      />
-      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-        <mat-option
-          *ngFor="let option of filteredOptions | async"
-          [value]="option"
-        >
-          {{ option.fullName }}
-        </mat-option>
-      </mat-autocomplete>
-      <mat-error *ngIf="true">
-        {{ getErrorSale() }}
-      </mat-error>
-    </mat-form-field>
+    
+    </div>
   </div>
 </div>

@@ -35,15 +35,15 @@
         fxLayout.gt-sm="row"
       >
         <div *ngFor="let item of arrdays">
-          <mat-checkbox
+          <mat-radio-button
             [checked]="reset"
             class="example-margin"
             #checkboxes
             formArrayName="daysCredit"
             [disabled]="!typeClient.value"
-            (change)="updateChkbxArray(item.id, $event.checked)"
+            (change)="updateChkbxArray(item.id)"
             value="item.id"
-            >{{ item.day }}</mat-checkbox
+            >{{ item.day }}</mat-radio-button
           >
         </div>
       </div>

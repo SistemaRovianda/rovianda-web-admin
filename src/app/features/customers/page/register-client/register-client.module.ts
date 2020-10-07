@@ -19,7 +19,9 @@ import { MatRadioModule } from "@angular/material";
 import { DialogComponent } from "src/app/features/products/components/dialog/dialog.component";
 import { TableModule } from "src/app/features/products/components/table/table.module";
 import { FlexLayoutModule } from "@angular/flex-layout";
-
+import { RegisterContactsComponent } from '../../components/register-contacts/register-contacts.component';
+import { RegisterContactsModule } from '../../components/register-contacts/register-contacts.module';
+import {MatSelectModule} from '@angular/material/select';
 @NgModule({
   declarations: [
     RegisterClientComponent,
@@ -40,6 +42,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     MatRadioModule,
     TableModule,
     FlexLayoutModule,
+    RegisterContactsModule,
+    MatSelectModule,
   ],
   exports: [RegisterClientComponent],
   entryComponents: [
@@ -47,6 +51,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     AddressClientComponent,
     TypeClientComponent,
     DialogComponent,
+    RegisterContactsComponent,
   ],
   providers: [
     // { provide: MatDialogRef, useValue: {hasBackdrop: false} },
