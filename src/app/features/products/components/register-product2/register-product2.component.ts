@@ -15,7 +15,7 @@ export class RegisterProduct2Component implements OnInit {
 @Input() public set change(val:string){
   if(typeof(val) == 'object'){
     this._item=val;
-    console.log(val)
+    console.log("val: ",val)
     this.OptionsDrief(this._item);
     this.reload()
   }else if(val != undefined){
@@ -25,6 +25,7 @@ export class RegisterProduct2Component implements OnInit {
     this.reload()
   }
 }
+@Input() change2:any;
   @Output() updateingredients= new EventEmitter<listIngredients[]>();
   options:any[];
   myControl = new FormControl(Validators.required);
@@ -78,7 +79,6 @@ export class RegisterProduct2Component implements OnInit {
   OptionsDrief(filter:any){
     let deleteitem:any= this.options;
     for(let item of filter){
-      console.log(item)
       this.options=deleteitem.filter(data=>data.id != item.id)
     }
   }

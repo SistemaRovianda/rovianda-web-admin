@@ -18,6 +18,7 @@ export class CreateProductComponent implements OnInit {
 
   dataImg: any;
   saveBaseImg: any;
+  change2: any;
   constructor(
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<DialogComponent>,
@@ -59,7 +60,10 @@ export class CreateProductComponent implements OnInit {
     dialogConfig.autoFocus = true;
     this.dialogRefIngredients = this.dialog.open(AddIngredientComponent, dialogConfig);
     this.dialogRefIngredients.afterClosed().subscribe(res => {
-      if (res == 'update') { this.change = [res, this.change] }
+      console.log('respuesta: ', res)
+      if (res == 'update' && this.change != undefined) { this.change = [res, this.change] }else{
+        this.change2=res;
+      }
     })
   }
 

@@ -10,19 +10,19 @@ import { RegisterContactsComponent } from '../../components/register-contacts/re
   styleUrls: ["./register-client.component.scss"],
 })
 export class RegisterClientComponent implements OnInit {
-  dialogValues: any[]= [];
+  dialogValues: any[] = [];
   constructor(
     private servicesClient: ServicesClientsService,
     // public dialogRef: MatDialogRef<DialogComponent>,
     public dialog: MatDialog
-  ) {}
+  ) { }
 
   objdataGeneric: any;
   objaddress: any;
   objchecks: any;
   ban: boolean = true;
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   dataGeneric(event: any) {
     this.objdataGeneric = event;
@@ -42,8 +42,8 @@ export class RegisterClientComponent implements OnInit {
   valid(lugar) {
     console.log(lugar)
     this.objdataGeneric != undefined &&
-    this.objaddress != undefined &&
-    this.objchecks != undefined
+      this.objaddress != undefined &&
+      this.objchecks != undefined
       ? Object.keys(this.objaddress).length &&
         Object.keys(this.objchecks).length &&
         Object.keys(this.objdataGeneric).length
@@ -71,32 +71,32 @@ export class RegisterClientComponent implements OnInit {
           phone: this.objdataGeneric.phone,
           rfc: this.objdataGeneric.rfc,
           currentCredit: Number(this.objdataGeneric.currentCredit),
-          saleuid: this.objdataGeneric.saleuid,
+          saleUid: this.objdataGeneric.saleuid,
           // client: this.objdataGeneric.client,
           typeClient: this.objchecks.typeClient,
           daysCredit: this.objchecks.daysCredit,
           dayCharge: this.objdataGeneric.dayCharge,
           addressClient: this.objaddress,
           cfdi: this.objdataGeneric.cfdi,
-          paymentSat:this.objdataGeneric.paymentSat,
+          paymentSat: this.objdataGeneric.paymentSat,
           contacts: this.dialogValues,
           clasification: this.objdataGeneric.clasification
         };
-        //falta consumir el servicio
-        // this.servicesClient.postCustomerCreated(obj).subscribe(
-        //   (data) => {
-        //     this.openDialogConfirm({
-        //       title: "Cliente Agregado",
-        //       msg: `Se agrego el cliente correctamente.`,
-        //     });
-        //   },
-        //   (err) => {
-        //     this.openDialogConfirm({
-        //       title: "Error al agregar cliente",
-        //       msg: `No se ha podido agregar al cliente.`,
-        //     });
-        //   }
-        // );
+        // falta consumir el servicio
+        this.servicesClient.postCustomerCreated(obj).subscribe(
+          (data) => {
+            this.openDialogConfirm({
+              title: "Cliente Agregado",
+              msg: `Se agrego el cliente correctamente.`,
+            });
+          },
+          (err) => {
+            this.openDialogConfirm({
+              title: "Error al agregar cliente",
+              msg: `No se ha podido agregar al cliente.`,
+            });
+          }
+        );
         console.log(obj);
       }
     }
@@ -110,16 +110,22 @@ export class RegisterClientComponent implements OnInit {
     this.dialog.open(DialogComponent, dialogConfig);
   }
 
-  openDialog(){
+  openDialog() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = this.dialogValues;
-    const dialogRef=this.dialog.open(RegisterContactsComponent, dialogConfig);
+    const dialogRef = this.dialog.open(RegisterContactsComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
-      if(result){
+      if (result) {
         this.dialogValues.push(result);
       }
     });
+  }
+
+  resetcomponent() {
+    this.objdataGeneric = undefined;
+    this.objaddress = undefined;
+    this.objchecks = undefined;
   }
 }
