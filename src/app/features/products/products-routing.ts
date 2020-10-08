@@ -1,15 +1,17 @@
-import { RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
-import { LayoutComponent } from '../quality/layout/layout.component';
-import { LayoutModule } from '../quality/layout/layout.module';
-import { ProductsComponent } from './page/list-products/list-products.component';
-import { ProductsModule } from './page/list-products/list-products.module';
-import { CreateProductComponent } from './page/create-product/create-product.component';
-import { CreateProductModule } from './page/create-product/create-product.module';
-import { EditProductComponent } from './page/edit-product/edit-product.component';
-import { EditProductModule } from './page/edit-product/edit-product.module';
-import { CommonModule } from '@angular/common';
-import { GuardAuthGuard } from '../guards/guard-auth.guard';
+import { RouterModule, Routes } from "@angular/router";
+import { NgModule } from "@angular/core";
+import { LayoutComponent } from "../quality/layout/layout.component";
+import { LayoutModule } from "../quality/layout/layout.module";
+import { ProductsComponent } from "./page/list-products/list-products.component";
+import { ProductsModule } from "./page/list-products/list-products.module";
+import { CreateProductComponent } from "./page/create-product/create-product.component";
+import { CreateProductModule } from "./page/create-product/create-product.module";
+import { EditProductComponent } from "./page/edit-product/edit-product.component";
+import { EditProductModule } from "./page/edit-product/edit-product.module";
+import { CommonModule } from "@angular/common";
+import { GuardAuthGuard } from "../guards/guard-auth.guard";
+import { NewProductLineModule } from "./page/new-product-line/new-product-line.module";
+import { NewProductLineComponent } from "./page/new-product-line/new-product-line.component";
 
 const routes: Routes = [
   {
@@ -19,20 +21,26 @@ const routes: Routes = [
       {
         path: "list-products",
         component: ProductsComponent,
-        canActivate:[GuardAuthGuard]
+        canActivate: [GuardAuthGuard],
       },
       {
         path: "create-product",
         component: CreateProductComponent,
-        canActivate:[GuardAuthGuard]
+        canActivate: [GuardAuthGuard],
       },
       {
         path: "edit-product",
         component: EditProductComponent,
-        canActivate:[GuardAuthGuard]
+        canActivate: [GuardAuthGuard],
       },
-    ]
-  }
+
+      {
+        path: "line",
+        component: NewProductLineComponent,
+        canActivate: [GuardAuthGuard],
+      },
+    ],
+  },
 ];
 
 @NgModule({
@@ -42,8 +50,9 @@ const routes: Routes = [
     LayoutModule,
     CreateProductModule,
     EditProductModule,
-    CommonModule
+    CommonModule,
+    NewProductLineModule,
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ProductsRouting { }
+export class ProductsRouting {}

@@ -1,78 +1,87 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { FormControl, Validators, FormGroup } from '@angular/forms';
-
-// import { Observable } from 'rxjs/Observable';
-// import { Subject } from 'rxjs/Subject';
+import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
+import { FormControl, Validators, FormGroup } from "@angular/forms";
+import { productLine } from "src/app/features/models/model-products";
 
 @Component({
-  selector: 'app-register-product1',
-  templateUrl: './register-product1.component.html',
-  styleUrls: ['./register-product1.component.scss']
+  selector: "app-register-product1",
+  templateUrl: "./register-product1.component.html",
+  styleUrls: ["./register-product1.component.scss"],
 })
 export class RegisterProduct1Component implements OnInit {
   private _details: any;
   form: FormGroup;
-  // private contentform:any= new Subject<this.form>();
-  @Output() emitterForm = new EventEmitter()
+
+  @Output() emitterForm = new EventEmitter();
   @Input() public set objDetails(val: any) {
     if (val != undefined) {
       this._details = val;
       this.paint();
     }
-  };
+  }
+
+  @Input() productLine: productLine;
 
   constructor() {
     this.form = new FormGroup({
-      code: new FormControl('', [
+      code: new FormControl("", [
         Validators.required,
         Validators.minLength(3),
-        Validators.pattern(/^[(áéíóúÁÉÍÓÚñÑ!"#$%&/=?¡¿'ñÑ!"#$%&/=?¡¿'.,*+}\-;:)a-zA-Z0-9(áéíóúÁÉÍÓÚñÑ!"#$%&/=?¡¿'.,*+}\-;:)]+(?:\s[(áéíóúÁÉÍÓÚñÑ!"#$%&/=?¡¿'.,*+}\-;:)a-zA-Z0-9(áéíóúÁÉÍÓÚñÑ!"#$%&/=?¡¿'.,*+}\-;:)]+)*$/),
+        Validators.pattern(
+          /^[(áéíóúÁÉÍÓÚñÑ!"#$%&/=?¡¿'ñÑ!"#$%&/=?¡¿'.,*+}\-;:)a-zA-Z0-9(áéíóúÁÉÍÓÚñÑ!"#$%&/=?¡¿'.,*+}\-;:)]+(?:\s[(áéíóúÁÉÍÓÚñÑ!"#$%&/=?¡¿'.,*+}\-;:)a-zA-Z0-9(áéíóúÁÉÍÓÚñÑ!"#$%&/=?¡¿'.,*+}\-;:)]+)*$/
+        ),
       ]),
 
-      nameProduct: new FormControl('', [
+      nameProduct: new FormControl("", [
         Validators.required,
         Validators.minLength(3),
-        Validators.pattern(/^[(áéíóúÁÉÍÓÚñÑ!"#$%&/=?¡¿'ñÑ!"#$%&/=?¡¿'.,*+}\-;:)a-zA-Z0-9(áéíóúÁÉÍÓÚñÑ!"#$%&/=?¡¿'.,*+}\-;:)]+(?:\s[(áéíóúÁÉÍÓÚñÑ!"#$%&/=?¡¿'.,*+}\-;:)a-zA-Z0-9(áéíóúÁÉÍÓÚñÑ!"#$%&/=?¡¿'.,*+}\-;:)]+)*$/),
+        Validators.pattern(
+          /^[(áéíóúÁÉÍÓÚñÑ!"#$%&/=?¡¿'ñÑ!"#$%&/=?¡¿'.,*+}\-;:)a-zA-Z0-9(áéíóúÁÉÍÓÚñÑ!"#$%&/=?¡¿'.,*+}\-;:)]+(?:\s[(áéíóúÁÉÍÓÚñÑ!"#$%&/=?¡¿'.,*+}\-;:)a-zA-Z0-9(áéíóúÁÉÍÓÚñÑ!"#$%&/=?¡¿'.,*+}\-;:)]+)*$/
+        ),
       ]),
-
-    })
+      productLine: new FormControl("", [Validators.required]),
+    });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   paint() {
-    this.form.controls['code'].setValue(this._details.code);
-    this.form.controls['nameProduct'].setValue(this._details.nameProduct);
+    this.form.controls["code"].setValue(this._details.code);
+    this.form.controls["nameProduct"].setValue(this._details.nameProduct);
     this.sendData();
   }
 
   getErrorCode() {
-    return this.form.get('code').hasError('required') &&
-      this.form.get('code').touched ? 'El campo es requerido' :
-      this.form.get('code').hasError('minlength') ? 'Minimo 3 letras' :
-        this.form.get('code').hasError('pattern') ? 'No se permiten espacios en blanco'
-          : '';
+    return this.form.get("code").hasError("required") &&
+      this.form.get("code").touched
+      ? "El campo es requerido"
+      : this.form.get("code").hasError("minlength")
+      ? "Minimo 3 letras"
+      : this.form.get("code").hasError("pattern")
+      ? "No se permiten espacios en blanco"
+      : "";
   }
   getErrorNameProduct() {
-    return this.form.get('nameProduct').hasError('required') &&
-      this.form.get('nameProduct').touched ? 'El campo es requerido' :
-      this.form.get('nameProduct').hasError('minlength') ? 'Minimo 3 letras' :
-        this.form.get('nameProduct').hasError('pattern') ? 'No se permiten espacios en blanco'
-          : '';
+    return this.form.get("nameProduct").hasError("required") &&
+      this.form.get("nameProduct").touched
+      ? "El campo es requerido"
+      : this.form.get("nameProduct").hasError("minlength")
+      ? "Minimo 3 letras"
+      : this.form.get("nameProduct").hasError("pattern")
+      ? "No se permiten espacios en blanco"
+      : "";
   }
 
   sendData() {
     let obj: any;
     if (!this.form.invalid) {
       obj = {
-        clave: this.form.get('code').value,
-        name: this.form.get('nameProduct').value
-      }
+        clave: this.form.get("code").value,
+        name: this.form.get("nameProduct").value,
+        productLine: this.form.get("productLine").value,
+      };
       this.emitterForm.emit(obj);
     } else {
-      this.emitterForm.emit({})
+      this.emitterForm.emit({});
     }
   }
-
 }

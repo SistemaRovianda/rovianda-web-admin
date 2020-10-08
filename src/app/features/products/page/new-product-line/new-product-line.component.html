@@ -1,0 +1,17 @@
+<div fxLayout="column" fxLayoutAlign="start center" class="page">
+  <mat-card fxLayoutGap="10px" fxLayout="column">
+    <new-product-line-form
+      (onSubmit)="onSubmit($event)"
+      #form
+    ></new-product-line-form>
+    <div fxLayoutAlign="center center">
+      <button
+        mat-raised-button
+        (click)="form.onSubmit()"
+        [disabled]="form.form.invalid"
+      >
+        Registrar
+      </button>
+    </div>
+  </mat-card>
+</div>

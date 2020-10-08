@@ -1,0 +1,17 @@
+<div fxLayoutGap="10px" fxLayout="column">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <h2 class="mat-title text-dark">Registro línea de productos</h2>
+  </div>
+  <div class="form" [formGroup]="form" fxLayoutGap="15px">
+    <mat-form-field class="example-full-width">
+      <mat-label>Clave</mat-label>
+      <input type="text" matInput formControlName="clave" />
+      <mat-error> </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Descripcion</mat-label>
+      <input type="text" matInput formControlName="description" />
+      <mat-error> </mat-error>
+    </mat-form-field>
+  </div>
+</div>

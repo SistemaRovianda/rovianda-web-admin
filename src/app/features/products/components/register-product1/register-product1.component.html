@@ -1,18 +1,40 @@
 <mat-card>
-    <div class="form" [formGroup]="form">
-        <mat-form-field class="example-full-width">
-            <mat-label>Clave</mat-label>
-            <input type="text" matInput formControlName="code" (ngModelChange)="sendData()">
-            <mat-error *ngIf="form.controls.code.invalid">
-              {{getErrorCode()}}
-            </mat-error>
-          </mat-form-field>
-        <mat-form-field class="example-full-width">
-            <mat-label>Nombre del producto</mat-label>
-            <input type="text" matInput formControlName="nameProduct" (ngModelChange)="sendData()">
-            <mat-error *ngIf="form.controls.nameProduct.invalid">
-              {{getErrorNameProduct()}}
-            </mat-error>
-          </mat-form-field>
-    </div>
+  <div class="form" [formGroup]="form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Clave</mat-label>
+      <input
+        type="text"
+        matInput
+        formControlName="code"
+        (ngModelChange)="sendData()"
+      />
+      <mat-error *ngIf="form.controls.code.invalid">
+        {{ getErrorCode() }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Nombre del producto</mat-label>
+      <input
+        type="text"
+        matInput
+        formControlName="nameProduct"
+        (ngModelChange)="sendData()"
+      />
+      <mat-error *ngIf="form.controls.nameProduct.invalid">
+        {{ getErrorNameProduct() }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Linea de producto</mat-label>
+      <mat-select formControlName="productLine">
+        <mat-option [value]="line.CVE_LIN" *ngFor="let line of productLine">
+          {{ line.DESC_LIN }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.controls.nameProduct.invalid">
+        {{ getErrorNameProduct() }}
+      </mat-error>
+    </mat-form-field>
+  </div>
 </mat-card>

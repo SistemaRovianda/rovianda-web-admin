@@ -1,15 +1,15 @@
 import { Component, OnInit } from "@angular/core";
+import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
 import { Router } from "@angular/router";
 import {
-  product,
   listIngredients,
+  product,
+  productLine,
 } from "src/app/features/models/model-products";
-import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
+import { ServicesProductsService } from "src/app/features/services/services-products.service";
+import { AddIngredientComponent } from "../../components/add-ingredient/add-ingredient.component";
 import { AddPresentationComponent } from "../../components/add-presentation/add-presentation.component";
 import { DialogComponent } from "../../components/dialog/dialog.component";
-import { AddIngredientComponent } from "../../components/add-ingredient/add-ingredient.component";
-import { ServicesProductsService } from "src/app/features/services/services-products.service";
-import { FormControl } from "@angular/forms";
 
 @Component({
   selector: "app-create-product",
@@ -33,7 +33,14 @@ export class CreateProductComponent implements OnInit {
   objDataIngredients: Object = {};
   objDataPresentations: Object = {};
   ban: boolean = true;
-  ngOnInit() {}
+
+  productLine: any;
+
+  ngOnInit() {
+    this.serviceProduct.getProductsLine().subscribe((line) => {
+      this.productLine = line;
+    });
+  }
 
   openDialog() {
     const dialogConfig = new MatDialogConfig();
@@ -130,6 +137,7 @@ export class CreateProductComponent implements OnInit {
           ingredients: this.objDataIngredients,
           presentations: this.objDataPresentations,
           productRoviandaImage: this.saveBaseImg,
+          productLine: this.objDataGeneric.productLine,
         };
         // console.log(JSON.stringify(send));
         this.serviceProduct.postAddProduct(send).subscribe(
