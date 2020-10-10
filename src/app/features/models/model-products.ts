@@ -45,3 +45,8 @@ export interface newLineProduct {
   clave: string;
   description: string;
 }
+
+export interface Tax {
+  CVE_ESQIMPU: number;
+  DESCRIPESQ: string;
+}

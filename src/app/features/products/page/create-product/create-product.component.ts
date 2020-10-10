@@ -76,8 +76,6 @@ export class CreateProductComponent implements OnInit {
   }
 
   objIngredients(event: any) {
-    console.log(event);
-
     let element: listIngredients;
     let contentarr: any[] = [];
     for (element of event) {
@@ -87,7 +85,6 @@ export class CreateProductComponent implements OnInit {
       });
     }
     this.objDataIngredients = contentarr;
-    console.log(this.objDataIngredients);
     this.Valid();
   }
 
@@ -139,7 +136,7 @@ export class CreateProductComponent implements OnInit {
           productRoviandaImage: this.saveBaseImg,
           productLine: this.objDataGeneric.productLine,
         };
-        // console.log(JSON.stringify(send));
+
         this.serviceProduct.postAddProduct(send).subscribe(
           () => {
             this.route.navigate(["products", "list-products"]);

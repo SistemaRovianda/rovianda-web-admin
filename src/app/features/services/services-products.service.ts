@@ -5,6 +5,7 @@ import { environment } from "../../../environments/environment";
 import {
   ingredient,
   newLineProduct,
+  Tax,
 } from "src/app/features/models/model-products";
 
 @Injectable({
@@ -22,11 +23,11 @@ export class ServicesProductsService {
     formData.set("keyProduct", objProduct.clave);
     formData.set("nameProduct", objProduct.name);
     formData.set("productLine", objProduct.productLine);
-    formData.set("ingredients", JSON.stringify(objProduct.Ingredients));
-    formData.set("presentations", JSON.stringify(objProduct.Presentations));
+    formData.set("ingredients", JSON.stringify(objProduct.ingredients));
+    formData.set("presentations", JSON.stringify(objProduct.presentations));
     formData.set(
       "productRoviandaImage",
-      JSON.stringify(objProduct.saveBaseImg)
+      JSON.stringify(objProduct.productRoviandaImage)
     );
 
     return this.http.post(`${this.endpoint}/product/rovianda`, formData);
@@ -38,6 +39,10 @@ export class ServicesProductsService {
 
   getProductsLine() {
     return this.http.get(`${this.endpoint}/sae/get-products/lines`);
+  }
+
+  getTaxShema() {
+    return this.http.get<Tax[]>(`${this.endpoint}/tax/schema`);
   }
 
   addProductsLine(body: newLineProduct) {

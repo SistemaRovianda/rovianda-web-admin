@@ -1,34 +1,74 @@
 <div class="content-dialog">
-    <h4>Registrar presentación</h4>
-    <div class="content-input" [formGroup]="form">
-      <div class="content-izq">
-        <mat-form-field class="example-full-width">
-            <mat-label>Ingrese cantidad*</mat-label>
-            <input type="text" min="1"  matInput formControlName="cuantity" placeholder="Ingrese el número de la cantidad">
-            <mat-error *ngIf="form.controls.cuantity.invalid">
-              {{getErrorCuantity()}}
-            </mat-error>
-          </mat-form-field>
-        <mat-form-field class="example-full-width">
-            <mat-label>Ingrese tipo de presentación*</mat-label>
-            <input type="text" matInput formControlName="typePresentation" placeholder="Ingrese tipo unidad de medida">
-            <mat-error *ngIf="form.controls.typePresentation.invalid">
-              {{getErrorTypePresentation()}}
-            </mat-error>
-          </mat-form-field>
-      </div>
-      <div class="content-der">
-        <mat-form-field class="example-full-width">
-            <mat-label>Ingrese costo de presentación*</mat-label>
-            <input type="text" (blur)="transformAmount($event)" formControlName="costPresentation" matInput placeholder="Ingrese el costo">
-            <mat-error *ngIf="form.controls.costPresentation.invalid">
-              {{getErrorCostPresentation()}}
-            </mat-error>
-          </mat-form-field>   
-          <div class="buttons">
-            <button mat-raised-button color="accent" (click)="onNoClick()">Cancelar</button>
-            <button mat-raised-button #disableButton [disabled]="form.invalid" color="primary" (click)="onClickUser(); disableButton.disabled=true">Agregar</button>
-          </div>   
+  <h4>Registrar presentación</h4>
+  <div class="content-input" [formGroup]="form">
+    <div class="content-izq">
+      <mat-form-field class="example-full-width">
+        <mat-label>Ingrese cantidad*</mat-label>
+        <input
+          type="text"
+          min="1"
+          matInput
+          formControlName="cuantity"
+          placeholder="Ingrese el número de la cantidad"
+        />
+        <mat-error *ngIf="form.controls.cuantity.invalid">
+          {{ getErrorCuantity() }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Ingrese tipo de presentación*</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="typePresentation"
+          placeholder="Ingrese tipo unidad de medida"
+        />
+        <mat-error *ngIf="form.controls.typePresentation.invalid">
+          {{ getErrorTypePresentation() }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="content-der">
+      <mat-form-field class="example-full-width">
+        <mat-label>Ingrese costo de presentación*</mat-label>
+        <input
+          type="text"
+          (blur)="transformAmount($event)"
+          formControlName="costPresentation"
+          matInput
+          placeholder="Ingrese el costo"
+        />
+        <mat-error *ngIf="form.controls.costPresentation.invalid">
+          {{ getErrorCostPresentation() }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Impuestos*</mat-label>
+        <mat-select formControlName="taxSchema">
+          <mat-option [value]="tax.CVE_ESQIMPU" *ngFor="let tax of taxSchema">
+            {{ tax.DESCRIPESQ }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.hasError('required', 'taxShema')">
+          El campo es requerido
+        </mat-error>
+      </mat-form-field>
+
+      <div class="buttons">
+        <button mat-raised-button color="accent" (click)="onNoClick()">
+          Cancelar
+        </button>
+        <button
+          mat-raised-button
+          #disableButton
+          [disabled]="form.invalid"
+          color="primary"
+          (click)="onClickUser(); disableButton.disabled = true"
+        >
+          Agregar
+        </button>
       </div>
     </div>
+  </div>
 </div>

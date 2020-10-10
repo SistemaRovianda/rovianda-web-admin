@@ -32,8 +32,8 @@
           {{ line.DESC_LIN }}
         </mat-option>
       </mat-select>
-      <mat-error *ngIf="form.controls.nameProduct.invalid">
-        {{ getErrorNameProduct() }}
+      <mat-error *ngIf="form.hasError('required', 'productLine')">
+        El campo es requerido
       </mat-error>
     </mat-form-field>
   </div>

@@ -8,6 +8,7 @@ import { RegisterProduct1Component } from "./register-product1.component";
 //angular material
 import { MatCardModule } from "@angular/material/card";
 import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material";
 
 @NgModule({
   declarations: [RegisterProduct1Component],
@@ -18,6 +19,7 @@ import { MatInputModule } from "@angular/material/input";
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
+    MatFormFieldModule,
   ],
   exports: [RegisterProduct1Component],
 })
