@@ -6,6 +6,7 @@ import {
   ingredient,
   newLineProduct,
   Tax,
+  WarehouseOFSAEDTO,
 } from "src/app/features/models/model-products";
 
 @Injectable({
@@ -18,19 +19,8 @@ export class ServicesProductsService {
   }
 
   postAddProduct(objProduct: any) {
-    const formData = new FormData();
-
-    formData.set("keyProduct", objProduct.keyProduct);
-    formData.set("nameProduct", objProduct.nameProduct);
-    formData.set("productLine", objProduct.productLine);
-    formData.set("ingredients", JSON.stringify(objProduct.ingredients));
-    formData.set("presentations", JSON.stringify(objProduct.presentations));
-    formData.set(
-      "productRoviandaImage",
-      JSON.stringify(objProduct.productRoviandaImage)
-    );
-
-    return this.http.post(`${this.endpoint}/product/rovianda`, formData);
+    
+    return this.http.post(`${this.endpoint}/product/rovianda`, objProduct);
   }
 
   getProductsRovianda() {
@@ -43,6 +33,10 @@ export class ServicesProductsService {
 
   getTaxShema() {
     return this.http.get<Tax[]>(`${this.endpoint}/tax/schema`);
+  }
+
+  getWarehouses(){
+    return this.http.get<WarehouseOFSAEDTO[]>(`${this.endpoint}/warehouses`);
   }
 
   addProductsLine(body: newLineProduct) {

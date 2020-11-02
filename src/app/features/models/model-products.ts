@@ -50,3 +50,11 @@ export interface Tax {
   CVE_ESQIMPU: number;
   DESCRIPESQ: string;
 }
+
+export interface WarehouseOFSAEDTO{
+  CVE_ALM:number,
+  DESCR:string,
+  DIRECCION:string,
+  ENCARGADO:string,
+  TELEFONO:string
+}

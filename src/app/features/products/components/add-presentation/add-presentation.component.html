@@ -44,6 +44,18 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
+        <mat-label>Almacen Destino*</mat-label>
+        <mat-select formControlName="warehouseKey">
+          <mat-option [value]="warehouse.CVE_ALM" *ngFor="let warehouse of warehouseOfSae">
+            {{ warehouse.CVE_ALM }} {{warehouse.DESCR}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.hasError('required', 'warehouseKey')">
+          El campo es requerido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
         <mat-label>Impuestos*</mat-label>
         <mat-select formControlName="taxSchema">
           <mat-option [value]="tax.CVE_ESQIMPU" *ngFor="let tax of taxSchema">
