@@ -18,19 +18,19 @@ export class ServicesProductsService {
   }
 
   postAddProduct(objProduct: any) {
-    const formData = new FormData();
+    // const formData = new FormData();
 
-    formData.set("keyProduct", objProduct.clave);
-    formData.set("nameProduct", objProduct.name);
-    formData.set("productLine", objProduct.productLine);
-    formData.set("ingredients", JSON.stringify(objProduct.ingredients));
-    formData.set("presentations", JSON.stringify(objProduct.presentations));
-    formData.set(
-      "productRoviandaImage",
-      JSON.stringify(objProduct.productRoviandaImage)
-    );
+    // formData.set("keyProduct", objProduct.clave);
+    // formData.set("nameProduct", objProduct.name);
+    // formData.set("productLine", objProduct.productLine);
+    // formData.set("ingredients", JSON.stringify(objProduct.ingredients));
+    // formData.set("presentations", JSON.stringify(objProduct.presentations));
+    // formData.set(
+    //   "productRoviandaImage",
+    //   JSON.stringify(objProduct.productRoviandaImage)
+    // );
 
-    return this.http.post(`${this.endpoint}/product/rovianda`, formData);
+    return this.http.post(`${this.endpoint}/product/rovianda`, objProduct);
   }
 
   getProductsRovianda() {
