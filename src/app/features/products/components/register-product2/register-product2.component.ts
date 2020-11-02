@@ -3,8 +3,9 @@ import { ServicesProductsService } from 'src/app/features/services/services-prod
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { FormControl, Validators } from '@angular/forms';
-import { listIngredients, ingredient } from 'src/app/features/models/model-products';
+import { listIngredients } from 'src/app/features/models/model-products';
 import { MatTableDataSource } from '@angular/material';
+
 @Component({
   selector: 'app-register-product2',
   templateUrl: './register-product2.component.html',
@@ -13,17 +14,18 @@ import { MatTableDataSource } from '@angular/material';
 export class RegisterProduct2Component implements OnInit {
   private _item:any[]=[];
 @Input() public set change(val:string){
-  if(typeof(val) == 'object'){
-    this._item=val;
-    console.log("val: ",val)
-    this.OptionsDrief(this._item);
-    this.reload()
-  }else if(val != undefined){
-    this._item.push(val);
-    console.log(this._item)
-    this.ngOnInit();
-    this.reload()
-  }
+    
+      if(typeof(val) == 'object'){
+        console.log("val: ",val)
+        this.OptionsDrief(this._item);
+        this.reload()
+      }else if(val != undefined){
+        this._item.push(val);
+        console.log(this._item)
+        this.ngOnInit();
+        this.reload()
+      }
+    
 }
 @Input() change2:any;
   @Output() updateingredients= new EventEmitter<listIngredients[]>();
@@ -79,6 +81,7 @@ export class RegisterProduct2Component implements OnInit {
   OptionsDrief(filter:any){
     let deleteitem:any= this.options;
     for(let item of filter){
+      console.log("ITEM: "+item);
       this.options=deleteitem.filter(data=>data.id != item.id)
     }
   }

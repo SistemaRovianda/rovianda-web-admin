@@ -20,8 +20,8 @@ export class ServicesProductsService {
   postAddProduct(objProduct: any) {
     const formData = new FormData();
 
-    formData.set("keyProduct", objProduct.clave);
-    formData.set("nameProduct", objProduct.name);
+    formData.set("keyProduct", objProduct.keyProduct);
+    formData.set("nameProduct", objProduct.nameProduct);
     formData.set("productLine", objProduct.productLine);
     formData.set("ingredients", JSON.stringify(objProduct.ingredients));
     formData.set("presentations", JSON.stringify(objProduct.presentations));

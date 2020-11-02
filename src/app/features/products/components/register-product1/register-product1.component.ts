@@ -73,12 +73,13 @@ export class RegisterProduct1Component implements OnInit {
 
   sendData() {
     let obj: any;
-    if (!this.form.invalid) {
+    if (this.form.valid) {
       obj = {
         clave: this.form.get("code").value,
         name: this.form.get("nameProduct").value,
         productLine: this.form.get("productLine").value,
       };
+      console.log("Emision de datos:"+JSON.stringify(obj));
       this.emitterForm.emit(obj);
     } else {
       this.emitterForm.emit({});

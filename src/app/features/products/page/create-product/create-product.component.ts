@@ -70,7 +70,11 @@ export class CreateProductComponent implements OnInit {
     );
     this.dialogRefIngredients.afterClosed().subscribe((res) => {
       if (res == "update") {
+        if(this.change!=undefined){
         this.change = [res, this.change];
+        }else{
+          this.change=[res];
+        }
       }
     });
   }
@@ -128,6 +132,7 @@ export class CreateProductComponent implements OnInit {
         Object.keys(this.objDataPresentations).length &&
         this.saveBaseImg != null
       ) {
+        console.log(JSON.stringify(this.objDataGeneric));
         let send = {
           keyProduct: this.objDataGeneric.clave,
           nameProduct: this.objDataGeneric.name,
