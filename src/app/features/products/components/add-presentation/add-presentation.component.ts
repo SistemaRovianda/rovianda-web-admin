@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { DialogComponent } from "../dialog/dialog.component";
 import { CurrencyPipe } from "@angular/common";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { Tax } from "src/app/features/models/model-products";
+import { Tax, WarehouseOFSAEDTO } from "src/app/features/models/model-products";
 import { ServicesProductsService } from "src/app/features/services/services-products.service";
 
 @Component({
@@ -16,6 +16,7 @@ export class AddPresentationComponent implements OnInit {
   form: FormGroup;
 
   taxSchema: Tax[] = [];
+  warehouseOfSae:WarehouseOFSAEDTO[] =[];
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -44,6 +45,7 @@ export class AddPresentationComponent implements OnInit {
         Validators.minLength(1),
         Validators.pattern(/^[\$0-9]+([.][0-9]+)?$/),
       ]),
+      warehouseKey: new FormControl("",[Validators.required])
     });
   }
 
@@ -79,6 +81,9 @@ export class AddPresentationComponent implements OnInit {
     this.serviceProduct.getTaxShema().subscribe((data) => {
       this.taxSchema = data;
     });
+    this.serviceProduct.getWarehouses().subscribe((data)=>{
+      this.warehouseOfSae = data;
+    })
   }
 
   transformAmount(element) {
@@ -106,6 +111,7 @@ export class AddPresentationComponent implements OnInit {
         .get("costPresentation")
         .value.replace("$", ""),
       taxSchema: this.form.get("taxSchema").value,
+      warehouseKey: this.form.get("warehouseKey").value
     };
     this.dialogRef.close(presentation);
   }
