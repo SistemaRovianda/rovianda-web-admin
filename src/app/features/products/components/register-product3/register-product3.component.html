@@ -22,13 +22,13 @@
         <!-- Symbol Column -->
         <ng-container matColumnDef="pricePresentation">
             <mat-header-cell *matHeaderCellDef> Precio </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.pricePresentation | currency:'CAD':'symbol-narrow'}} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{element.pricePresentation || element.pricePresentationPublic | currency:'CAD':'symbol-narrow'}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="accions">
             <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
-            <mat-cell *matCellDef="let i=index">
-                <a mat-button color="warn" style="align-content: space-between;" (click)="delete(i)">
+            <mat-cell *matCellDef="let element; let i=index" >
+                <a mat-button color="warn" style="align-content: space-between;" *ngIf="!element.pricePresentationPublic" (click)="delete(i)">
                     Eliminar
                 </a>
             </mat-cell>

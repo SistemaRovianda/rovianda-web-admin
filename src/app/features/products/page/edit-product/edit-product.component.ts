@@ -19,12 +19,12 @@ export class EditProductComponent implements OnInit {
   change: any;
   objDataGeneric: product;
   objDataIngredients: Object = {};
-  objDataPresentations: Object = {};
+  objDataPresentations: any = {};
   ban: boolean = false
   objDetails: any;
   dataImg: any;
   saveBaseImg: any;
-  urlImage:string;
+  urlImage: string;
   constructor(
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<DialogComponent>,
@@ -54,11 +54,12 @@ export class EditProductComponent implements OnInit {
       }
       this.change = change;
       this.options = data.presentations;
-      this.objDetails = { code: data.code, nameProduct: data.nameProduct };
+      this.objDetails = { code: data.code, nameProduct: data.nameProduct, lineProduct: data.lineProduct };
       this.objDataGeneric = this.objDetails;
       this.objDataIngredients = data.ingredents;
+      this.objIngredients(this.objDataIngredients);
       this.objDataPresentations = this.options;
-      this.dataImg= data.image
+      this.dataImg = data.image
     })
   }
 
@@ -93,26 +94,28 @@ export class EditProductComponent implements OnInit {
 
   objIngredients(event: any) {
     //this method get the data finally and convert to object waiting for service
+    console.log( "el event: ",event)
     let element: listIngredients
     let contentarr: any[] = [];
     for (element of event) {
-      console.log('edit: ',event)
-      console.log('edit element: ',element)
-      contentarr.push({ 'ingredientId': element.id, 'description': element.nameProduct, 
-      'variant':element.variant, 'presentation':element.presentation, 'mark': element.mark })
+      contentarr.push({ 'productId': element.id || element.ingredientId, 'nameProduct': element.nameProduct || element.description })
     }
     this.objDataIngredients = contentarr;
-    console.log('result: ',this.objDataIngredients)
     this.Valid()
   }
 
   objPresentation(event) {
-    this.objDataPresentations = event;
+    this.objDataPresentations = event.filter(element => element.presentationId ? false : true)
+    for(let item of this.objDataPresentations){
+      item["presentationId"]=null
+    }
     this.Valid()
   }
 
   dataGeneric(event: product) {  //funciona
+
     this.objDataGeneric = event;
+    console.log("DataGeneric: ", this.objDataGeneric);
     this.Valid()
   }
 
@@ -131,24 +134,21 @@ export class EditProductComponent implements OnInit {
 
     (this.objDataGeneric != undefined) ?
       (Object.keys(this.objDataGeneric).length &&
-        Object.keys(this.objDataIngredients).length &&
-        Object.keys(this.objDataPresentations).length) ? this.ban = false : this.ban = true : this.ban = true;
+        Object.keys(this.objDataIngredients).length) ? this.ban = false : this.ban = true : this.ban = true;
   }
 
   sendData() {
     if (this.objDataGeneric != undefined)
       if (Object.keys(this.objDataGeneric).length &&
-        Object.keys(this.objDataIngredients).length &&
-        Object.keys(this.objDataPresentations).length && this.dataImg != null) {
+        Object.keys(this.objDataIngredients).length && this.dataImg != null) {
         let send = {
-          code: this.objDataGeneric.clave,
+          keyProduct: this.objDataGeneric.clave,
           nameProduct: this.objDataGeneric.name,
+          image: this.saveBaseImg || null,
           ingredients: this.objDataIngredients,
-          presentation: this.objDataPresentations,
-          status: true,
-          image: this.saveBaseImg || ''
+          presentations: this.objDataPresentations,
         }
-        // console.log(send)
+        console.log(send)
         this.serviceProduct.putProductRovianda(this.id, send).subscribe(() => {
           this.route.navigate(['products', 'list-products']);
           this.openDialogConfirm(
@@ -166,21 +166,21 @@ export class EditProductComponent implements OnInit {
 
   onFileChanges(event) {
     if (event.length != 0)
-     if(event[0].type == "image/jpeg" || event[0].type == "image/png") {
-      this.dataImg = event[0].base64;
-      this.saveBaseImg = this.dataImg.replace(/^data:image\/[a-z]+;base64,/, "");
-      this.Valid()
-    } else {
-      this.Valid()
+      if (event[0].type == "image/jpeg" || event[0].type == "image/png") {
+        this.dataImg = event[0].base64;
+        this.saveBaseImg = this.dataImg.replace(/^data:image\/[a-z]+;base64,/, "");
+        this.Valid()
+      } else {
+        this.Valid()
 
-    }
+      }
   }
 
   resetImg() {
     this.dataImg = null;
     this.saveBaseImg = null;
-    this.urlImage=null
+    this.urlImage = null
     this.Valid()
-    }
+  }
 
 }

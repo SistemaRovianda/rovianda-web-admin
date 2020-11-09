@@ -7,6 +7,8 @@ export interface listProduct {
 export interface listIngredients {
   category: string;
   id: number;
+  ingredientId?: number;
+  description?: string;
   mark: string;
   nameProduct: string;
   presentation: string;
@@ -17,6 +19,7 @@ export interface presentations {
   presentation: number;
   typePresentation: string;
   pricePresentation: string;
+  pricePresentationPublic?:string;
 }
 
 export interface ingredient {

@@ -46,7 +46,10 @@ export class RegisterProduct1Component implements OnInit {
 
   paint() {
     this.form.controls["code"].setValue(this._details.code);
+    this.form.controls["code"].disable();
     this.form.controls["nameProduct"].setValue(this._details.nameProduct);
+    this.form.controls["productLine"].setValue(this._details.lineProduct);
+    this.form.controls["productLine"].disable();
     this.sendData();
   }
 

@@ -17,6 +17,7 @@ export class RegisterProduct2Component implements OnInit {
     
       if(typeof(val) == 'object'){
         console.log("val: ",val)
+        this._item = val;
         this.OptionsDrief(this._item);
         this.reload()
       }else if(val != undefined){
@@ -84,6 +85,9 @@ export class RegisterProduct2Component implements OnInit {
       console.log("ITEM: "+item);
       this.options=deleteitem.filter(data=>data.id != item.id)
     }
+    console.log("filter: ", filter)
+    this.dataSource= new MatTableDataSource(filter);
+
   }
 
   print(){
