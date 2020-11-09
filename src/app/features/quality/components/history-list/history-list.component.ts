@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from "@angular/core";
   styleUrls: ["./history-list.component.scss"]
 })
 export class HistoryListComponent implements OnInit {
-  private _meat:any;
+  private _meat:any=null;
 
   displayedColumns:string[]=['Number', '']
 
