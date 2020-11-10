@@ -13,17 +13,20 @@ export class HistoryListComponent implements OnInit {
   displayedColumnInputs:string[]=['number','receive','weigth','date']
   displayedColumnFormulations:string[]=['number','lotDay','product','temp','elaborated']
   displayedColumnProcess:string[]=['number','lotDay','product','lastProcess','dateStart','dateEnd']
-  displayedColumnOven:string[]=['number','lotDay','product','hour','oven','revisions']
+  displayedColumnOven:string[]=['number','lotDay','product','hour','oven','revisions'];
+  displayedColumnPacking:string[]=['number','date','product','lotDay','presentation','quantity','weight']
   outputs:any[]=[];
   inputs:any[]=[];
   formulations:any[]=[];
   process:any[]=[];
   ovens:any[]=[];
+  packing:any[]=[];
   datasourceOutputs:MatTableDataSource<any>;
   datasourceInputs:MatTableDataSource<any>;
   datasourceFormulations:MatTableDataSource<any>;
   datasourceProcess:MatTableDataSource<any>;
   datasourceOven:MatTableDataSource<any>;
+  datasourcePacking:MatTableDataSource<any>;
   @Input() public set meat(val: any){
     if(val){
     this._meat=val;
@@ -50,6 +53,23 @@ export class HistoryListComponent implements OnInit {
       this.ovens=this._meat.oven;
       this.resetTable();
     }
+
+    if(this._meat.packingDate && this._meat.packingDate.length){
+      this.packing=[];
+      this._meat.packingDate.map((x)=>{
+        for(let output of x.properties){
+          this.packing.push({
+            date: x.date,
+            product:output.product,
+            lotDay:x.newLot,
+            presentation: output.presentation,
+            quantity: output.quantity,
+            weight: output.weight
+          })
+        }
+      });
+      this.resetTable();
+    }
   }
     
   }
@@ -60,6 +80,7 @@ export class HistoryListComponent implements OnInit {
     this.datasourceFormulations= new MatTableDataSource();
     this.datasourceProcess= new MatTableDataSource();
     this.datasourceOven = new MatTableDataSource();
+    this.datasourcePacking= new MatTableDataSource();
   }
 
   ngOnInit() {}
@@ -70,5 +91,6 @@ export class HistoryListComponent implements OnInit {
     this.datasourceFormulations.data=this.formulations;
     this.datasourceProcess.data=this.process;
     this.datasourceOven.data=this.ovens;
+    this.datasourcePacking.data=this.packing;
   }
 }
