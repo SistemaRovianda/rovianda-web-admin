@@ -259,7 +259,7 @@ export class HistoryPageComponent implements OnInit {
           packingDate: this.meat.packingDate[0]
             ? this.meat.packingDate[0].packaginId
             : null,
-          inspection: 40,
+          inspection: this.meat.InspectionDate,
         };
         this.meat.entranceMeat;
         this.getDocumentsMeat(obj);

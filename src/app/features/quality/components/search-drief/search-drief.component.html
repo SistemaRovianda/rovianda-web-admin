@@ -44,6 +44,12 @@
                   <mat-cell *matCellDef="let element"> {{element.lot || 'N/A'}} </mat-cell>
                 </ng-container>
 
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="productRovianda">
+                  <mat-header-cell *matHeaderCellDef> Producto Elaborado </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.productRovianda || 'N/A'}} </mat-cell>
+                </ng-container>
+
                 <ng-container matColumnDef="observations">
                   <mat-header-cell *matHeaderCellDef> Observaciones </mat-header-cell>
                   <mat-cell *matCellDef="let element"> {{element.observations}} </mat-cell>

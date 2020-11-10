@@ -14,7 +14,7 @@ export class SearchPackagingComponent implements OnInit {
     this.assignedData(this._packaging.outputs)
   }
 
-  displayedColumns: string[] = ['number', 'name', 'date'];
+  displayedColumns: string[] = ['number', 'name','quantity', 'date'];
   dataSource:any;
   constructor() { }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: "history-list",
@@ -8,19 +9,66 @@ import { Component, OnInit, Input } from "@angular/core";
 export class HistoryListComponent implements OnInit {
   private _meat:any=null;
 
-  displayedColumns:string[]=['Number', '']
-
+  displayedColumnsOutputs:string[]=['number','name','date','quantity']
+  displayedColumnInputs:string[]=['number','receive','weigth','date']
+  displayedColumnFormulations:string[]=['number','lotDay','product','temp','elaborated']
+  displayedColumnProcess:string[]=['number','lotDay','product','lastProcess','dateStart','dateEnd']
+  displayedColumnOven:string[]=['number','lotDay','product','hour','oven','revisions']
+  outputs:any[]=[];
+  inputs:any[]=[];
+  formulations:any[]=[];
+  process:any[]=[];
+  ovens:any[]=[];
+  datasourceOutputs:MatTableDataSource<any>;
+  datasourceInputs:MatTableDataSource<any>;
+  datasourceFormulations:MatTableDataSource<any>;
+  datasourceProcess:MatTableDataSource<any>;
+  datasourceOven:MatTableDataSource<any>;
   @Input() public set meat(val: any){
+    if(val){
     this._meat=val;
     console.log(this._meat);
-    this.receiver()
+    if(this._meat.outputs && this._meat.outputs.length){
+      this.outputs=this._meat.outputs;
+      this.resetTable();
+    }
+    if(this._meat.entranceMeat && this._meat.entranceMeat.length){
+      this.inputs=this._meat.entranceMeat;
+      this.resetTable();
+    }
+
+    if(this._meat.formulation && this._meat.formulation.length){
+      this.formulations=this._meat.formulation;
+      this.resetTable();
+    }
+    if(this._meat.process && this._meat.process.length){
+      this.process=this._meat.process;
+      this.resetTable();
+    }
+
+    if(this._meat.oven && this._meat.oven.length){
+      this.ovens=this._meat.oven;
+      this.resetTable();
+    }
+  }
+    
   }
 
-  constructor() {}
+  constructor() {
+    this.datasourceOutputs=new MatTableDataSource();
+    this.datasourceInputs= new MatTableDataSource();
+    this.datasourceFormulations= new MatTableDataSource();
+    this.datasourceProcess= new MatTableDataSource();
+    this.datasourceOven = new MatTableDataSource();
+  }
 
   ngOnInit() {}
 
-  receiver(){
-    console.log(this._meat)
+  resetTable(){
+    this.datasourceOutputs.data=this.outputs;
+    this.datasourceInputs.data=this.inputs;
+    this.datasourceFormulations.data=this.formulations;
+    this.datasourceProcess.data=this.process;
+    this.datasourceOven.data=this.ovens;
   }
 }

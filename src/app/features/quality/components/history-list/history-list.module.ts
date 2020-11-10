@@ -3,13 +3,14 @@ import { CommonModule } from "@angular/common";
 import { HistoryListComponent } from "./history-list.component";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatCardModule } from "@angular/material/card";
-import { MatIconModule } from "@angular/material";
+import { MatIconModule, MatTableModule } from "@angular/material";
 
 const COMMON_IMPORTS = [
   CommonModule,
   FlexLayoutModule,
   MatCardModule,
   MatIconModule,
+  MatTableModule
 ];
 
 const COMMON_DECLARATIONS = [HistoryListComponent];

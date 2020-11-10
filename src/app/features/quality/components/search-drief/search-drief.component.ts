@@ -15,7 +15,7 @@ export class SearchDriefComponent implements OnInit {
     this.assignedData(this.dataDrief.outputs)
   }
 
-  displayedColumns: string[] = ['number', 'date', 'product', 'lot', 'observations'];
+  displayedColumns: string[] = ['number', 'date', 'product', 'lot','productRovianda', 'observations'];
   dataSource:any;
   constructor() { }
 
