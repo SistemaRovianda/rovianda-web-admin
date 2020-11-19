@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter, Input, ViewChildren, QueryList } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 @Component({
@@ -7,7 +7,25 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
   styleUrls: ["./date-machine.component.scss"],
 })
 export class DateMachineComponent implements OnInit {
+
+  @ViewChildren('checkBox') checkBox: QueryList<any>;
+  checked = [];
+  @ViewChildren('checkBox2') checkBox2: QueryList<any>;
+  checked2 = [];
+  @Output() emitterForm = new EventEmitter();
+
   form: FormGroup;
+  _devices: any = [];
+  _store: any = [];
+  @Input() public set device(data: any) {
+    this._devices = data;
+    console.log("recive: ", this._devices)
+  }
+  @Input() public set store(data: any) {
+    this._store = data;
+    console.log("recive tienda: ", this._store)
+
+  }
   @Output() dates = new EventEmitter();
 
   constructor() {
@@ -21,7 +39,7 @@ export class DateMachineComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   sendData() {
     let obj = {
@@ -34,5 +52,40 @@ export class DateMachineComponent implements OnInit {
       ),
     };
     this.dates.emit(obj);
+  }
+
+  getCheckbox(checkbox) {
+    this.checked = []; // resetting each Time new event is fire.
+    // filtering only checked vlaue and assign to checked variable.
+    const checked = this.checkBox.filter(checkbox => checkbox.checked);
+
+    // then, we make object array of checked, and value by checked variable  
+    checked.forEach(data => {
+      this.checked.push({
+        'checked': data.checked,
+        'value': data.value,
+      })
+    })
+    this.sendObj();
+  }
+
+  getCheckbox2(checkbox) {
+    this.checked2 = []; // resetting each Time new event is fire.
+    // filtering only checked vlaue and assign to checked variable.
+    const checked2 = this.checkBox2.filter(checkbox => checkbox.checked);
+
+    // then, we make object array of checked, and value by checked variable  
+    checked2.forEach(data => {
+      this.checked2.push({
+        'checked': data.checked,
+        'value': data.value,
+        'machine':"machine",
+      })
+    })
+    this.sendObj();
+  }
+
+  sendObj(){
+    this.emitterForm.emit(this.checked.concat(this.checked2));
   }
 }

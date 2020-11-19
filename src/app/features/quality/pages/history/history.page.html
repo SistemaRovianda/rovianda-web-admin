@@ -3,20 +3,14 @@
     <div fxFlex fxLayoutAlign="center center" class="search">
       <search-form (onSubmit)="objSearch($event)"></search-form>
     </div>
-    <div
-      fxFlex
-      fxLayout="column"
-      fxLayout.gt-sm="row"
-      fxLayoutAlign="space-evenly stretch"
-      style="padding: 10px"
-      fxLayoutGap="10px"
-    >
+    <div fxFlex fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="space-evenly stretch" style="padding: 10px"
+      fxLayoutGap="10px">
       <div class="content-history" fxFlex.gt-xs="40%">
         <mat-card fxFlex fxLayout="column" fxLayoutGap="10px">
           <div class="list">
             <div class="contentNext" *ngIf="banButtons">
-              <button mat-stroked-button color="primary"(click)="countLess()" >&lt;</button>
-                <button mat-stroked-button color="primary"(click)="countMore()" >></button>
+              <button mat-stroked-button color="primary" (click)="countLess()">&lt;</button>
+              <button mat-stroked-button color="primary" (click)="countMore()">></button>
             </div>
             <div fxLayout="row" fxLayoutAlign="space-between">
               <h2 fxFlex="70" class="mat-title text-primary">Acción</h2>
@@ -24,10 +18,7 @@
             </div>
             <div
               *ngIf="!(hasPackaging$ | async) && !(hasDrief$ | async) && !(hasMeat$ | async) || !((drief) || (packaging) || meat) && !(isLoading$|async)"
-              class="alert"
-              fxLayout="row"
-              fxLayoutGap="10px"
-            >
+              class="alert" fxLayout="row" fxLayoutGap="10px">
               <div>
                 <mat-icon class="icon-alert">error</mat-icon>
               </div>
@@ -35,15 +26,11 @@
             </div>
 
             <div fxLayoutAlign="center center">
-              <mat-spinner
-                *ngIf="(isLoading$|async) && !((drief) || (packaging) || meat) "
-              ></mat-spinner>
+              <mat-spinner *ngIf="(isLoading$|async) && !((drief) || (packaging) || meat) "></mat-spinner>
             </div>
 
             <div class="packaging" *ngIf="hasPackaging$ | async">
-              <app-search-packaging
-                [packaging]="packaging"
-              ></app-search-packaging>
+              <app-search-packaging [packaging]="packaging"></app-search-packaging>
             </div>
             <div class="drief" *ngIf="hasDrief$ | async">
               <app-search-drief [drief]="drief"></app-search-drief>
@@ -67,20 +54,12 @@
           <app-date-reports (dates)="objdates($event)"></app-date-reports>
         </div>
 
-        <mat-card
-          fxFlex
-          fxLayout="column"
-          fxLayoutGap="10px"
-          class="card-documents"
-        >
+        <mat-card fxFlex fxLayout="column" fxLayoutGap="10px" class="card-documents">
           <div class="list">
             <h2 class="mat-title text-primary">Documentos para descargar</h2>
             <div
               *ngIf="!(hasPackaging$ | async) && !(hasDrief$ | async) && !(hasMeat$ | async) || !((drief) || (packaging) || meat) && !(isLoading$|async)"
-              class="alert"
-              fxLayout="row"
-              fxLayoutGap="10px"
-            >
+              class="alert" fxLayout="row" fxLayoutGap="10px">
               <div>
                 <mat-icon class="icon-alert">error</mat-icon>
               </div>
@@ -88,49 +67,27 @@
             </div>
 
             <div fxLayoutAlign="center center">
-              <mat-spinner
-                *ngIf="(isLoading$|async) && !(documentsMeat$ || (documentsDrief$) || documentsPacking$) "
-              ></mat-spinner>
+              <mat-spinner *ngIf="(isLoading$|async) && !(documentsMeat$ || (documentsDrief$) || documentsPacking$) ">
+              </mat-spinner>
             </div>
 
-            <div
-              class="content-all-docs"
-              *ngIf="(hasPackaging$ | async) || (hasDrief$ | async) || (hasMeat$ | async)"
-            >
+            <div class="content-all-docs" *ngIf="(hasPackaging$ | async) || (hasDrief$ | async) || (hasMeat$ | async)">
               <div class="content-documents-meat">
                 <div *ngFor="let document of documentsMeat$">
-                  <document-list
-                    [document]="document"
-                    (sendDocument)="downloadFileMeat($event)"
-                  ></document-list>
+                  <document-list [document]="document" (sendDocument)="downloadFileMeat($event)"></document-list>
                 </div>
               </div>
 
-              <div
-                class="content-documents-drief"
-                *ngIf="(hasDrief$ | async) && drief"
-              >
+              <div class="content-documents-drief" *ngIf="(hasDrief$ | async) && drief">
                 <!--Terminado-->
                 <div *ngFor="let document of documentsDrief$">
-                  <document-list
-                    [document]="document"
-                    (sendDocument)="downloadFileDrief($event)"
-                  ></document-list>
+                  <document-list [document]="document" (sendDocument)="downloadFileDrief($event)"></document-list>
                 </div>
               </div>
 
-              <div
-                class="content-documents-packaing"
-                *ngIf="(hasPackaging$ | async) && packaging"
-              >
-                <div
-                  class="content-documents"
-                  *ngFor="let document of documentsPacking$"
-                >
-                  <document-list
-                    [document]="document"
-                    (sendDocument)="downloadFilePacking($event)"
-                  ></document-list>
+              <div class="content-documents-packaing" *ngIf="(hasPackaging$ | async) && packaging">
+                <div class="content-documents" *ngFor="let document of documentsPacking$">
+                  <document-list [document]="document" (sendDocument)="downloadFilePacking($event)"></document-list>
                 </div>
               </div>
             </div>

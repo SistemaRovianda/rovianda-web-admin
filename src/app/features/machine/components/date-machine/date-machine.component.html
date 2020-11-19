@@ -49,5 +49,27 @@
         </button>
       </div>
     </div>
+    <div class="filter">
+      <h5>Filtrar por:</h5>
+      <div class="contentFilter">
+        <div class="tienda">
+          <h6>Tiendas</h6>
+
+          <div *ngFor="let item of _store">
+            <mat-checkbox #checkBox [value]="item" (change)="getCheckbox(checkBox)">  
+                 {{item}} 
+            </mat-checkbox>
+       </div>
+        </div>
+        <div class="maquinas">
+          <h6>Maquinas</h6>
+          <div *ngFor="let item of _devices">
+            <mat-checkbox #checkBox2 [value]="item" (change)="getCheckbox2(checkBox2)">  
+                 {{item}} 
+            </mat-checkbox>
+       </div>
+        </div>
+      </div>
+    </div>
   </mat-card>
 </div>

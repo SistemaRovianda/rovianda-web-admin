@@ -14,4 +14,13 @@
             }
         }
     }
+    .filter{
+        display: flex;
+        flex-direction: column;
+        // justify-content: space-between;
+        .contentFilter{
+            display: flex;
+            flex-direction: row;
+        }
+    }
 }

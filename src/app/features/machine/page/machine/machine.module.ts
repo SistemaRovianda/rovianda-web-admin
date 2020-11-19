@@ -18,6 +18,7 @@ import {
 import { MatButtonModule } from "@angular/material/button";
 import { ReactiveFormsModule } from "@angular/forms";
 import { FlexLayoutModule } from "@angular/flex-layout";
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 const COMMON_IMPORTS = [
   CommonModule,
@@ -30,6 +31,7 @@ const COMMON_IMPORTS = [
   MatButtonModule,
   ReactiveFormsModule,
   FlexLayoutModule,
+  MatCheckboxModule,
 ];
 const COMMON_DECLARATIONS = [MachineComponent, DateMachineComponent];
 const COMMON_EXPORTS = [];
