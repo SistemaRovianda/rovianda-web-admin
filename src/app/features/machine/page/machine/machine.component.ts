@@ -92,7 +92,9 @@ export class MachineComponent implements OnInit {
       this.store.push(v.store);
       this.device.push(v.device);
     }
+    console.log(this.store);
     this.store= this.store.filter((v,i) => this.store.indexOf(v) === i);
+    console.log(this.store);
     this.device= this.device.filter((v,i) => this.device.indexOf(v) === i);
   }
 
@@ -111,6 +113,7 @@ export class MachineComponent implements OnInit {
             }
           }
         }
+        newRows= [...new Set(newRows)];
 
         if(data.length){
           this.dataSource= new MatTableDataSource(newRows);    
