@@ -19,7 +19,7 @@ export class RegisterProduct3Component implements OnInit  {
     this._item=val;
     this.reload();
   }
-  @Output() updatePresentation= new EventEmitter;
+  @Output() updatePresentation= new EventEmitter();
 
   displayedColumns: string[] = ['count','presentation', 'typePresentation', 'pricePresentation', 'accions']
   dataSource: MatTableDataSource<presentations>

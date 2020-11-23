@@ -40,6 +40,14 @@ export class RegisterProduct2Component implements OnInit {
 
   displayedColumns: string[] = ['number', 'nameIngredient', 'mark', 'variant', 'presentation', 'accions'];
   dataSource: MatTableDataSource<listIngredients>;
+  @Output() reloadIngre = new EventEmitter();
+
+  reloadFromService(){
+    console.log("realoading ingre");
+    this.serviceProduct.getIngredientsDrief('DRIEF').subscribe((data:listIngredients[])=>{
+      this.options=data;
+    })
+  }
 
   async ngOnInit() {
 

@@ -15,7 +15,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="example-full-width" *ngIf="!edited">
       <mat-label>Linea de producto</mat-label>
       <mat-select formControlName="productLine">
         <mat-option [value]="line.CVE_LIN" *ngFor="let line of productLine">
@@ -25,6 +25,28 @@
       <mat-error *ngIf="form.hasError('required', 'productLine')">
         El campo es requerido
       </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width " *ngIf="!edited">
+      <mat-label>Punto de distribución*</mat-label>
+      <mat-select formControlName="distLine">
+        <mat-option value="NORMAL">
+            DISTRIBUCION EN EMPAQUETADO
+      </mat-option>
+        <mat-option value="CHEESE_LINE">
+            DISTRIBUCION EN LINEA DE QUESOS
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.hasError('required', 'distLine')">
+        El campo es requerido
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" *ngIf="edited">
+      <mat-label>Linea de producto*</mat-label>
+      <input type="text" matInput value="{{_details.lineProduct}}" disabled/>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" *ngIf="edited">
+      <mat-label>Punto de distribución*</mat-label>
+      <input type="text" matInput value="{{typeLine=='NORMAL'?'DISTRIBUCION EN EMPAQUETADO':'DISTRIBUCION EN LINEA DE QUESOS'}}" disabled/>
     </mat-form-field>
   </div>
 </mat-card>

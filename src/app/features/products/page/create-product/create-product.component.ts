@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
 import { Router } from "@angular/router";
 import {
@@ -10,6 +10,7 @@ import { ServicesProductsService } from "src/app/features/services/services-prod
 import { AddIngredientComponent } from "../../components/add-ingredient/add-ingredient.component";
 import { AddPresentationComponent } from "../../components/add-presentation/add-presentation.component";
 import { DialogComponent } from "../../components/dialog/dialog.component";
+import { RegisterProduct2Component } from '../../components/register-product2/register-product2.component';
 
 @Component({
   selector: "app-create-product",
@@ -26,6 +27,8 @@ export class CreateProductComponent implements OnInit {
     private serviceProduct: ServicesProductsService,
     public route: Router
   ) {}
+
+  @ViewChild(RegisterProduct2Component,{static:false}) ingreComponent: RegisterProduct2Component;
 
   options: any = [];
   change: any;
@@ -49,6 +52,8 @@ export class CreateProductComponent implements OnInit {
     this.dialogRef = this.dialog.open(AddPresentationComponent, dialogConfig);
     this.dialogRef.afterClosed().subscribe((res) => {
       res != true ? (this.options = [res, ...this.options]) : "";
+      
+      
     });
   }
 
@@ -69,13 +74,14 @@ export class CreateProductComponent implements OnInit {
       dialogConfig
     );
     this.dialogRefIngredients.afterClosed().subscribe((res) => {
-      if (res == "update") {
-        if(this.change!=undefined){
-        this.change = [res, this.change];
-        }else{
-          this.change=[res];
-        }
-      }
+      // if (res == "update") {
+      //   if(this.change!=undefined){
+      //   this.change = [res, this.change];
+      //   }else{
+      //     this.change=[res];
+      //   }
+      // }
+      this.ingreComponent.reloadFromService();
     });
   }
 
@@ -114,26 +120,30 @@ export class CreateProductComponent implements OnInit {
   }
 
   Valid() {
-    this.objDataGeneric != undefined
-      ? Object.keys(this.objDataGeneric).length &&
-        Object.keys(this.objDataIngredients).length &&
+    if(this.objDataGeneric!=null){
+      if(Object.keys(this.objDataGeneric).length &&
         Object.keys(this.objDataPresentations).length &&
-        this.saveBaseImg != null
-        ? (this.ban = false)
-        : (this.ban = true)
-      : (this.ban = true);
+        this.saveBaseImg != null){
+        this.ban = false;
+        }else{
+          this.ban = true;
+        }
+      }else{
+        this.ban=true;
+      }
+    return this.ban;
   }
 
   sendData() {
     if (this.objDataGeneric != undefined)
       if (
         Object.keys(this.objDataGeneric).length &&
-        Object.keys(this.objDataIngredients).length &&
         Object.keys(this.objDataPresentations).length &&
         this.saveBaseImg != null
       ) {
         console.log(JSON.stringify(this.objDataGeneric));
         let send = {
+          distLine: this.objDataGeneric.distLine,
           keyProduct: this.objDataGeneric.clave,
           nameProduct: this.objDataGeneric.name,
           ingredients: this.objDataIngredients,
@@ -169,10 +179,8 @@ export class CreateProductComponent implements OnInit {
           /^data:image\/[a-z]+;base64,/,
           ""
         );
-        this.Valid();
-      } else {
-        this.Valid();
-      }
+      } 
+      this.Valid();
   }
 
   resetImg() {
@@ -180,4 +188,5 @@ export class CreateProductComponent implements OnInit {
     this.saveBaseImg = null;
     this.Valid();
   }
+  
 }

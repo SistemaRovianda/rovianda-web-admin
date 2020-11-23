@@ -21,19 +21,15 @@ export class AddPresentationComponent implements OnInit {
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private serviceProduct: ServicesProductsService,
-
     private currencyPipe: CurrencyPipe
   ) {
     this.form = new FormGroup({
-      cuantity: new FormControl("", [
-        Validators.required,
-        Validators.minLength(1),
-        Validators.pattern(/^[0-9]\d*$/),
+      code: new FormControl(null, [
+        Validators.minLength(3)
       ]),
       typePresentation: new FormControl("", [
         Validators.required,
         Validators.minLength(3),
-        Validators.pattern(/^[A-ZÑÁÉÍÓÚa-zñáéíóú]+(([A-ZÑÁÉÍÓÚa-zñáéíóú])+)*$/),
       ]),
       costPresentation: new FormControl("", [
         Validators.required,
@@ -45,18 +41,12 @@ export class AddPresentationComponent implements OnInit {
         Validators.minLength(1),
         Validators.pattern(/^[\$0-9]+([.][0-9]+)?$/),
       ]),
-      warehouseKey: new FormControl("",[Validators.required])
+      warehouseKey: new FormControl(null,[]),
+      uniMed:new FormControl(null,[Validators.required])
     });
   }
 
-  getErrorCuantity() {
-    return this.form.get("cuantity").hasError("required") &&
-      this.form.get("cuantity").touched
-      ? "El campo es requerido."
-      : this.form.get("cuantity").hasError("pattern")
-      ? "Ingresa solo números."
-      : "";
-  }
+
 
   getErrorCostPresentation() {
     return this.form.get("costPresentation").hasError("required") &&
@@ -105,7 +95,9 @@ export class AddPresentationComponent implements OnInit {
 
   onClickUser(): void {
     let presentation: any = {
-      presentation: this.form.get("cuantity").value,
+      codePresentation:this.form.get("code").value,
+      uniMed:this.form.get("uniMed").value,
+      presentation: 1,
       typePresentation: this.form.get("typePresentation").value,
       pricePresentation: this.form
         .get("costPresentation")

@@ -54,7 +54,7 @@ export class EditProductComponent implements OnInit {
       }
       this.change = change;
       this.options = data.presentations;
-      this.objDetails = { code: data.code, nameProduct: data.nameProduct, lineProduct: data.lineProduct };
+      this.objDetails = { code: data.code, nameProduct: data.nameProduct, lineProduct: data.lineProduct,distLine:data.distLine };
       this.objDataGeneric = this.objDetails;
       this.objDataIngredients = data.ingredents;
       this.objIngredients(this.objDataIngredients);

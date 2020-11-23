@@ -34,6 +34,7 @@ export interface product {
   clave: string;
   name: string;
   productLine?: number;
+  distLine:string;
 }
 
 export interface productLine {

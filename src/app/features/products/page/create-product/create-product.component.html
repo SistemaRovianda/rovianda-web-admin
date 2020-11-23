@@ -25,6 +25,7 @@
         [change]="change"
         [change2]="change2"
         (updateingredients)="objIngredients($event)"
+        #ingreRel
       >
       </app-register-product2>
     </div>
@@ -90,7 +91,7 @@
           mat-raised-button
           #disableButton
           color="primary"
-          [disabled]="ban"
+          [disabled]="Valid()"
           (click)="sendData()"
         >
           Agregar

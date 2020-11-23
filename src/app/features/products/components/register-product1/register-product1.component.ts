@@ -10,10 +10,12 @@ import { productLine } from "src/app/features/models/model-products";
 export class RegisterProduct1Component implements OnInit {
   private _details: any;
   form: FormGroup;
-
+  private edited:boolean=false;
+  private typeLine:string="";
   @Output() emitterForm = new EventEmitter();
   @Input() public set objDetails(val: any) {
     if (val != undefined) {
+      this.edited=true;
       this._details = val;
       this.paint();
     }
@@ -39,6 +41,7 @@ export class RegisterProduct1Component implements OnInit {
         ),
       ]),
       productLine: new FormControl("", [Validators.required]),
+      distLine: new FormControl(null,[Validators.required])
     });
   }
 
@@ -50,6 +53,9 @@ export class RegisterProduct1Component implements OnInit {
     this.form.controls["nameProduct"].setValue(this._details.nameProduct);
     this.form.controls["productLine"].setValue(this._details.lineProduct);
     this.form.controls["productLine"].disable();
+    this.typeLine=this._details.distLine;
+    this.form.controls["distLine"].setValue(this._details.distLine);
+    this.form.controls['distLine'].disable();
     this.sendData();
   }
 
@@ -81,6 +87,7 @@ export class RegisterProduct1Component implements OnInit {
         clave: this.form.get("code").value,
         name: this.form.get("nameProduct").value,
         productLine: this.form.get("productLine").value,
+        distLine: this.form.get("distLine").value
       };
       console.log("Emision de datos:"+JSON.stringify(obj));
       this.emitterForm.emit(obj);

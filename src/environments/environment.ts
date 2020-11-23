@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  basePath:"https://us-central1-rovianda-88249.cloudfunctions.net/app/rovianda"
+  basePath:"https://us-central1-rovianda-88249.cloudfunctions.net/app/rovianda"//"https://us-central1-sistema-rovianda.cloudfunctions.net/app/rovianda"//
 };
 
 

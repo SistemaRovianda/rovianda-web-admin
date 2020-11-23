@@ -3,17 +3,15 @@
   <div class="content-input" [formGroup]="form">
     <div class="content-izq">
       <mat-form-field class="example-full-width">
-        <mat-label>Ingrese cantidad*</mat-label>
+        <mat-label>Codigo SAE personalizado (Opcional)</mat-label>
         <input
           type="text"
           min="1"
           matInput
-          formControlName="cuantity"
-          placeholder="Ingrese el número de la cantidad"
+          formControlName="code"
+          placeholder="Ingrese el codigo de la presentacion"
         />
-        <mat-error *ngIf="form.controls.cuantity.invalid">
-          {{ getErrorCuantity() }}
-        </mat-error>
+       
       </mat-form-field>
       <mat-form-field class="example-full-width">
         <mat-label>Ingrese tipo de presentación*</mat-label>
@@ -21,11 +19,27 @@
           type="text"
           matInput
           formControlName="typePresentation"
-          placeholder="Ingrese tipo unidad de medida"
+          placeholder="Ej. Paquete/Pieza (250 gr)"
         />
         <mat-error *ngIf="form.controls.typePresentation.invalid">
           {{ getErrorTypePresentation() }}
         </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Unidad de medida*</mat-label>
+        
+        <mat-select formControlName="uniMed">
+          <mat-option value="PZ">
+            PAQUETE
+          </mat-option>
+          <mat-option value="KG">
+            KILOGRAMOS
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.hasError('required', 'uniMed')">
+          El campo es requerido
+        </mat-error>
+        
       </mat-form-field>
     </div>
     <div class="content-der">
@@ -44,7 +58,7 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <mat-label>Almacen Destino*</mat-label>
+        <mat-label>Almacen Destino (Opcional)</mat-label>
         <mat-select formControlName="warehouseKey">
           <mat-option [value]="warehouse.CVE_ALM" *ngFor="let warehouse of warehouseOfSae">
             {{ warehouse.CVE_ALM }} {{warehouse.DESCR}}

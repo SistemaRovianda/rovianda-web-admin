@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "sistema-rovianda"
+  },
+  "targets": {
+    "sistema-rovianda": {
+      "hosting": {
+        "administrador-rovianda": [
+          "admin"
+        ],
+        "admin": [
+          "administrador-rovianda"
+        ]
+      }
+    }
+  }
+}
