@@ -1,0 +1,14 @@
+
+<div fxLayoutGap="10px" fxLayout="column">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <h2 class="mat-title text-dark">Registro Almacén</h2>
+    </div>
+    <div class="form" [formGroup]="form" fxLayoutGap="15px">
+      <mat-form-field class="example-full-width">
+        <mat-label>Descripción</mat-label>
+        <input type="text" matInput formControlName="description" />
+        <mat-error> </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" [disabled]="isLoading" (click)="submit()">Guardar</button>
+    </div>
+  </div>

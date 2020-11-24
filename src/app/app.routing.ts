@@ -16,6 +16,11 @@ const routes: Routes = [
     path: "quality",
     loadChildren: () => import("./features/quality/quality.module").then(m => m.QualityModule),
       canActivate:[GuardAuthGuard]
+  },
+  {
+    path:"warehouses",
+    loadChildren: ()=> import("./features/warehouses/warehouse-module.module").then(m=>m.WarehouseModuleModule),
+    canActivate:[GuardAuthGuard]
   },{
     path: "products",
     loadChildren: ()=> import("./features/products/products-module").then(m=>m.ProductsModule),
