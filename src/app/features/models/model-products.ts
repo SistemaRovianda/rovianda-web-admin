@@ -20,6 +20,7 @@ export interface presentations {
   typePresentation: string;
   pricePresentation: string;
   pricePresentationPublic?:string;
+  keySae:string;
 }
 
 export interface ingredient {

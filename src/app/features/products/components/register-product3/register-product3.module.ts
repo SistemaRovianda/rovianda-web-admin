@@ -4,14 +4,18 @@ import { RegisterProduct3Component } from './register-product3.component';
 
 //angular material
 import { MatTableModule } from '@angular/material/table';
-import { MatButtonModule } from '@angular/material';
+import { MatButtonModule, MatInputModule } from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [RegisterProduct3Component],
   imports: [
     CommonModule,
     MatTableModule,
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports:[
     RegisterProduct3Component

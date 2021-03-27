@@ -1,6 +1,17 @@
 <div>
     <h1 class="title">Listado de clientes</h1>
+    
     <div style="width: 100%;display: flex;flex-direction: column;">
+        <div class="list-clients">
+            <form [formGroup]="form">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Nombre</mat-label>
+                    <input type="text" matInput formControlName="name" />
+                    <mat-error> </mat-error>
+                  </mat-form-field>
+                  <button mat-raised-button color="primary" (click)="searchByName()">{{filtered?"Cancenlar":"Buscar"}}</button>
+            </form>
+        </div>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 list-clients">
 
         <!-- <ng-container matColumnDef="key">

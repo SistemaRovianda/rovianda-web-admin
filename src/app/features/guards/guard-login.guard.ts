@@ -23,7 +23,7 @@ export class GuardLoginGuard implements CanActivate {
         this.router.navigate(['/products/list-products'])
         return false;
       }else{
-        console.log("demacidos redireccionamientos");
+        //console.log("demacidos redireccionamientos");
         return true;
       }
   }

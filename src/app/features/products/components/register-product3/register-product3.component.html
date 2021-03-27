@@ -2,34 +2,64 @@
     <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
         <!-- Position Column -->
-        <ng-container matColumnDef="count">
+        <!-- <ng-container matColumnDef="count">
             <mat-header-cell *matHeaderCellDef> Consecutivo </mat-header-cell>
             <mat-cell *matCellDef="let i=index"> {{i+1}} </mat-cell>
-        </ng-container>
+        </ng-container> -->
 
         <!-- Name Column -->
         <ng-container matColumnDef="presentation">
-            <mat-header-cell *matHeaderCellDef> Presentación </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.presentation}} </mat-cell>
+            <mat-header-cell *matHeaderCellDef> clave </mat-header-cell>
+            <mat-cell *matCellDef="let element"> 
+            
+                  <label >
+                {{element.keySae}} 
+                  </label >
+            </mat-cell>
         </ng-container>
 
         <!-- Weight Column -->
         <ng-container matColumnDef="typePresentation">
-            <mat-header-cell *matHeaderCellDef> Tipo </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.typePresentation}} </mat-cell>
+            <mat-header-cell *matHeaderCellDef> Presentación </mat-header-cell>
+            <mat-cell *matCellDef="let element"> 
+                <mat-form-field class="example-full-width" *ngIf="element.isEditing">
+                    <mat-label>Presentacion</mat-label>
+                    <input type="text" matInput [(ngModel)]="element.typePresentationTemp" />
+                    
+                  </mat-form-field>
+               <label *ngIf="!element.isEditing">
+                {{element.typePresentation}} 
+               </label> 
+            </mat-cell>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="pricePresentation">
             <mat-header-cell *matHeaderCellDef> Precio </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.pricePresentation || element.pricePresentationPublic | currency:'CAD':'symbol-narrow'}} </mat-cell>
+            <mat-cell *matCellDef="let element"> 
+                <mat-form-field class="example-full-width" *ngIf="element.isEditing">
+                    <mat-label>Presentacion</mat-label>
+                    <input type="text" matInput [(ngModel)]="element.priceTemp" />
+                    
+                  </mat-form-field>
+                  <label *ngIf="!element.isEditing">
+                {{element.pricePresentation || element.pricePresentationPublic | currency:'CAD':'symbol-narrow'}} 
+                </label>
+
+            </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="accions">
             <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
             <mat-cell *matCellDef="let element; let i=index" >
-                <a mat-button color="warn" style="align-content: space-between;" *ngIf="!element.pricePresentationPublic" (click)="delete(i)">
+                <a mat-button color="warn" style="align-content: space-between;" (click)="delete(i)">
                     Eliminar
+                </a>
+                <a mat-button color="primary" style="align-content: space-between;" *ngIf="!element.isEditing" (click)="edit(i)">
+                    Editar
+                </a>
+                <a mat-button color="primary" style="align-content: space-between;" *ngIf="element.isEditing" (click)="saveEdit(i)">
+                    Guardar
                 </a>
             </mat-cell>
         </ng-container>

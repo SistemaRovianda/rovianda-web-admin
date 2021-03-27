@@ -5,6 +5,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatTableModule, MAT_DATE_LOCALE } from '@angular/material';
 import {MatNativeDateModule} from '@angular/material/core';
+import { TicketModalModule } from '../ticket-modal/ticket-modal.module';
+import { TicketModalComponent } from '../ticket-modal/ticket-modal.component';
 
 
 
@@ -22,9 +24,11 @@ import {MatNativeDateModule} from '@angular/material/core';
     MatButtonModule,
     MatDialogModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    TicketModalModule
   ],
   exports:[SalesClientModalComponent],
+  entryComponents:[TicketModalComponent],
   providers:[
     {provide: MAT_DATE_LOCALE, useValue: 'es-mx'}
   ]

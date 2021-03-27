@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -32,13 +32,21 @@ export class ServicesClientsService {
   getCatalogCfdi(){
     return this.http.get(`${this.endpoint}/catalogos-de-cfdi`)
   }
-  getListOfClient(page:number,perPage:number){
+  getListOfClient(page:number,perPage:number,hint:string){
     let httpParams:HttpParams= new HttpParams().append("page",page.toString()).append("perPage",perPage.toString());
+    if(hint!=null){
+      httpParams=httpParams.append("hint",hint);
+    }
     return this.http.get(`${this.endpoint}/sae/list-clients`,{params:httpParams,observe:"response"});
   }
 
   getSalesByClient(from:string,to:string,clientId:number,page:number,perPage:number){
     let httpParams:HttpParams= new HttpParams().append("from",from).append("to",to).append("page",page.toString()).append("perPage",perPage.toString());
     return this.http.get(`${this.endpoint}/sales-clients/${clientId}`,{params:httpParams,observe:"response"});
+  }
+
+  getTicket(saleId:number){
+    let httpHeaders:HttpHeaders = new HttpHeaders().append("Content-Type","text/plain; charset=utf-8");
+    return this.http.get(`${this.endpoint}/single-ticket/${saleId}`,{headers:httpHeaders,responseType:"text"});
   }
 }

@@ -1,8 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MatTableDataSource, MAT_DIALOG_DATA, PageEvent } from '@angular/material';
+import { MatDialog, MatDialogRef, MatTableDataSource, MAT_DIALOG_DATA, PageEvent } from '@angular/material';
 import { ServicesClientsService } from 'src/app/features/services/services-clients.service';
 import { SaleInterface } from 'src/app/features/shared/models/sale.interface';
+import { TicketModalComponent } from '../ticket-modal/ticket-modal.component';
 
 @Component({
   selector: 'app-sales-client-modal',
@@ -13,7 +14,8 @@ export class SalesClientModalComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data:{client:any},
   private dialogRef:MatDialogRef<SalesClientModalComponent>,
-  private servicesClientsService:ServicesClientsService
+  private servicesClientsService:ServicesClientsService,
+  private dialog:MatDialog
   ) { }
   form:FormGroup;
   displayedColumns:string[]=["folio","date","amount","seller","options"];
@@ -23,7 +25,8 @@ export class SalesClientModalComponent implements OnInit {
   dataSource:MatTableDataSource<SaleInterface>;
   
   pageChange(pageEvent:PageEvent){
-    
+    this.page=pageEvent.pageIndex;
+    this.searchSales();
   }
   searchSales(){
     if(this.form.valid){
@@ -66,7 +69,15 @@ export class SalesClientModalComponent implements OnInit {
     return this.form.get("to");
   }
 
-
+  showTicket(index:number){
+    this.dialog.open(TicketModalComponent,{
+      data:{
+        saleId: this.dataSource.data[index].saleId,
+        folio: this.dataSource.data[index].folio
+      },
+      disableClose: true
+    });
+  }
 
   close(){
     this.dialogRef.close();
