@@ -21,7 +21,13 @@ const routes: Routes = [
     path:"warehouses",
     loadChildren: ()=> import("./features/warehouses/warehouse-module.module").then(m=>m.WarehouseModuleModule),
     canActivate:[GuardAuthGuard]
-  },{
+  },
+  {
+    path:"sellers",
+    loadChildren: ()=> import("./features/sellers/seller-module.module").then(m=>m.SellerModuleModule),
+    canActivate:[GuardAuthGuard]
+  }
+  ,{
     path: "products",
     loadChildren: ()=> import("./features/products/products-module").then(m=>m.ProductsModule),
     canActivate:[GuardAuthGuard]
@@ -36,6 +42,11 @@ const routes: Routes = [
   },{
     path: 'fridge',
     loadChildren: ()=> import("./features/fridges/fridge.module").then(m=>m.FridgeModule),
+    canActivate:[GuardAuthGuard]
+  },
+  {
+    path: 'users',
+    loadChildren: ()=>import("./features/users/page/list-users/list-users.module").then(m=>m.ListUsersModule),
     canActivate:[GuardAuthGuard]
   }
 ];

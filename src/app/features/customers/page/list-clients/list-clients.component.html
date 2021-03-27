@@ -1,0 +1,49 @@
+<div>
+    <h1 class="title">Listado de clientes</h1>
+    <div style="width: 100%;display: flex;flex-direction: column;">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 list-clients">
+
+        <!-- <ng-container matColumnDef="key">
+          <th mat-header-cell *matHeaderCellDef> Clave </th>
+          <td mat-cell *matCellDef="let element"> {{element.isAspel?element.idAspel:element.id}} </td>
+        </ng-container> -->
+      
+        
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Nombre </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+      
+        
+        <ng-container matColumnDef="rfc">
+          <th mat-header-cell *matHeaderCellDef> RFC </th>
+          <td mat-cell *matCellDef="let element"> {{element.rfc}} </td>
+        </ng-container>
+      
+      
+        <ng-container matColumnDef="credit">
+          <th mat-header-cell *matHeaderCellDef> Tipo </th>
+          <td mat-cell *matCellDef="let element"> {{element.type_cliente}} </td>
+        </ng-container>
+        <ng-container matColumnDef="balance">
+            <th mat-header-cell *matHeaderCellDef> Saldo </th>
+            <td mat-cell *matCellDef="let element"> {{element.credit}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="sales">
+            <th mat-header-cell *matHeaderCellDef> Ventas </th>
+            <td mat-cell *matCellDef="let element; let index=index"> 
+                <button mat-raised-button (click)="showSales(index)"> Ventas </button>
+            </td>
+          </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table> 
+      <mat-paginator class="list-clients" [length]="totalCount"
+               [pageSize]="perPage"
+               (page)="pageChange($event)"
+               >
+    </mat-paginator>
+    </div>
+</div>

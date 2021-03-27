@@ -44,6 +44,7 @@ import {MatSelectModule} from '@angular/material/select';
     FlexLayoutModule,
     RegisterContactsModule,
     MatSelectModule,
+    
   ],
   exports: [RegisterClientComponent],
   entryComponents: [

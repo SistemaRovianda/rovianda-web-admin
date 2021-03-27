@@ -1,12 +1,135 @@
-.main-container {
-  height: calc(100vh - 64px);
-  background: linear-gradient(
-    to bottom,
-    #eef1f6 0%,
-    #eef1f6 77%,
-    #eef1f6 78%,
-    #eef1f6 79%
-  );
-  background-color: #eef1f6;
-  overflow-x: auto;
+// .main-container {
+//   height: calc(100vh - 64px);
+//   background: linear-gradient(
+//     to bottom,
+//     #eef1f6 0%,
+//     #eef1f6 77%,
+//     #eef1f6 78%,
+//     #eef1f6 79%
+//   );
+//   background-color: #eef1f6;
+//   overflow-x: auto;
+// }
+
+
+// .menu-title:hover> .menu{
+//   display: block;
+//   visibility: visible;
+// }
+// .menu-title{
+//   z-index: 1;
+// }
+// .menu{
+//   z-index: 2;
+//   visibility: hidden;
+//   list-style-type: none;
+//   margin: 0;
+//   padding: 10px;
+//   position: fixed;
+//   background-color: white;
+// }
+// .menu>li:hover{
+//   color: gray;
+// }
+// .dropdown{
+//   position: relative;
+//   display: inline-block;
+// }
+
+
+
+.mat-toolbar{
+  height: 60px;
 }
+
+.nav ul {
+  list-style: none;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.nav ul li {
+    font-family: 'Roboto', sans-serif;
+    border-bottom: none;
+    height: 60px;
+    line-height: 60px;
+    font-size: 14px;
+    float:left;
+    margin: 0 auto;
+}
+
+.nav ul li a {
+  text-decoration: none;
+  color:#000000;
+  display: block;
+  transition: .3s background-color;
+  padding:0 24px;
+}
+
+.nav ul li a:hover {
+  background-color: #5c89c7;
+  color:#FFFFFF;
+}
+
+.nav a {
+    border-bottom:none;
+}
+.nav li ul {
+  position:absolute;
+  display:none;
+  width:inherit;
+text-align:left;
+}
+
+
+
+.nav li:hover ul li:hover ul{
+  display: block;
+  background-color: white;
+  min-width: 150px;
+  float: right;
+  position: absolute;
+}
+
+.nav li:hover ul {
+  display:block;
+  background-color: white;
+  min-width: 150px;
+}
+
+.nav ul li ul li {
+display: block;
+float:none !important; /* newly added */
+height:auto; /* newly added */
+line-height:34px; /* newly added */
+}
+
+.button-logout{
+  flex:auto
+}
+
+.sub-menu{
+  display: none;
+}
+.nav li ul li ul {
+  position:absolute;
+  display:none;
+  width:auto;
+  text-align: left;
+}
+
+.nav ul li ul li ul li {
+  background-color: rgb(86, 172, 238);
+  display: block;
+  float:none !important; /* newly added */
+  height:auto; /* newly added */
+  line-height:34px; /* newly added */
+  }
+  .nav ul li ul li:hover .sub-menu-item-list{
+    display: flex;
+  }
+
+  .nav ul li:hover .sub-menu-list{
+    display: flex;
+  }

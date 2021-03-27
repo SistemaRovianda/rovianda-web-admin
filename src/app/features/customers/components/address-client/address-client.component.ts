@@ -11,6 +11,8 @@ export class AddressClientComponent implements OnInit {
   form: FormGroup;
   @Output() addressSend = new EventEmitter;
 
+ 
+
   constructor() {
     this.form = new FormGroup({
       street: new FormControl('', [
@@ -18,11 +20,7 @@ export class AddressClientComponent implements OnInit {
         Validators.minLength(3),
         Validators.pattern(/^([a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.,;&"'-_()]+\s)*[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.,;&"'-_()]*$/)
       ]),
-      intNumber: new FormControl('', [
-        Validators.required,
-        Validators.minLength(1),
-        Validators.pattern(/^[0-9]\d*$/)
-      ]),
+      intNumber: new FormControl(''),
       extNumber: new FormControl('', [
         Validators.required,
         Validators.minLength(1),
@@ -49,14 +47,8 @@ export class AddressClientComponent implements OnInit {
         Validators.pattern(/^([a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.,;&"'-_()]+\s)*[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.,;&"'-_()]*$/)
       ]),
       reference: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.pattern(/^([a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.,;&"'-_()]+\s)*[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.,;&"'-_()]*$/)
-      ]),
-      population: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.pattern(/^([a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.,;&"'-_()]+\s)*[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ.,;&"'-_()]*$/)
+        
+        
       ]),
       cp: new FormControl('', [
         Validators.required,
@@ -123,12 +115,7 @@ export class AddressClientComponent implements OnInit {
         : this.form.get('location').hasError('pattern') ? 'No se permiten espacios en blanco.'
           : '';
   }
-  getErrorPopulation() {
-    return this.form.get('population').hasError('required') && this.form.get('population').touched ? 'La población es requerida.'
-      : this.form.get('population').hasError('minlength') ? 'Mínimo 3 letras.'
-        : this.form.get('population').hasError('pattern') ? 'No se permiten espacios en blanco.'
-          : '';
-  }
+ 
   getErrorCp() {
     return this.form.get('cp').hasError('required') && this.form.get('cp').touched ? 'El código postal es requerido.'
       : this.form.get('cp').hasError('minlength') ? 'Mínimo 3 caracteres.'
@@ -176,7 +163,7 @@ export class AddressClientComponent implements OnInit {
         suburb: this.form.get('suburb').value,
         location: this.form.get('location').value,
         reference: this.form.get('reference').value,
-        population: this.form.get('population').value,
+        
         cp: this.form.get('cp').value,
         state: this.form.get('state').value,
         municipality: this.form.get('municipality').value,

@@ -6,6 +6,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app.routing";
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { ToastrModule } from "ngx-toastr";
+
 
 // import { SessionStorageService } from './features/services/session-storage-service';
 // import { StoreModule } from '@ngrx/store';
@@ -19,6 +21,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     AppRoutingModule,
     HttpClientModule,
     AngularFireAuthModule,
+    ToastrModule.forRoot()
     // StoreModule,
     // StoreModule.forRoot({}, {})
   ],

@@ -15,7 +15,7 @@ import { DialogComponent } from '../dialog/dialog.component';
 export class TableComponent implements OnInit {
 
   @Output() identificator= new EventEmitter<number>();
-  displayedColumns: string[] = ['position','code', 'productName', 'accions'];
+  displayedColumns: string[] = ['code', 'productName', 'accions'];
   infoIngredients: MatTableDataSource<listProduct>;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 

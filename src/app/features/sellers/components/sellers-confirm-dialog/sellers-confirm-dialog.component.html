@@ -1,0 +1,8 @@
+<h3>¿Seguro que desea eliminar al cliente: {{data.user.name}}?</h3>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<button *ngIf="!isLoading" mat-button mat-raised-button color="warn" (click)="cancel()">
+    Cancelar
+</button>
+<button *ngIf="!isLoading" mat-button mat-raised-button color="primary" (click)="deleteUser()">
+    Eliminar
+</button>

@@ -8,6 +8,7 @@ import {
   Tax,
   WarehouseOFSAEDTO,
 } from "src/app/features/models/model-products";
+import { ProductLineInterface } from "../shared/models/product.line.interface";
 
 @Injectable({
   providedIn: "root",
@@ -64,5 +65,12 @@ export class ServicesProductsService {
 
   postAddIngredient(ingredient: ingredient) {
     return this.http.post(`${this.endpoint}/add/ingredient`, ingredient);
+  }
+
+  getProductLines(){
+    return this.http.get<Array<ProductLineInterface>>(`${this.endpoint}/sae/get-products/lines`);
+  }
+  deleteProductLine(cve:string){
+    return this.http.delete(`${this.endpoint}/sae/delete-products/lines/${cve}`);
   }
 }

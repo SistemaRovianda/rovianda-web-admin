@@ -3,99 +3,219 @@
     fxFlex
     class="mat-h3"
     fxLayout="row"
-    fxLayoutAlign="space-between center"
-    style="padding: 0 20px; height: 64px; margin: 0"
+    style="z-index: 2;"
   >
     <img class="logo" src="\assets\images\grupo-6.svg" alt="logo" />
 
-    <div fxLayoutGap="25px" fxLayout="row">
-      <div fxLayout="row" fxLayoutGap="15px">
-        <div class="content-links-products" routerLinkActive="active">
-          <a
-            class="nav"
-            mat-list-item
-            routerLinkActive="active"
-            routerLink="/products/edit-product"
-            style="display: none"
-          >
-            Productos
-          </a>
-          <a
-            class="nav"
-            mat-list-item
-            routerLinkActive="active"
-            routerLink="/products/list-products"
-            >Productos
-          </a>
-        </div>
-        <a
-          class="nav"
-          mat-list-item
-          routerLink="/quality/history"
-          routerLinkActive="active"
-        >
-          Historial
-        </a>
-        <a
+    <div style="width: auto;">
+    
+        <!-- <a
           class="nav"
           mat-list-item
           routerLink="/quality/maintenance"
           routerLinkActive="active"
         >
           Mantenimiento
-        </a>
-        <a
-          class="nav"
-          mat-list-item
-          routerLink="/customers/create-client"
-          routerLinkActive="active"
-        >
-          Clientes
-        </a>
-        <a
+        </a> -->
+
+        <div class="nav">
+          
+            <ul >
+
+              <li>
+                <a
+                mat-list-item
+                routerLink="/warehouses/create"
+                routerLinkActive="active"
+                >
+                Inventarios
+              </a>
+            </li>
+              
+
+              <li>
+                <a>
+                  Productos
+                </a>
+                <ul>
+                  <li>
+                      <a
+                      mat-list-item
+                      routerLinkActive="active"
+                      routerLink="/products/list-products"
+                      >
+                      Listado
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                    mat-list-item
+                    routerLink="/products/line"
+                    routerLinkActive="active"
+                    >
+                    Linea de productos
+                  </a>
+                  </li>
+                </ul>
+               
+              </li>
+          
+          <!-- <li>
+            <a
+            mat-list-item
+            routerLink="/quality/history"
+            routerLinkActive="active"
+            >
+             Historial
+            </a>
+          </li> -->
+         
+       
+
+              
+              <li>
+                <a >Maquinas</a>
+                <ul class="sub-menu-list" >
+                  <li>
+                    <a mat-list-item
+                    routerLink="/fridge/fridge"
+                    routerLinkActive="active" >
+                    Congeladores
+                    </a>
+                  </li>
+                  <li>
+                    
+                    <a>
+                      Mantenimiento
+                    </a>
+                    <ul class="sub-menu-item-list"  >
+                      <li>
+                        <a
+                          mat-list-item
+                          routerLink="/quality/maintenance"
+                          routerLinkActive="active"
+                        >
+                          Activos
+                        </a>
+                        
+                      </li>
+                      <li>
+                        <a
+                        mat-list-item
+                        routerLink="/machines/machine"
+                        routerLinkActive="active"  
+                        >
+                        Historial
+                        </a>
+                      </li>
+                    </ul>
+                  
+                  </li>
+                    
+                    
+                </ul>
+              </li>
+              <li>
+                <a>Ventas</a>
+                <ul class="sub-menu-list">
+                  <li>
+                    <a>Clientes</a>
+                    <ul class="sub-menu-item-list">
+                      <li>
+                      <a
+                      mat-list-item
+                      routerLink="/customers/create-client"
+                      routerLinkActive="active">
+                      Registro
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                    mat-list-item
+                    routerLink="/customers/list-clients"
+                    routerLinkActive="active">
+                    Listado
+                  </a>
+                </li>
+                    </ul>
+                   
+                    </li>
+                   
+    
+                
+                  <li>
+                    <a
+                    mat-list-item
+                    routerLink="/sellers/list"
+                    routerLinkActive="active"
+                    >
+                    Visitas
+                  </a>
+                </li>
+                </ul>
+              </li>
+                
+              <li>
+                <a>Usuarios</a>
+                <ul class="sub-menu-item-list">
+                  <li>
+                    <a
+                    mat-list-item
+                    routerLink="/users/list"
+                    routerLinkActive="active"
+                    >
+                    Listado
+                  </a>
+                  </li>
+                  <li>
+                    <a
+                    mat-list-item
+                    routerLink="/users/register"
+                    routerLinkActive="active"
+                    >
+                    Registro
+                  </a>
+                  </li>
+                </ul>
+                
+              </li>
+            </ul>
+          
+        </div>
+
+        
+        <!-- <a
           class="nav"
           mat-list-item
           routerLink="/machines/machine"
           routerLinkActive="active"
         >
           Maquinas
-        </a>
-        <a
+        </a> -->
+        <!-- <a
           class="nav"
           mat-list-item
           routerLink="/fridge/fridge"
           routerLinkActive="active"
         >
           Congeladores
-        </a>
-        <a
-          class="nav"
-          mat-list-item
-          routerLink="/products/line"
-          routerLinkActive="active"
-        >
-          Linea de productos
-        </a>
-        <a
-          class="nav"
-          mat-list-item
-          routerLink="/warehouses/create"
-          routerLinkActive="active"
-        >
-          Almacenes (vendedores)
-        </a>
+        </a> -->
+        
       </div>
-    </div>
-    <div>
-      <a mat-list-item routerLinkActive="active" (click)="logout()">
-        Cerrar sesión
-        <!-- <div fxLayoutAlign="center center" >
-          <mat-icon>keyboard_arrow_left</mat-icon>
-        </div> -->
-      </a>
-    </div>
+      <div class="button-logout nav">
+      <ul style="list-style-type: none; float: right;">
+        <li>
+          <a mat-list-item routerLinkActive="active" (click)="logout()" class="logout">
+            Cerrar sesión
+            
+          </a>
+         </li>
+        </ul>
+      </div>
   </div>
+  
 </mat-toolbar>
+
 <mat-sidenav-container>
   <mat-sidenav-content fxFlexFill>
     <div class="main-container">

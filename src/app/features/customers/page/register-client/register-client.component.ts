@@ -34,9 +34,15 @@ export class RegisterClientComponent implements OnInit {
     this.valid('dirección');
   }
 
+  rfcRequired:boolean = false;
   check(event: any) {
     this.objchecks = event;
     this.valid('checks');
+    if(this.objchecks.typeClient=="CREDITO"){
+      this.rfcRequired = true;
+    }else if(this.objchecks.typeClient="CONTADO"){
+      this.rfcRequired=false;
+    }
   }
 
   valid(lugar) {
@@ -50,9 +56,27 @@ export class RegisterClientComponent implements OnInit {
         ? (this.ban = false)
         : (this.ban = true)
       : (this.ban = true);
+
   }
 
   sendData() {
+    if(this.rfcRequired==true && this.objdataGeneric.rfc==""){
+      this.openDialogConfirm({
+        title: "Rfc Requerido",
+        msg: `Si el cliente es crédito debe llevar RFC obligatoriamente.`,
+      });
+    }else if(this.rfcRequired==true && this.objchecks.daysCredit==null){
+      this.openDialogConfirm({
+        title: "Días de crédito requeridos",
+        msg: `Si el cliente es crédito debe días de crédito.`,
+      });
+    }else if(this.objdataGeneric.monday==false && this.objdataGeneric.tuesday==false && this.objdataGeneric.wednesday==false &&
+      this.objdataGeneric.thursday==false && this.objdataGeneric.friday==false && this.objdataGeneric.saturday==false && this.objdataGeneric.sunday==false){
+        this.openDialogConfirm({
+          title: "Días de visita del vendedor requeridos",
+          msg: `Favor de seleccionar los días en los que el vendedor asignado visitará al cliente.`,
+        });
+    }else{
     if (
       this.objdataGeneric != undefined &&
       this.objaddress != undefined &&
@@ -80,9 +104,18 @@ export class RegisterClientComponent implements OnInit {
           cfdi: this.objdataGeneric.cfdi,
           paymentSat: this.objdataGeneric.paymentSat,
           contacts: this.dialogValues,
-          clasification: this.objdataGeneric.clasification
+          clasification: this.objdataGeneric.clasification,
+          daysVisited:{
+            monday: this.objdataGeneric.monday,
+            tuesday: this.objdataGeneric.tuesday,
+            wednesday: this.objdataGeneric.wednesday,
+            thursday: this.objdataGeneric.thursday,
+            friday: this.objdataGeneric.friday,
+            saturday: this.objdataGeneric.saturday,
+            sunday: this.objdataGeneric.sunday
+          }
         };
-        // falta consumir el servicio
+      //  falta consumir el servicio
         this.servicesClient.postCustomerCreated(obj).subscribe(
           (data) => {
             this.openDialogConfirm({
@@ -100,6 +133,7 @@ export class RegisterClientComponent implements OnInit {
         console.log(obj);
       }
     }
+  }
   }
 
   openDialogConfirm(data) {

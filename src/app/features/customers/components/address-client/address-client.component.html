@@ -21,7 +21,7 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <mat-label>No. Interior</mat-label>
+        <mat-label>No. Interior (Opcional)</mat-label>
         <input matInput formControlName="intNumber" placeholder="Ingresa el número int." (ngModelChange)="sendData()" />
         <mat-error *ngIf="form.controls.intNumber.invalid">
           {{ getErrorNumberInt() }}
@@ -64,16 +64,13 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field class="example-full-width">
+      <!-- <mat-form-field class="example-full-width">
         <mat-label>población</mat-label>
         <input matInput formControlName="population" placeholder="Ingresa la población" (ngModelChange)="sendData()" />
         <mat-error *ngIf="form.controls.population.invalid">
           {{ getErrorPopulation() }}
         </mat-error>
-      </mat-form-field>
-    </div>
-
-    <div class="row" fxLayoutGap="10px">
+      </mat-form-field> -->
       <mat-form-field class="example-full-width">
         <mat-label>Código Postal</mat-label>
         <input matInput formControlName="cp" placeholder="Ingresa el código postal" (ngModelChange)="sendData()" />
@@ -81,6 +78,10 @@
           {{ getErrorCp() }}
         </mat-error>
       </mat-form-field>
+    </div>
+
+    <div class="row" fxLayoutGap="10px">
+      
 
       <mat-form-field class="example-full-width">
         <mat-label>Estado</mat-label>
@@ -113,9 +114,7 @@
           {{ getErrorReference() }}
         </mat-error>
       </mat-form-field>
-    </div>
 
-    <div class="row" fxLayoutGap="10px">
       <mat-form-field class="example-full-width">
         <mat-label>Nacionalidad</mat-label>
         <input matInput formControlName="nationality" placeholder="Ingresa la nacionalidad"
@@ -125,4 +124,6 @@
         </mat-error>
       </mat-form-field>
     </div>
+
+    
   </div>

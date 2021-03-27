@@ -1,10 +1,10 @@
 <div class="contentTable">
   <mat-table [dataSource]="infoIngredients" class="mat-elevation-z8" matSort>
     <!-- Position Column -->
-    <ng-container matColumnDef="position">
+    <!-- <ng-container matColumnDef="position">
       <mat-header-cell *matHeaderCellDef> Consecutivo </mat-header-cell>
       <mat-cell *matCellDef="let i= index" mat-sort-header> {{i+1+(paginator.pageIndex*paginator.pageSize)}} </mat-cell>
-    </ng-container>
+    </ng-container> -->
     <ng-container matColumnDef="code">
       <mat-header-cell *matHeaderCellDef> Clave </mat-header-cell>
       <mat-cell *matCellDef="let element" mat-sort-header> {{element.code}} </mat-cell>
@@ -16,7 +16,7 @@
     <ng-container matColumnDef="accions" mat-sort-header>
       <mat-header-cell *matHeaderCellDef> Opciones </mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <button class="button" mat-raised-button color="primary" (click)="funtionDetail(element.id)">Detalles</button>
+        <!-- <button class="button" mat-raised-button color="primary" (click)="funtionDetail(element.id)">Detalles</button> -->
         <button class="button" mat-raised-button color="accent" [routerLink]="['/products/edit-product',{id:element.id}]">Editar</button>
         <!-- <button class="button" mat-raised-button color="warn" (click)="funtionDelete(element.id, element.code)">Eliminar</button> -->
       </mat-cell>

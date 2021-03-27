@@ -30,7 +30,7 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <mat-label>correo electrónico</mat-label>
+        <mat-label>correo electrónico (Opcional)</mat-label>
         <input matInput formControlName="email" placeholder="Ingresa el correo electrónico" (ngModelChange)="sendData()"/>
         <mat-error>
           <span *ngIf="form.hasError('required', 'email')">
@@ -49,12 +49,9 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <mat-label>CURP</mat-label>
+        <mat-label>CURP (Opcional)</mat-label>
         <input matInput formControlName="curp" placeholder="Ingresa la curp" (ngModelChange)="sendData()"/>
         <mat-error>
-          <span *ngIf="form.hasError('required', 'curp')">
-            Este campo es requerido.
-          </span>
 
           <span *ngIf="form.hasError('whitespace', 'curp')">
             No has introducido caracteres.
@@ -72,12 +69,9 @@
 
     <div class="row" fxLayoutGap="30px">
       <mat-form-field class="example-full-width">
-        <mat-label>Teléfono</mat-label>
+        <mat-label>Teléfono (Opcional)</mat-label>
         <input matInput formControlName="phone" (ngModelChange)="sendData()"/>
         <mat-error>
-          <span *ngIf="form.hasError('required', 'phone')">
-            Este campo es requerido.
-          </span>
 
           <span *ngIf="form.hasError('whitespace', 'phone')">
             No has introducido caracteres.
@@ -93,11 +87,17 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <mat-label>RFC</mat-label>
+        <mat-label>RFC (Opcional)</mat-label>
         <input matInput formControlName="rfc" placeholder="RFC del cliente" (ngModelChange)="sendData()" #input
           [value]="input.value.toUpperCase()" type="text" />
+          <mat-error *ngIf="form.hasError('required', 'rfc')">
+            <span >
+              Campo obligatorio
+            </span>
+        </mat-error>
         <mat-error *ngIf="form.controls.rfc.invalid">
-          {{ getErrorRFC() }}
+            {{ getErrorRFC() }}
+          
         </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
@@ -124,7 +124,7 @@
     </div>
     <div class="row" fxLayoutGap="30px">
       <mat-form-field class="example-full-width">
-        <mat-label>Clasificación</mat-label>
+        <mat-label>Clasificación (Opcional)</mat-label>
         <input matInput formControlName="clasification" (ngModelChange)="sendData()"/>
         <mat-error>
           <span *ngIf="form.hasError('required', 'clasification')">
@@ -174,6 +174,17 @@
         </mat-select>
     </mat-form-field>
     
+    </div>
+    <div class="row" fxLayoutGap="30px">
+      
+      <h3>Días en los que el vendedor: {{userSaleValue}} Visitará a este cliente</h3>
+        <mat-checkbox class="example-margin" formControlName="monday" (change)="sendData()">Lunes</mat-checkbox>
+        <mat-checkbox class="example-margin" formControlName="tuesday" (change)="sendData()">Martes</mat-checkbox>
+        <mat-checkbox class="example-margin" formControlName="wednesday" (change)="sendData()">Miercoles</mat-checkbox>
+        <mat-checkbox class="example-margin" formControlName="thursday" (change)="sendData()">Jueves</mat-checkbox>
+        <mat-checkbox class="example-margin" formControlName="friday" (change)="sendData()">Viernes</mat-checkbox>
+        <mat-checkbox class="example-margin" formControlName="saturday" (change)="sendData()">Sabado</mat-checkbox>
+        <mat-checkbox class="example-margin" formControlName="sunday" (change)="sendData()">Domingo</mat-checkbox>
     </div>
   </div>
 </div>

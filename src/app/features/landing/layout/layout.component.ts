@@ -18,7 +18,7 @@ export class LayoutComponent implements OnInit {
       this.authService.getUserData(data.uid).subscribe((dataUser)=>{
         console.log(dataUser)
         if(dataUser.rol == 'ADMINISTRATOR'){
-          this.router.navigateByUrl("/products/list-products");  
+          this.router.navigateByUrl("/warehouses/create");  ////products/list-products
         }else{
           this.ban2 = true;
         }

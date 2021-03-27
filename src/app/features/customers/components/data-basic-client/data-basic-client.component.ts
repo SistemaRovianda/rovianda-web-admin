@@ -1,5 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { FormControl, FormGroup, ValidationErrors, Validators } from "@angular/forms";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 import { usersSale } from "src/app/features/models/model-clients";
@@ -22,6 +22,42 @@ export class DataBasicClientComponent implements OnInit {
   paymentSat:any[]=[]
   typesCfdi:any[]=[]
 
+  daysToVisit:{
+    monday:boolean,
+    tuesday:boolean,
+    wednesday:boolean,
+    thursday:boolean,
+    friday:boolean,
+    saturday:boolean,
+    sunday:boolean
+  }={
+    monday:false,
+    tuesday:false,
+    wednesday:false,
+    thursday:false,
+    friday:false,
+    saturday:false,
+    sunday:false
+  }
+
+  rfcRequired:boolean = false;
+
+  @Input() set _rfcRequired(rfcIsRequired:boolean){
+    console.log("rfc requerido: "+rfcIsRequired+" typeof: "+typeof rfcIsRequired);
+    this.rfcRequired=rfcIsRequired;
+    if(rfcIsRequired==true){
+      if(this.rfcInput.value==""){
+        this.rfcInput.setErrors({required:true});
+      }
+    }else if(rfcIsRequired==false){
+      this.rfcInput.setErrors(null);
+    }
+  }
+
+  get rfcInput(){
+    return this.form.get("rfc");
+  }
+
   constructor(private serviceClient: ServicesClientsService) {
     this.form = new FormGroup({
       keyClient: new FormControl({ value: 0, disabled: true }, [ //correcto númerico
@@ -32,7 +68,7 @@ export class DataBasicClientComponent implements OnInit {
         ),
       ]),
       email: new FormControl("", [
-        Validators.required,
+        
         Validators.email,
         whitespaceValidator,
       ]),
@@ -42,19 +78,15 @@ export class DataBasicClientComponent implements OnInit {
         whitespaceValidator,
       ]),
       rfc: new FormControl("", [
-        Validators.required,
         Validators.minLength(3),
         Validators.pattern(
           /^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])([A-Z]|[0-9]){2}([A]|[0-9]){1})?$/
         ),
       ]),
       curp: new FormControl("", [
-        Validators.required,
-        Validators.pattern(REGEX_CURP),
-        whitespaceValidator,
+        Validators.pattern(REGEX_CURP)
       ]),
       phone: new FormControl("", [
-        Validators.required,
         whitespaceValidator,
         digitsValidator
       ]),
@@ -88,6 +120,13 @@ export class DataBasicClientComponent implements OnInit {
         whitespaceValidator,
         Validators.pattern(/^[0-9]\d*$/)
       ]),
+      monday: new FormControl(false),
+      tuesday: new FormControl(false),
+      wednesday: new FormControl(false),
+      thursday: new FormControl(false),
+      friday: new FormControl(false),
+      saturday: new FormControl(false),
+      sunday: new FormControl(false)
     });
   }
 
@@ -169,6 +208,10 @@ export class DataBasicClientComponent implements OnInit {
     return search;
   }
 
+  get userSaleValue(){
+    return this.userSale.value.fullName;
+  }
+
   sendData() {
     if (!this.form.invalid && !this.userSale.invalid) {
       let obj = {
@@ -184,6 +227,13 @@ export class DataBasicClientComponent implements OnInit {
         cfdi: this.form.get('cfdi').value,
         clasification: this.form.get('clasification').value,
         dayCharge: this.form.get('dayCharge').value,
+        monday: this.form.get("monday").value,
+        tuesday: this.form.get("tuesday").value,
+        wednesday: this.form.get("wednesday").value,
+        thursday: this.form.get("thursday").value,
+        friday: this.form.get("friday").value,
+        saturday: this.form.get("saturday").value,
+        sunday: this.form.get("sunday").value,
       };
       if (obj.saleuid == undefined) {
         this.userSale.setErrors({ invalid: true });

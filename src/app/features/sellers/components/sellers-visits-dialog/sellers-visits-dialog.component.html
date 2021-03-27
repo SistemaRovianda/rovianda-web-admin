@@ -1,0 +1,110 @@
+<div>
+    <div *ngIf="data.mode=='VISITS'">
+    <h2 >Clientes a visitar en : {{currentDate}}</h2>
+    
+    
+    <form [formGroup]="form">
+        <mat-form-field appearance="fill">
+            <mat-label>Visitas en: </mat-label>
+            <input matInput [matDatepicker]="fromPicker" formControlName="from">
+            <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+            <mat-datepicker #fromPicker></mat-datepicker>
+          </mat-form-field>
+          
+          <button mat-button mat-raised-button color="primary"  class="button-report" (click)="buscar()" [disabled]="isLoading">Buscar</button>
+        </form>
+    </div>
+
+    <div *ngIf="data.mode=='CLIENTS'">
+        <h2 >Todos los clientes de: {{data.seller.name}}</h2>
+    </div>
+</div>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<div>
+<table *ngIf="!isLoading && data.mode=='VISITS'" mat-table [dataSource]="dataSourceVisits" class="mat-elevation-z8 table-sellers-visits">
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+          
+            <!-- Position Column -->
+            <ng-container matColumnDef="no">
+              <th mat-header-cell *matHeaderCellDef> No. </th>
+              <td mat-cell *matCellDef="let element;let index=index"> {{index+1}} </td>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Nombre </th>
+              <td mat-cell *matCellDef="let element"> {{element.client.name}} </td>
+            </ng-container>
+          
+            <!-- Weight Column -->
+            <ng-container matColumnDef="keySae">
+              <th mat-header-cell *matHeaderCellDef> clave </th>
+              <td mat-cell *matCellDef="let element"> 
+                  
+                  {{element.client.keyClient}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="visited">
+                <th mat-header-cell *matHeaderCellDef> Visitado </th>
+                <td mat-cell *matCellDef="let element"> 
+                    {{(element.visitedStatus=="VISITED"?"VISITADO":"NO VISITADO")}}
+                
+            </td>
+            </ng-container>
+
+            <ng-container matColumnDef="time">
+                <th mat-header-cell *matHeaderCellDef> Tiempo en visita </th>
+                <td mat-cell *matCellDef="let element">
+                {{element.time}}
+            </td>
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsVisits"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsVisits;"></tr>
+          </table>
+          
+          <table *ngIf="!isLoading && data.mode=='CLIENTS'" mat-table [dataSource]="dataSourceClients" class="mat-elevation-z8 table-sellers-visits">
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+          
+            <!-- Position Column -->
+            <ng-container matColumnDef="no">
+              <th mat-header-cell *matHeaderCellDef> No. </th>
+              <td mat-cell *matCellDef="let element;let index=index"> {{index+1}} </td>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Nombre </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+          
+            <!-- Weight Column -->
+            <ng-container matColumnDef="keySae">
+              <th mat-header-cell *matHeaderCellDef> clave </th>
+              <td mat-cell *matCellDef="let element"> 
+                  
+                  {{element.keyClient}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="options">
+                <th mat-header-cell *matHeaderCellDef>Opciones </th>
+                <td mat-cell *matCellDef="let element">
+                    <button *ngIf="element.idAspel!=0" mat-button mat-raised-button color="warn" (click)="deleteUser(element)">
+                        Eliminar
+                    </button>
+                    <button *ngIf="element.idAspel==0" disabled mat-button mat-raised-button >Eliminar</button>
+            </td>
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsClients"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsClients;"></tr>
+          </table>
+    <button mat-button mat-raised-button color="warn" (click)="closeModal()">
+        Cerrar modal
+    </button>
+</div>

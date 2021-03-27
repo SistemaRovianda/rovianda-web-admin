@@ -18,6 +18,7 @@
       <mat-card-content fxLayout="column" fxLayoutGap="10px">
         <div class="content-data-generic">
           <app-data-basic-client
+            [_rfcRequired]="rfcRequired"
             (dataGeneric)="dataGeneric($event)"
           ></app-data-basic-client>
         </div>
