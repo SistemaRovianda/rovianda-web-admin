@@ -63,3 +63,43 @@ export interface WarehouseOFSAEDTO{
   ENCARGADO:string,
   TELEFONO:string
 }
+
+export interface AdminProductsCatalog{
+  id:number,
+  product:string,
+  presentation:string,
+  price:string,
+  weight:string,
+  keySae:string,
+  keyAltern:string,
+  type:string,
+  uniMed:string,
+  quantityByPresentation:number,
+  esqDescription:string,
+  esqKey:number
+}
+
+export interface AdminPreRegisterProductDetails{
+  productIdInSystem:number,
+  name:string,
+  price:number,
+  keySae:string,
+  uniMed:string,
+  descriptionImp:string,
+  esqKey:number
+}
+
+export interface RequestPreRegistProduct{
+  productId:number,
+  name:string,
+  code:string,
+  codeAltern:string,
+  presentation:string,
+  price:number,
+  weight:number,
+  type:string,
+  quantityByPresentation:number,
+  uniMed:string,
+  esqDescription:string,
+  esqKey:number
+}

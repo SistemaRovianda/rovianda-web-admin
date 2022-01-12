@@ -11,7 +11,7 @@ import { TypeClientComponent } from "../../components/type-client/type-client.co
 //Angular material
 import { MatCardModule } from "@angular/material/card";
 import { MatInputModule } from "@angular/material/input";
-import { MatButtonModule, MatDialogRef } from "@angular/material";
+import { MatButtonModule, MatDialogRef, MatFormFieldModule, MatIconModule, MatProgressSpinnerModule } from "@angular/material";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatListModule } from "@angular/material/list";
@@ -22,6 +22,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { RegisterContactsComponent } from '../../components/register-contacts/register-contacts.component';
 import { RegisterContactsModule } from '../../components/register-contacts/register-contacts.module';
 import {MatSelectModule} from '@angular/material/select';
+import { CreateClientModalModule } from "../../components/create-client-modal/create-client-modal.module";
 @NgModule({
   declarations: [
     RegisterClientComponent,
@@ -44,7 +45,10 @@ import {MatSelectModule} from '@angular/material/select';
     FlexLayoutModule,
     RegisterContactsModule,
     MatSelectModule,
-    
+    CreateClientModalModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatProgressSpinnerModule
   ],
   exports: [RegisterClientComponent],
   entryComponents: [

@@ -1,0 +1,15 @@
+<div>
+    <div class="ticket-container">
+        
+        <p class="ticket">
+            <mat-spinner [diameter]="60" style="margin-left: 40%;" *ngIf="isLoading"></mat-spinner>
+            {{ticket}}
+        </p>
+        
+    </div>
+    <div class="button-container">
+        <button mat-raised-button color="primary" (click)="close()" *ngIf="data.requestStatus!='PENDING'">Aceptar</button>
+        <button mat-raised-button color="primary" (click)="close()" *ngIf="data.requestStatus=='PENDING'" (click)="acceptCancelation(data.saleId)">Aceptar Cancelación</button>
+        <button mat-raised-button color="warn" (click)="close()" *ngIf="data.requestStatus=='PENDING'" (click)="declineCancelation(data.saleId)">Rechazar Cancelación</button>
+    </div>
+</div>

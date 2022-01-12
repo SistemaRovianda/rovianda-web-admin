@@ -1,0 +1,48 @@
+<div class="devolution-request-container">
+    <div class="devolution-summary-info" *ngIf="devolutionRequest">
+        <div class="devolution-label"><strong>Folio: </strong><label > {{devolutionRequest.folio}}</label></div>
+            <div class="devolution-label"><strong>Vendedor:</strong> <label>{{devolutionRequest.sellerName}}</label></div>
+            <div class="devolution-label"><strong>Fecha de venta:</strong><label> {{parseDateWithHour(devolutionRequest.dateSale)}}</label></div>
+            <div class="devolution-label"><strong>Fecha de solicitud:</strong><label > {{parseDateWithHour(devolutionRequest.dateRequest)}}</label></div>
+            <div class="devolution-label"><strong>Estatus:</strong><label > {{devolutionRequest.status=='PENDING'?"PENDIENTE":(devolutionRequest.status=="ACCEPTED"?"ACEPTADO":"RECHAZADO")}}</label></div>
+        </div>
+        <div class="devolution-details" *ngIf="devolutionRequest">
+            <div class="original">
+                <h3>Nota original</h3>
+                <p class="ticket" *ngIf="devolutionRequest">{{devolutionRequest.originalTicket}}</p>
+            </div>
+            <div class="summary" >
+                <div class="observations">
+                    <h3 *ngIf="devolutionRequest" >Motivo: </h3>
+                    <label *ngIf="devolutionRequest" class="text">{{devolutionRequest.observations}}</label>
+                    <h3 *ngIf="devolutionRequest">Producto devuelto: </h3>
+                    <div *ngIf="devolutionRequest">
+                    <label *ngFor="let dev of devolutionRequest.devolutionProducts" class="text">{{dev.productName}} {{dev.quantity}} {{dev.uniMed}} ${{dev.price}}</label>
+                    </div>
+                </div>
+                
+            </div>
+        <div class="modified" *ngIf="devolutionRequest">
+            <h3>Nota resultante</h3>
+            <p class="ticket" *ngIf="devolutionRequest">{{devolutionRequest.modifiedTicket}}</p>
+        </div>
+    </div>
+    <div class="action-buttons"  *ngIf="devolutionRequest">
+        <button mat-raised-button color="primary" *ngIf="devolutionRequest.status=='PENDING'" (click)="acceptDevolution(devolutionRequest)" [disabled]="isLoading">Aceptar devolución</button>
+        <button mat-raised-button color="warn" *ngIf="devolutionRequest.status=='PENDING'" (click)="declineDevolution(devolutionRequest)" [disabled]="isLoading"> Rechazar devolución</button>
+        <div class="spinner-container" *ngIf="isLoading">
+            <mat-spinner class="spinner" [diameter]="60"></mat-spinner>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-container" *ngIf="devolutionRequest">
+            <strong>Fecha de atención: </strong> <label>{{parseDateWithHour(devolutionRequest.dateAttended)}}</label>
+        </div>
+        <div class="footer-container" *ngIf="devolutionRequest">
+            <strong>Atendio: </strong> <label>{{devolutionRequest.adminAccepted}}</label>
+        </div>
+    </div>
+    <div class="button-close">
+        <button mat-raised-button color="primary" *ngIf="devolutionRequest.status!='PENDING'" (click)="close()">Cerrar</button>
+    </div>
+</div>

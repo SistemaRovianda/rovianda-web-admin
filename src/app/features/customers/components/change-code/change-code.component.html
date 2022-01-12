@@ -1,0 +1,15 @@
+<div class="container">
+    <h3 class="title">Cambio de código</h3>
+    <div class="form" [formGroup]="form">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Código (Anterior)</mat-label>
+              <input matInput [value]="oldCode" disabled>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Nuevo Código (Debe existir en Aspel SAE)</mat-label>
+                <input matInput type="number" formControlName="newCode">
+            </mat-form-field>
+            <button mat-raised-button [disabled]="isLoading" (click)="changeCode()">Cambiar código</button>
+            <mat-spinner  [diameter]="60" *ngIf="isLoading" class="spinner"></mat-spinner>
+    </div>
+</div>

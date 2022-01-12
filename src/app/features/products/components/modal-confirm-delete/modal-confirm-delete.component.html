@@ -1,0 +1,10 @@
+<div>
+    <label>¿Está seguro que decea eliminar el product: {{data.productName}}?</label>
+    <div style="text-align: center;">
+        <button mat-raised-button  (click)="cancel()">Cancelar</button>
+        <button mat-raised-button color="warn" (click)="delete()">Eliminar</button>
+    </div>
+    <div style="width: 100%;" *ngIf="isLoading">
+        <mat-spinner [diameter]="70" style="margin-left: 45%;"></mat-spinner>
+    </div>
+</div>

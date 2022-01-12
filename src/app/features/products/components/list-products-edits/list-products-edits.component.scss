@@ -1,0 +1,27 @@
+.table-products{
+    width: 90%;
+    margin-left: 5%;
+    text-align: center;
+}
+td{
+    text-align: left;
+}
+th{
+    text-align: left;
+}
+
+.searcher-product-container{
+    display: block;
+    margin-left: 5%;
+}
+.searcher-product{
+    display: flex;
+}
+.searcher-product>div{
+    display: inline-block
+}
+.button-container{
+    line-height: 60px;
+    vertical-align: middle;
+    margin-left: 20px;
+}

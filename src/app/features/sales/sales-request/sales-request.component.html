@@ -1,0 +1,86 @@
+<div class="sales-request-container">
+    <div class="searcher-container">
+        <div class="search-filter" [formGroup]="form">
+            
+                <mat-form-field appearance="fill">
+                    <mat-label>Tipo de solicitud</mat-label>
+                    <mat-select formControlName="typeRequest">
+                    <mat-option value="CANCELATIONS" selected>Cancelaciones</mat-option>
+                    <mat-option value="DEVOLUTIONS" >Devoluciones</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Estado de solicitud</mat-label>
+                    <mat-select formControlName="status">
+                    <mat-option value="PENDING" selected>Pendientes</mat-option>
+                    <mat-option value="ACCEPTED">Aceptadas</mat-option>
+                    <mat-option value="DECLINED" >Rechazadas</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="search-button-container">
+                    <div class="search-button" (click)="search()">
+                        <mat-icon>search</mat-icon>
+                    </div>
+                </div>
+                <div class="date-container">
+                    <label>{{currentDate}}</label>            
+                    <mat-icon class="date-icon"  (click)="picker.open()">edit</mat-icon>
+                    <input matInput [matDatepicker]="picker" style="width: 0px;height: 0px;" formControlName="date">
+                    <mat-datepicker #picker></mat-datepicker>
+                </div>
+        </div>
+        <div class="loading">
+            <mat-spinner [diameter]="60" *ngIf="isLoading"></mat-spinner>
+        </div>
+    </div>
+
+    <div class="table-container">
+
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table-request">
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+          
+            <!-- Position Column -->
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef class="header"> No. </th>
+              <td mat-cell *matCellDef="let element;let index=index">  {{((pageIndex*10)+index)+1}}  </td>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="sellerName">
+              <th mat-header-cell *matHeaderCellDef class="header"> Vendedor </th>
+              <td mat-cell *matCellDef="let element" > {{element.sellerName}} </td>
+            </ng-container>
+          
+            <!-- Weight Column -->
+            <ng-container matColumnDef="folio">
+              <th mat-header-cell *matHeaderCellDef class="header"> Folio </th>
+              <td mat-cell *matCellDef="let element"> {{element.folio}} </td>
+            </ng-container>
+          
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="saleDate">
+              <th mat-header-cell *matHeaderCellDef class="header"> Fecha de venta </th>
+              <td mat-cell *matCellDef="let element"> {{parseDateWithHour(element.date)}} </td>
+            </ng-container>
+            <ng-container matColumnDef="requestDate">
+                <th mat-header-cell *matHeaderCellDef class="header"> Fecha de solicitud </th>
+                <td mat-cell *matCellDef="let element" > {{parseDateWithHour(element.createAt)}} </td>
+              </ng-container>
+              <ng-container matColumnDef="options">
+                <th mat-header-cell *matHeaderCellDef class="header"> Opciones </th>
+                <td mat-cell *matCellDef="let element" >  
+                  <button mat-raised-button color="primary" (click)="checkRequestSale(element)"> Ver detalles </button>
+                </td>
+              </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+    </div>
+    <div class="comparator">
+
+    </div>
+</div>

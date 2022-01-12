@@ -12,12 +12,13 @@ import { ModalTypeReportModule } from '../modal-type-report/modal-type-report.mo
 import { ModalTypeReportComponent } from '../modal-type-report/modal-type-report.component';
 import { ModalOutputsGeneralModule } from '../modal-outputs-general/modal-outputs-general.module';
 import { ModalOutputsGeneralComponent } from '../modal-outputs-general/modal-outputs-general.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 @NgModule({
   declarations: [ModalsellerentranceComponent],
   imports: [
     MatNativeDateModule,MatInputModule,MatProgressSpinnerModule,
     CommonModule,MatButtonModule,FlexLayoutModule,MatTableModule,MatDatepickerModule,ReactiveFormsModule,MatFormFieldModule,
-    ModalTypeReportModule, ModalOutputsGeneralModule
+    ModalTypeReportModule, ModalOutputsGeneralModule,MatButtonToggleModule
   ],
   exports:[ModalsellerentranceComponent],
   entryComponents:[ModalTypeReportComponent,ModalOutputsGeneralComponent],

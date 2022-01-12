@@ -1,26 +1,37 @@
-<div fxLayout="column" fxLayoutAlign="center center" fxFlex fxLayoutGap="10px">
+<!-- <div fxLayout="column" fxLayoutAlign="center center" fxFlex fxLayoutGap="10px">
   <div class="content" fxLayout="column" fxLayoutGap="10px">
     <div class="content-button">
-      <button
+      
+    </div>
+    
+
+      
+        <div class="content-list">
+        <app-table (identificator)="detailsProduct($event)"></app-table>
+      </div>
+      
+      
+    
+    <div class="content-detail" *ngIf="dataDetailsProduct" fxLayout="column">
+      <h2>Detalles del producto</h2>
+      <div fxFlex>
+         <app-details-product
+          fxFlex
+          [dataDetails]="dataDetailsProduct"
+        ></app-details-product> 
+        
+      </div>
+    </div>
+  </div>
+</div> -->
+<div class="button-container">
+<button
         class="button"
         mat-raised-button
-        (click)="navigateCreateProduct()"
+        (click)="openPreRegister()"
       >
         <img src="../../../../../assets/icons/plus-solid.svg" />
         Nuevo producto
       </button>
-    </div>
-    <div class="content-list">
-      <app-table (identificator)="detailsProduct($event)"></app-table>
-    </div>
-    <div class="content-detail" *ngIf="dataDetailsProduct" fxLayout="column">
-      <h2>Detalles del producto</h2>
-      <div fxFlex>
-        <app-details-product
-          fxFlex
-          [dataDetails]="dataDetailsProduct"
-        ></app-details-product>
-      </div>
-    </div>
-  </div>
 </div>
+<app-list-products-edits #listProducts></app-list-products-edits>

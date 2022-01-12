@@ -105,7 +105,7 @@
       </mat-form-field>
 
       <mat-form-field class="item-form" appearance="outline">
-        <mat-label class="input">Id vendedor</mat-label>
+        <mat-label class="input">Id vendedor (Aspel)</mat-label>
         <input matInput class="input" formControlName="clave" readonly />
       </mat-form-field>
     </div>
@@ -129,12 +129,13 @@
             <option *ngFor="let warehouseItem of warehouses" [value]="warehouseItem.CVE_ALM">
               {{warehouseItem.CVE_ALM }}-{{warehouseItem.ENCARGADO}}</option>
           </select>
-       
-        
+      </mat-form-field>      
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-around end">
+      <mat-form-field class="item-form" appearance="outline">
+        <mat-label class="input">Folio (Debe existir en Aspel)</mat-label>
+        <input matInput class="input"  matNativeControl formControlName="folio" />
       </mat-form-field>
-      
-      
-      
     </div>
 
     <button fxLayoutAlign="space-around center" (click)="createUser()" mat-button class="btn-add-user"

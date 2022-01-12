@@ -1,0 +1,64 @@
+.ticket{
+    width: 300px;
+    height: 400px;
+    overflow-y: scroll;
+    font-size: .90em;
+    white-space: pre-line;
+}
+
+.devolution-request-container{
+    width: 100%;
+    display: block;
+}
+.devolution-details{
+    width: 100%;
+    height: 400px;
+    display: flex;
+}
+.original{
+    width: 33%;
+}
+.summary{
+    width: 33%;
+}
+.modified{
+    width: 33%;
+}
+.action-buttons{
+    width: 100%;
+    height: 100px;
+    text-align: center;
+}
+
+.text{display: block;}
+.devolution-summary-info{
+    width: 100%;
+}
+.devolution-label{
+    width: 20%;
+    text-align: center;
+}
+.devolution-summary-info{
+    width: 100%;
+    display: flex;
+}
+
+.spinner-container{
+    width: 100%;
+}
+
+.spinner{
+    margin-left: 45%;
+}
+.footer{
+    width: 100%;
+    display: flex;
+}
+.footer-container{
+    width: 50%;
+}
+
+.button-close{
+    width: 100%;
+    text-align: right;
+}

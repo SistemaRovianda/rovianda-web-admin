@@ -28,7 +28,8 @@ export class AddUserPageComponent implements OnInit {
       job: ["", [Validators.required]],
       clave: [""],
       comision: [{ value: '', disabled: true }],
-      warehouse:[{value:null,disabled:true}]
+      warehouse:[{value:null,disabled:true}],
+      folio: [{value:'',disabled: true}]
     });
 
   }
@@ -100,6 +101,11 @@ export class AddUserPageComponent implements OnInit {
   get warehouse(){
    return this.userForm.get("warehouse");
   }
+
+  get folio(){
+    return this.userForm.get("folio");
+  }
+
   rols:number[] =[10,13,14,15];
   checkTypeSeller() {
     if (this.rols.includes(+this.rolId.value)) {
@@ -110,7 +116,9 @@ export class AddUserPageComponent implements OnInit {
       })
       this.comision.enable();
       this.warehouse.enable()
+      this.folio.enable();
     } else {
+      this.folio.disable();
       this.comision.disable();
     }
   }
@@ -156,7 +164,6 @@ export class AddUserPageComponent implements OnInit {
     },(err)=>{
       this.isLoading=false;
       this.toast.error(`Error al registrar el usuario`, "Error");});
-    
   }
 
   clearForm(result) {

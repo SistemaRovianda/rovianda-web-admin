@@ -1,56 +1,108 @@
 <div fxLayout="row" fxLayoutAlign="center start" class="page">
-  <div
-    fxLayoutGap="10px"
-    fxLayout="row"
-    style="padding: 28px 16px"
-    fxLayoutAlign="center start"
-  >
-    <mat-card
-      class="curtomer-card"
-      fxFlex="80"
-      fxFlex.gt-md="90"
-      fxLayout="column"
-      fxLayoutGap="10px"
-    >
-      <div class="content-title mat-title">
-        <p>Registrar cliente</p>
+ 
+  <div class="client-register-container">
+      <div [formGroup]="form" >
+        <div class="form-client-search">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Códido SAE</mat-label>
+            <input matInput formControlName="clientCode">
+          </mat-form-field>
+          <div class="btn-search-client" (click)="search()">
+            <mat-icon>search</mat-icon>
+          </div>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Códido Asignado</mat-label>
+            <input matInput formControlName="clientCodeAssigned" disabled>
+          </mat-form-field>
+        </div>
+        <div class="form-client-form">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="clientName">
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>RFC</mat-label>
+            <input matInput formControlName="clientRfc">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Tipo</mat-label>
+            <mat-select formControlName="clientType">
+              <mat-option value="CONTADO">CONTADO</mat-option>
+              <mat-option value="CREDITO">CREDITO</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Credito</mat-label>
+            <input matInput formControlName="clientCredit">
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Saldo</mat-label>
+            <input matInput formControlName="clientCurrentCredit">
+          </mat-form-field>
+        </div>
+        <div class="form-client-form">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Calle</mat-label>
+            <input matInput formControlName="clientStreet">
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Colonia</mat-label>
+            <input matInput formControlName="clientSuburb">
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Número exterior</mat-label>
+            <input matInput formControlName="clientExtNumber">
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Localidad</mat-label>
+            <input matInput formControlName="clientLocality">
+          </mat-form-field>
+          
+        </div>
+        <div class="form-client-form">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Estado</mat-label>
+            <input matInput formControlName="clientState">
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Municipio</mat-label>
+            <input matInput formControlName="clientMunicipality">
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Cp.</mat-label>
+            <input matInput formControlName="clientCp">
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Nacionalidad</mat-label>
+            <input matInput formControlName="clientNationality">
+          </mat-form-field>
+        </div>
+        <div class="form-client-form">
+          <mat-form-field appearance="fill">
+            <mat-label>Vendedor</mat-label>
+            <mat-select formControlName="clientSeller">
+              <mat-option *ngFor="let seller of sellersList" [value]="seller.id">{{seller.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          
+          
+        </div>
+        <label class="title-days-visited">Días de visita: </label>
+        <div class="form-client-form">
+          
+          <mat-checkbox formControlName="monday">Lunes</mat-checkbox>
+          <mat-checkbox formControlName="tuesday">Martes</mat-checkbox>
+          <mat-checkbox formControlName="wednesday">Miercoles</mat-checkbox>
+          <mat-checkbox formControlName="thursday">Jueves</mat-checkbox>
+          <mat-checkbox formControlName="friday">Viernes</mat-checkbox>
+          <mat-checkbox formControlName="saturday">Sabado</mat-checkbox>
+          <mat-checkbox formControlName="sunday">Domingo</mat-checkbox>
+        </div>
+        <div class="form-client-form">
+          <button mat-raised-button (click)="regist()" *ngIf="!isLoading">Registrar Cliente</button>
+          <button mat-raised-button color="warn" (click)="cancel()" *ngIf="!isLoading">Cancelar</button>
+          <mat-spinner *ngIf="isLoading" [diameter]="70"></mat-spinner>
+        </div>
       </div>
-      <mat-card-content fxLayout="column" fxLayoutGap="10px">
-        <div class="content-data-generic">
-          <app-data-basic-client
-            [_rfcRequired]="rfcRequired"
-            (dataGeneric)="dataGeneric($event)"
-          ></app-data-basic-client>
-        </div>
-        <div class="content-address-customer">
-          <app-address-client
-            (addressSend)="dataAddress($event)"
-          ></app-address-client>
-        </div>
-        <div class="content-type-customer">
-          <app-type-client (objTypeCredit)="check($event)"></app-type-client>
-        </div>
-        <div class="buttons" fxFlex fxLayoutAlign="center">
-          <button
-            mat-raised-button
-            color="secondary"
-            (click)="openDialog()"
-            style="margin-left: 20px;"
-          >
-            Registrar contactos
-          </button>
-          <button
-            mat-raised-button
-            #disableButton
-            color="primary"
-            [disabled]="ban"
-            (click)="sendData()"
-          >
-            Agregar
-          </button>
-
-        </div>
-      </mat-card-content>
-    </mat-card>
   </div>
 </div>

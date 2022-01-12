@@ -48,6 +48,11 @@ const routes: Routes = [
     path: 'users',
     loadChildren: ()=>import("./features/users/page/list-users/list-users.module").then(m=>m.ListUsersModule),
     canActivate:[GuardAuthGuard]
+  },
+  {
+    path: "sales",
+    loadChildren: ()=>import("./features/sales/list-sales.module").then(m=>m.ListSalePageModule),
+    canActivate:[GuardAuthGuard]
   }
 ];
 

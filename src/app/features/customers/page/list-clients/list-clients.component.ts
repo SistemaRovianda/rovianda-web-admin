@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatTableDataSource, PageEvent } from '@angular/material';
 import { ClientSAE } from 'src/app/features/models/model-clients';
 import { ServicesClientsService } from 'src/app/features/services/services-clients.service';
+import { ChangeCodeComponent } from '../../components/change-code/change-code.component';
 import { SalesClientModalComponent } from '../../components/sales-client-modal/sales-client-modal.component';
 
 @Component({
@@ -20,28 +21,32 @@ export class ListClientsComponent implements OnInit {
   perPage=10;
   totalCount=0;
   dataSource:MatTableDataSource<any>;
-  displayedColumns:string[]=["name","rfc","credit","balance","sales"];
+  displayedColumns:string[]=["name","code","aspelcode","rfc","credit","balance","sales"];
   form:FormGroup;
   pageChange(pageEvent:PageEvent){
     this.page = pageEvent.pageIndex;
-    this.servicesClientsService.getListOfClient(this.page,this.perPage,this.nameToFind).subscribe((response:HttpResponse<Object>)=>{
+    this.servicesClientsService.getListOfClient(this.page,this.perPage,this.nameToFind,this.typeFilter.value).subscribe((response:HttpResponse<Object>)=>{
       this.totalCount=+response.headers.get("x-total-count");
       //console.log(response.body);
       this.dataSource.data=response.body as Array<any>;
   });
   }
   nameToFind:string=null;
+  get typeFilter(){
+    return this.form.get("typeFilter");
+  }
   ngOnInit() {
     this.dataSource = new MatTableDataSource();
     this.form = new FormGroup({
-      name: new FormControl(null,Validators.required)
+      name: new FormControl(""),
+      typeFilter: new FormControl("NAME",Validators.required)
     });
     this.search();
   }
 
   search(){
     this.dataSource.data=[];
-    this.servicesClientsService.getListOfClient(this.page,this.perPage,this.nameToFind).subscribe((response:HttpResponse<Object>)=>{
+    this.servicesClientsService.getListOfClient(this.page,this.perPage,this.nameToFind,this.typeFilter.value).subscribe((response:HttpResponse<Object>)=>{
         this.totalCount=+response.headers.get("x-total-count");
         //console.log(response.body);
         this.dataSource.data=response.body as Array<any>;
@@ -68,6 +73,7 @@ export class ListClientsComponent implements OnInit {
       if(!this.filtered){
       this.filtered=true;
       this.nameToFind=this.name.value;
+      
       }else{
         this.filtered=false;
         this.nameToFind=null;
@@ -78,5 +84,14 @@ export class ListClientsComponent implements OnInit {
     
   }
 
+  changeCode(client:any){
+    this.dialog.open(ChangeCodeComponent,{
+      data: {
+        client
+      }
+    }).afterClosed().subscribe(()=>{
+      this.search();
+    });
+  }
 
 }

@@ -9,10 +9,12 @@ export interface WarehouseModel{
 export interface DeliverToWarehouse{
     CODE:string,
     NAME:string,
-    LOT:string,
+    LOT?:string,
     UNITS:number,
     WEIGHT:number,
-    DATE:string
+    PRICE:number,
+    TOTAL:number,
+    DATE?:string,
 }
 
 export interface DeviveryFromMainWarehouse{

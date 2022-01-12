@@ -12,16 +12,23 @@ import { ModalTypeReportComponent } from '../modal-type-report/modal-type-report
   styleUrls: ['./modalsellerentrance.component.scss']
 })
 export class ModalsellerentranceComponent implements OnInit {
-
+  warehouseType:number=0;
   constructor(public dialogRef: MatDialogRef<ModalsellerentranceComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {warehouseModel:WarehouseModel},
-    private warehouseService:WarehouseService,public dialog: MatDialog) { }
+    private warehouseService:WarehouseService,public dialog: MatDialog) { 
+      this.warehouseType=+this.data.warehouseModel.CVE_ALM;
+      if(this.warehouseType==53){
+        this.displayedColumns=["position","code","name","lot","units","weight","date"];
+      }else{
+        this.displayedColumns=["position","code","name","units","weight","price","total"];
+      }
+    }
     isLoading=false;
-    displayedColumns:string[]=["position","code","name","lot","units","weight","date"];
+    displayedColumns:string[];
   dataSource:DeliverToWarehouse[]=[
   
   ];
-
+  form2:FormGroup;
   form:FormGroup;
   ngOnInit() {
     
@@ -29,7 +36,28 @@ export class ModalsellerentranceComponent implements OnInit {
       from: new FormControl(null,[Validators.required]),
       to: new FormControl(null,[Validators.required])
     });
+    this.form2=new FormGroup({
+      type: new FormControl('acumulated',[Validators.required])
+    });
+
+    this.form2.valueChanges.subscribe((newVal)=>{
+      if(this.warehouseType!=53){
+        
+      if(newVal.type=='acumulated'){
+        this.displayedColumns=["position","code","name","units","weight","price","total"];
+      }else{
+        this.displayedColumns=["position","code","name","lot","units","weight","price","total","date"];
+      }
+      
+    }else{
+      this.displayedColumns=["position","code","name","lot","units","weight","date"];
+    }
+    })
     
+  }
+
+  get type(){
+    return this.form2.get("type");
   }
 
   get from(){
@@ -52,8 +80,11 @@ export class ModalsellerentranceComponent implements OnInit {
       // date2.setHours(date2.getHours()-6);
       
       this.isLoading=true;
-      this.warehouseService.getRecordsOfDelivered(this.data.warehouseModel.CVE_ALM,this.getDateStr(date1),this.getDateStr(date2)).subscribe((records)=>{
-        this.dataSource=records;
+      this.warehouseService.getRecordsOfDelivered(this.data.warehouseModel.CVE_ALM,this.getDateStr(date1),this.getDateStr(date2),this.type.value).subscribe((records)=>{
+        this.dataSource=records.map(x=>{
+          x.WEIGHT=+x.WEIGHT.toFixed(2); 
+          return x
+        });
         this.isLoading=false;
       
       },
@@ -72,35 +103,55 @@ export class ModalsellerentranceComponent implements OnInit {
     return date.getFullYear()+"-"+month+"-"+day;
   }
 
-  getReport(){
-    if(this.form.valid==true){
-      let date1=new Date(this.from);
-      let date2=new Date(this.to);
-      // date1.setHours(date1.getHours()-6);
-      // date2.setHours(date2.getHours()-6);
-      this.isLoading=true;
-      this.warehouseService.getRecordsOfDeliveredReport(this.data.warehouseModel.CVE_ALM,this.getDateStr(date1),this.getDateStr(date2)).subscribe((records)=>{
-        this.downloadFile(records,"EntregaAAlmacenes","pdf");
-        this.isLoading=false;
-      },
-      (err)=>this.isLoading=false);
-    }
-  }
+  // getReport(){
+  //   if(this.form.valid==true){
+ 
+  //     this.isLoading=true;
+  //     this.warehouseService.getRecordsOfDeliveredReport(this.data.warehouseModel.CVE_ALM,this.getDateStr(date1),this.getDateStr(date2),this.type.value).subscribe((records)=>{
+  //       this.downloadFile(records,"EntregaAAlmacenes","pdf");
+  //       this.isLoading=false;
+  //     },
+  //     (err)=>this.isLoading=false);
+  //   }
+  // }
 
  
-  getReportInventory(){
+  getReport(type:number){
     this.isLoading=true;
-    const dialog = this.dialog.open(ModalTypeReportComponent,{
-      width: "40%",
-      height: "40%",
-      data:{
-        warehouse: this.data.warehouseModel.CVE_ALM
-      },
-      disableClose:true
+    if(type==1){
+      let date1=new Date(this.from);
+      let date2=new Date(this.to);
+      const dialog = this.dialog.open(ModalTypeReportComponent,{
+        width: "40%",
+        height: "40%",
+        data:{
+          warehouse: this.data.warehouseModel.CVE_ALM,
+          type,
+          dateStart:this.getDateStr(date1),
+          dateEnd: this.getDateStr(date2),
+          typeReport: this.type.value
+        },
+        disableClose:true
+        });
+      dialog.afterClosed().subscribe((result)=>{
+        this.isLoading=false;
       });
-    dialog.afterClosed().subscribe((result)=>{
-      this.isLoading=false;
-    });
+    }else if(type==2){
+      const dialog = this.dialog.open(ModalTypeReportComponent,{
+        width: "40%",
+        height: "40%",
+        data:{
+          warehouse: this.data.warehouseModel.CVE_ALM,
+          type
+        },
+        disableClose:true
+        });
+      dialog.afterClosed().subscribe((result)=>{
+        this.isLoading=false;
+      });
+    }
+    
+    
   }
 
   openModalOutputsGeneral(){

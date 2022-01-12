@@ -1,0 +1,84 @@
+<div>
+    <label class="title-preregister">{{data.type=='edit'?"Edición":"Creación"}} de producto</label>
+    <form [formGroup]="form" *ngIf="data.type=='create'">
+        <mat-form-field appearance="fill" class="input-code-sae">
+            <mat-label>Código (en Aspel Sae)</mat-label>
+            <input matInput formControlName="code">
+          </mat-form-field>
+          <button mat-raised-button (click)="search()"> Buscar </button>
+    </form>
+    <div *ngIf="details!=null || data.type=='edit'">
+        <form [formGroup]="form2">
+            <div>
+                <mat-form-field appearance="fill" >
+                <mat-label>Nombre</mat-label>
+                <input matInput formControlName="name">
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="second-input">
+                <mat-label>Código</mat-label>
+                <input matInput formControlName="code">
+              </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field appearance="fill" >
+                <mat-label>Código alterno (Vendedores)</mat-label>
+                <input matInput formControlName="codeAltern">
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="second-input">
+                <mat-label>Presentación</mat-label>
+                <input matInput formControlName="presentation">
+              </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field appearance="fill" >
+                <mat-label>Esquema de impuesto</mat-label>
+                <input matInput formControlName="esqDescription">
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="second-input">
+                  <mat-label>Precio</mat-label>
+                  <input matInput formControlName="price" type="number">
+                  </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="fill" class="second-input">
+                <mat-label>Peso (opcional)</mat-label>
+                <input matInput formControlName="weight" type="number">
+              </mat-form-field>
+              <mat-form-field appearance="fill" >
+                <mat-label>Tipo</mat-label>
+                <mat-select formControlName="type">
+                    <mat-option value="NORMAL">NORMAL</mat-option>
+                    <mat-option value="ABARROTES">ABARROTES</mat-option>
+                    <mat-option value="QUESOS">QUESOS</mat-option>
+                  </mat-select>
+              </mat-form-field>
+            </div>
+            
+            <div>
+              <mat-form-field appearance="fill" >
+                <mat-label>Unidad de medida</mat-label>
+                <mat-select formControlName="uniMed">
+                    <mat-option value="KG">KILO</mat-option>
+                    <mat-option value="PZ">PIEZA</mat-option>
+                  </mat-select>
+              </mat-form-field>
+
+                <mat-form-field appearance="fill" *ngIf="type.value=='ABARROTES'" class="second-input">
+                    <mat-label>Cantidad por presentación</mat-label>
+                    <input matInput formControlName="quantityByPresentation" type="number">
+                  </mat-form-field>
+            </div>
+        </form>
+    </div>
+    <div style="margin-left: 45%;" *ngIf="isLoading">
+        <mat-spinner></mat-spinner>
+    </div>
+    <div class="buttons-containers">
+        <button mat-raised-button (click)="cancel()" [disabled]="isLoading"> Cancelar </button>
+        <button mat-raised-button (click)="delete()" color="warn" *ngIf="data.type!='create'">Eliminar</button>
+        <button mat-raised-button (click)="resincronize()" *ngIf="data.type!='create'">
+          <mat-icon>autorenew</mat-icon>
+        </button>
+        <button mat-raised-button color="primary" (click)="validate()" class="regist-preregist-button" [disabled]="!validForm() || isLoading" > {{data.type=='create'?"Registrar":"Actualizar"}} </button>
+    </div>
+</div>

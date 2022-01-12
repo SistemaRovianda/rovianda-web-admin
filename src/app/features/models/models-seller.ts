@@ -26,3 +26,27 @@ export interface Client{
 export enum ClientVisitedStatus{
     PENDING="PENDING",INVISIT="INVISIT",VISITED="VISITED"
 }
+
+export interface Seller{
+    id:string;
+    saeKey:number,
+    name: string;
+    email: string,
+    job:string,
+    warehouseKeySae:string,
+    status: string,
+    cve: string
+}
+export interface Sale{
+    saleId:number;
+    date:string;
+    hour?:string;
+    amount:number;
+    folio:string;
+    statusStr:string,
+    seller:{
+        name:string;
+        email?:string;
+    },
+    devolutionRequest:boolean
+} 

@@ -9,6 +9,10 @@ import { ProductsComponent } from "./list-products.component";
 import { MatButtonModule } from "@angular/material/button";
 import { DetailsProductModule } from "../../components/details-product/details-product.module";
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { ListProductsEditsModule } from "../../components/list-products-edits/list-products-edits.module";
+import { PreregisterProductModule } from "../../components/preregister-product/preregister-product.module";
+import { MatDialogModule } from "@angular/material";
+import { PreregisterProductComponent } from "../../components/preregister-product/preregister-product.component";
 
 @NgModule({
   declarations: [ProductsComponent],
@@ -18,7 +22,11 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     MatButtonModule,
     DetailsProductModule,
     FlexLayoutModule,
+    ListProductsEditsModule,
+    PreregisterProductModule,
+    MatDialogModule
   ],
   exports: [ProductsComponent],
+  entryComponents:[PreregisterProductComponent]
 })
 export class ProductsModule {}

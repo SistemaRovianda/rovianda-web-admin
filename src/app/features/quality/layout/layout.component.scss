@@ -64,12 +64,13 @@
   color:#000000;
   display: block;
   transition: .3s background-color;
-  padding:0 24px;
+  padding:10px 24px;
 }
 
 .nav ul li a:hover {
   background-color: #5c89c7;
   color:#FFFFFF;
+  padding: 10px 24px;
 }
 
 .nav a {
@@ -102,7 +103,7 @@ text-align:left;
 display: block;
 float:none !important; /* newly added */
 height:auto; /* newly added */
-line-height:34px; /* newly added */
+line-height:60px; /* newly added */
 }
 
 .button-logout{
@@ -124,7 +125,7 @@ line-height:34px; /* newly added */
   display: block;
   float:none !important; /* newly added */
   height:auto; /* newly added */
-  line-height:34px; /* newly added */
+  line-height:60px; /* newly added */
   }
   .nav ul li ul li:hover .sub-menu-item-list{
     display: flex;
