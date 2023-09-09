@@ -187,7 +187,8 @@
                   <li>
                     <a
                     mat-list-item
-                    routerLink="/users/register"
+                    [routerLink]="['/users/register']"
+                    [queryParams]="{type:'CREATE'}"
                     routerLinkActive="active"
                     >
                     Registro

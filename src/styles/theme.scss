@@ -113,24 +113,7 @@ $primary: map-get($theme, primary);
   }
 }
 
-@mixin alert($theme) {
-  .alert {
-    padding: 10px 5px;
-    border-radius: 5px;
-    background: lighten($color: #2d80cd, $amount: 30%);
-    margin-top: 5px;
-  }
 
-  .icon-alert {
-    color: #2d80cd;
-  }
-  .alert-error {
-    padding: 10px 5px;
-    border-radius: 5px;
-    background: lighten($color: #e42311, $amount: 30%);
-    margin-top: 5px;
-  }
-}
 
 // Theme Init
 @include angular-material-theme($theme);
@@ -139,4 +122,4 @@ $primary: map-get($theme, primary);
 @include mat-button($theme);
 @include mat-toolbar($theme);
 @include search-theme($theme);
-@include alert($theme);
+

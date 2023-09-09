@@ -47,12 +47,12 @@
       <!-- Symbol Column -->
       <ng-container matColumnDef="keySae">
         <th mat-header-cell *matHeaderCellDef> Código Sae </th>
-        <td mat-cell *matCellDef="let element"> {{element.type=="ABARROTES"?element.keyAltern:element.keySae}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.keySae}} </td>
       </ng-container>
         <!-- Symbol Column -->
     <ng-container matColumnDef="keyAltern">
         <th mat-header-cell *matHeaderCellDef> Código alterno (Vendedor) </th>
-        <td mat-cell *matCellDef="let element"> {{element.keySae}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.keyAltern?element.keyAltern:element.keySae}} </td>
       </ng-container>
         <!-- Symbol Column -->
     <ng-container matColumnDef="type">

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MatCheckboxChange, MatSelectChange, MatTableDataSource } from '@angular/material';
+import { MatCheckboxChange, MatDialog, MatSelectChange, MatTableDataSource } from '@angular/material';
 import { ItemUser, ItemUserEdit } from '../../../shared/models/list-users.interface';
 import { PlantService } from '../../../services/plant.service';
 import { FormControl } from '@angular/forms';
 import { role } from 'src/app/features/shared/models/role.interface';
+import { ModalChangePasswordComponent } from '../components/modal-change-password/modal-change-password.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-users',
@@ -12,7 +14,7 @@ import { role } from 'src/app/features/shared/models/role.interface';
 })
 export class ListUsersComponent implements OnInit {
 
-  constructor(private plantService:PlantService) { 
+  constructor(private plantService:PlantService,private matDialog:MatDialog,private router:Router) { 
     this.dataSource = new MatTableDataSource();
     this.filterRolFormControl=new FormControl(false);
   }
@@ -34,6 +36,7 @@ export class ListUsersComponent implements OnInit {
     { name: "Mantenimiento", rolId: 9 },
     { name: "Vendedor", rolId: 10 },
     { name: "Ventas", rolId: 10 },
+    {name:"Prevendedor",rolId:18},
     { name: "Administrador", rolId: 11 },
     { name: "Linea de quesos", rolId: 12 },
     { name: "Tiendas tradicionales (sucursal)", rolId: 13 },
@@ -114,7 +117,8 @@ export class ListUsersComponent implements OnInit {
 
   edit(index:number){
     let item = this.dataSource.data[index];
-    item.editing=true;
+    /*item.editing=true;*/
+    this.router.navigateByUrl("/users/details/"+item.userId+"?type=EDIT&rol="+item.rol);
   }
   save(index:number){
     let item = this.dataSource.data[index];
@@ -158,6 +162,15 @@ export class ListUsersComponent implements OnInit {
       item.updating=false;
     },()=>{
       item.updating=false;
+    });
+  }
+
+  changePasswordModal(index:number){
+    let item = this.dataSource.data[index];
+    this.matDialog.open(ModalChangePasswordComponent,{
+      width: "300px",
+      disableClose:true,
+      data:{uid:item.userId}
     });
   }
 

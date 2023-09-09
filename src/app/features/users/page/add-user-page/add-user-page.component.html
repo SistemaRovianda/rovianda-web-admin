@@ -1,147 +1,170 @@
-<div class="container">
-  <form class="form-register" [formGroup]="userForm" fxLayout="column">
-    <h1 class="title-form">Registrar Usuario</h1>
-    <div class="img-perfil">
-      <img src="assets/icon-add-user/user-circle-solid.svg" height="100px" width="100px">
+<div class="container" [formGroup]="form">
+  <div class="alert alert-success" role="alert" *ngIf="showMsg">
+    <img src="assets/icons/cancel_modal.png"  width="30px" height="30px" (click)="showMsg=false">
+    {{msgService}}
+    
+  </div>
+  <div class="alert alert-danger" role="alert" *ngIf="showMsgError">
+    <img src="assets/icons/cancel_modal.png"  width="30px" height="30px" (click)="showMsgError=false">
+    {{msgService}}
+    
+  </div>
+  <div class="row rolpicker">
+    <div class="input-group">
+      <span class="input-group-text ">Rol del usuario</span>
+      <select class="form-select" aria-label="Default select example" formControlName="rol">
+        <option value=""> </option>
+        <option value="ADMINISTRATOR">Administrador</option>
+        <option value="ADMIN_SALES">Admin. Ruta Venta</option>
+        <option value="WAREHOUSE">Almacén</option>
+        <option value="QUALITY">Calidad</option>
+        <option value="PACKAGING">Empaque</option>
+        <option value="COOLING">Enfriamiento</option>
+        <option value="FORMULATION">Formulación</option>
+        <option value="OVEN">Hornos</option>
+        <option value="MANTENIMENT">Matenimiento</option>
+        <option value="SUPERMARKET">SuperMercados</option>
+        <option value="PRESALE">Prevendedor</option>
+        <option value="PROCESS">Proceso</option>
+        <option value="SUCURSAL">Sucursal</option>
+        <option value="SUCURSAL_PLUS">Sucursal Plus</option>
+        <option value="SALESUSER">Vendedor/Repartidor</option>
+      </select>
     </div>
-
-    <div fxLayout="row" fxLayoutAlign="space-around end">
-      <mat-form-field class="item-form" appearance="outline">
-        <mat-label class="input">Nombre</mat-label>
-        <input matInput class="input" formControlName="name" required />
-        <mat-error *ngIf="
-            name.invalid &&
-            !name.errors?.notCharacter &&
-            (name.dirty || name.touched)
-          ">
-          Por favor ingrese un nombre
-        </mat-error>
-        <mat-error *ngIf="name.errors?.notCharacter">
-          No son validos los caracteres especiales y números
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="item-form" appearance="outline">
-        <mat-label class="input">Apellido Paterno</mat-label>
-        <input matInput class="input" formControlName="firstName" required />
-        <mat-error *ngIf="
-            firstName.invalid &&
-            !firstName.errors?.notCharacter &&
-            (firstName.dirty || firstName.touched)
-          ">
-          Por favor ingrese un apellido paterno
-        </mat-error>
-        <mat-error *ngIf="firstName.errors?.notCharacter">
-          No son validos los caracteres especiales y números
-        </mat-error>
-      </mat-form-field>
+    <div class="alert alert-danger" role="alert" *ngIf="rol.touched && !rol.valid">
+      Falta seleccionar el rol
     </div>
-
-    <div fxLayout="row" fxLayoutAlign="space-around end">
-      <mat-form-field class="item-form" appearance="outline">
-        <mat-label class="input">Apellido Materno</mat-label>
-        <input matInput class="input" formControlName="lastName" required />
-        <mat-error *ngIf="
-            lastName.invalid &&
-            !lastName.errors?.notCharacter &&
-            (lastName.dirty || lastName.touched)
-          ">
-          Por favor ingrese un apellido materno
-        </mat-error>
-        <mat-error *ngIf="lastName.errors?.notCharacter">
-          No son validos los caracteres especiales y números
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="item-form" appearance="outline">
-        <mat-label class="input">Correo</mat-label>
-        <input matInput class="input" formControlName="email" required />
-        <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">
-          Por favor ingresar un correo electrónico válido
-        </mat-error>
-        <mat-error *ngIf="email.errors?.whitespace && email.touched">
-          No se aceptan espacios en blanco
-        </mat-error>
-        <mat-error *ngIf="!email.errors?.isValidEmail">
-          Ingrese un formato de correo electrónico válido
-        </mat-error>
-      </mat-form-field>
+  </div>
+  
+  <div class="row mb-3">
+    <div class="col">
+      <div class="form-group">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" placeholder="Nombre del usuario" formControlName="name"/>
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="name.touched && !name.valid">
+        El nombre no puede ir vacio
+      </div>
     </div>
-
-    <div fxLayout="row" fxLayoutAlign="space-around end">
-      <mat-form-field class="item-form" appearance="outline">
-        <mat-label class="input">Contraseña</mat-label>
-        <input matInput class="input" type="password" formControlName="password" required />
-        <mat-error *ngIf="password.invalid && (password.dirty || password.touched)">
-          Ingrese un contraseña
-        </mat-error>
-        <mat-error *ngIf="password.touched && password.errors?.whitespace">
-          No se aceptan espacios en blanco
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field class="item-form" appearance="outline">
-        <mat-label class="input">Puesto</mat-label>
-        <input matInput class="input" formControlName="job" required />
-        <mat-error *ngIf="
-            job.invalid &&
-            !job.errors?.notCharacter &&
-            (job.dirty || job.touched)
-          ">
-          Ingresar un puesto de trabajo
-        </mat-error>
-      </mat-form-field>
+    <div class="col">
+      <div class="form-group">
+        <label class="form-label">Correo</label>
+        <input type="email" class="form-control" placeholder="Correo electronico" formControlName="email"/>
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="email.touched && !email.valid">
+        El email no puede ir vacio
+      </div>
     </div>
-
-    <div fxLayout="row" fxLayoutAlign="space-around end">
-      <mat-form-field class="item-form" appearance="outline">
-        <mat-label>Tipo de usuario</mat-label>
-        <select (change)="checkTypeSeller()" matNativeControl formControlName="rolId" #role required>
-          <option *ngFor="let option of roles" [value]="option.rolId">{{
-            option.name
-          }}</option>
-        </select>
-        <mat-error *ngIf="rolId.invalid && (rolId.dirty || rolId.touched)">
-          Seleccionar un tipo de usuario
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field class="item-form" appearance="outline">
-        <mat-label class="input">Id vendedor (Aspel)</mat-label>
-        <input matInput class="input" formControlName="clave" readonly />
-      </mat-form-field>
+  </div>
+  <div class="row mb-3">
+    <div class="col">
+      <div class="form-group">
+        <label class="form-label">Descripción del puesto</label>
+        <input type="text" class="form-control" placeholder="Ej. Auxiliar de proceso" formControlName="jobDescription"/>
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="jobDescription.touched && !jobDescription.valid">
+        La descripción del puesto no puede ir vacio
+      </div>
     </div>
-
-    <div fxLayout="row" fxLayoutAlign="space-around end">
-      <mat-form-field class="item-form" appearance="outline">
-        <mat-label class="input">Comision</mat-label>
-        <input matInput class="input" type="number"  matNativeControl formControlName="comision" [disabled]="true" />
-        <mat-error *ngIf="
-            comision.invalid &&
-            (comision.dirty || comision.touched)
-          ">
-          Ingresar un puesto de trabajo
-        </mat-error>
-      </mat-form-field>
+    <div class="col">
+      <div class="form-group">
+        <label class="form-label">Contraseña</label>
+        <div class="input-group">
+          <input [type]="showingPassword?'text':'password'" class="form-control" placeholder="Contraseña" formControlName="password"/>
+          <div class="input-group-append input-group-text">
+            <img src="assets/icons/visibility.png" width="20px" height="20px" *ngIf="!showingPassword" (click)="showingPassword=true">
+            <img src="assets/icons/visibility_off.png" width="20px" height="20px" *ngIf="showingPassword" (click)="showingPassword=false">
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="password.touched && !password.valid && typeOperation!='EDIT'">
+        La contraseña no puede ir vacia
+      </div>
       
-      <mat-form-field class="item-form" appearance="outline" >
-        <mat-label>Almacen</mat-label>
-        
-          <select  formControlName="warehouse" matNativeControl  >
-            <option *ngFor="let warehouseItem of warehouses" [value]="warehouseItem.CVE_ALM">
-              {{warehouseItem.CVE_ALM }}-{{warehouseItem.ENCARGADO}}</option>
-          </select>
-      </mat-form-field>      
     </div>
-    <div fxLayout="row" fxLayoutAlign="space-around end">
-      <mat-form-field class="item-form" appearance="outline">
-        <mat-label class="input">Folio (Debe existir en Aspel)</mat-label>
-        <input matInput class="input"  matNativeControl formControlName="folio" />
-      </mat-form-field>
+    <div class="col">
+      <div class="form-group">
+      <label class="form-label">Confirmar contraseña</label>
+        <div class="input-group">
+          <input [type]="showingPasswordConfirm?'text':'password'" class="form-control" placeholder="Confirmar contraseña" formControlName="passwordConfirm"/>
+          <div class="input-group-append input-group-text">
+            <img src="assets/icons/visibility.png" width="20px" height="20px" *ngIf="!showingPasswordConfirm" (click)="showingPasswordConfirm=true">
+            <img src="assets/icons/visibility_off.png" width="20px" height="20px" *ngIf="showingPasswordConfirm" (click)="showingPasswordConfirm=false">
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="passwordConfirm.touched && !passwordConfirm.valid && typeOperation!='EDIT'">
+        El campo no puede ir vacio
+      </div>
+      <div class="alert alert-warning" role="alert" *ngIf="!passwordEquals">
+        La contraseña no coincide
+      </div>
     </div>
+  </div>
 
-    <button fxLayoutAlign="space-around center" (click)="createUser()" mat-button class="btn-add-user"
-      [disabled]="userForm.invalid" [ngClass]="userForm.invalid ? 'disabled' : 'active'">
-      <span *ngIf="!isLoading">Registar usuario</span>
-      <mat-spinner class="custom-spinner" *ngIf="isLoading" diameter="25"></mat-spinner>
-    </button>
-  </form>
+  <div class="row mb-3" *ngIf="rols.includes(rol.value)">
+    <div class="col">
+      <div class="form-group">
+        <label class="form-label">Id vendedor ASPEL</label>
+        <input type="number" class="form-control" placeholder="Id del vendedor en ASPEL SAE" formControlName="claveSAE"/>
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="claveSAE.touched && !claveSAE.valid">
+        La clave SAE no puede ser vacia
+      </div>
+    </div>
+    <div class="col" *ngIf="rols.includes(rol.value)">
+      <div class="form-group">
+        <label class="form-label">Almacén SAE</label>
+        <select  class="form-select" formControlName="warehouseId">
+          <option *ngFor="let warehouse of warehouses" [value]="warehouse.CVE_ALM">{{warehouse.DESCR}}</option>
+        </select>
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="warehouseId.touched && !warehouseId.valid">
+        Debe seleccionar un almacén
+      </div>
+    </div>
+    <div class="col" *ngIf="rols.includes(rol.value)">
+      <div class="form-group">
+        <label class="form-label">Folio de SAE</label>
+        <input type="text" class="form-control" placeholder="Ejemplo. (1V,2V,3V,etc.)" formControlName="folio"/>
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="folio.touched && !folio.valid">
+        El folio no puede ser vacio
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3" *ngIf="rol.value=='PRESALE'">
+    <div class="col-3">
+      <div class="form-group">
+        <label class="form-label">Folio de Prevendedor</label>
+        <input type="text" class="form-control" placeholder="Ejemplo. (1PV,2PV,3PV,etc.)" formControlName="folioPreSale"/>
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="folioPreSale.touched && !folioPreSale.valid">
+        El folio no puede ser vacio
+      </div>
+    </div>
+  </div>
+  <div *ngIf="rol.value=='PRESALE'">
+    <div class="row">
+      <label class="form-label titleRoutes">Rutas asignadas a prevendedor</label>
+    </div>
+    <button type="button" class="btn btn-primary addRoute mb-3" (click)="openDialogSellers()">Agregar ruta</button>
+    <div class="card">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let seller of sellersSelected" [value]="seller.id">{{seller.name}}</li>
+      </ul>
+    </div>
+    <div class="alert alert-warning" role="alert" *ngIf="sellersSelected.length==0">
+      Seleccionar una ruta para el prevendedor
+    </div>
+  </div>
+  <div class="btn-register-container">
+    <button type="button" class="btn btn-danger" (click)="backToList()" *ngIf="!isLoading && typeOperation=='EDIT' && updateCorrect">Regresar al listado</button>
+    <button type="button" class="btn btn-danger" (click)="backToList()" *ngIf="!isLoading && typeOperation=='EDIT' && !updateCorrect">Cancelar</button>
+    <button type="button" class="btn btn-success" (click)="update()" *ngIf="!isLoading && typeOperation=='EDIT' && !updateCorrect">Actualizar</button>
+    <button type="button" class="btn btn-dark" (click)="register()" *ngIf="!isLoading && typeOperation=='CREATE' && !updateCorrect">Registrar</button>
+    <div class="spinner-border" role="status" *ngIf="isLoading">
+      
+    </div>
+  </div>
 </div>

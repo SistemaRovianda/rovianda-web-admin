@@ -42,7 +42,8 @@ export class PlantService {
 
   getReportSalesByType(request:{sellers:string[],format:string,type:string},dateStart:string,dateEnd:string){
     let params:HttpParams = new HttpParams().set("dateStart",dateStart).set("dateEnd",dateEnd);
-    return this.http.post(`${this.url}/report/sales-types`,request,{params,responseType:"blob"});
+    //return this.http.post(`${this.url}/report/sales-types`,request,{params,responseType:"blob"});
+    return this.http.post(`http://rovianda.ddns.net:3000/rovianda/report/sales-types`,request,{params,responseType:"blob"});
   }
   getAllSellers(){
     return this.http.get<Seller[]>(`${this.url}/admin-sales/sellers`);

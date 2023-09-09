@@ -1,8 +1,8 @@
 
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Client, listSellerItem, VisitSeller } from '../models/models-seller';
+import { Client, listSellerItem, Seller, VisitSeller } from '../models/models-seller';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class SellerService {
   }
 
   getAllSeller(){
-      return this.http.get<listSellerItem[]>(`${this.endpoint}/sellers-list`);
+      return this.http.get<Seller[]>(`${this.endpoint}/sellers-list`);
   }
 
   getAllClients(sellerUid:string){
@@ -33,4 +33,25 @@ export class SellerService {
     return this.http.delete(`${this.endpoint}/customer/delete-client/${clientId}`);
   }
 
+  getListOfSellers(){
+    return this.http.get<any[]>(`${this.endpoint}/admin-sales/sellers`);
+  }
+  getListOfClientReport(format:string,hint:string,type:string,sellerId:string){
+    let httpParams:HttpParams= new HttpParams().append("format",format);
+    
+    if(hint!=null && hint!="" && type!=null && type!=""){
+      httpParams=httpParams.append("type",type);
+      httpParams=httpParams.append("hint",hint);
+    }
+    if(sellerId!="0" && sellerId!=null && sellerId!=""){
+      httpParams=httpParams.append("sellerId",sellerId);
+    }
+    return this.http.get(`${this.endpoint}/customers-report/sellers`,{params:httpParams,responseType:"blob"});
+  }
+
+  updatePassword(uid:string,password:string){
+    return this.http.post(`${this.endpoint}/user-password`,{uid,password});
+  }
+
+ 
 }

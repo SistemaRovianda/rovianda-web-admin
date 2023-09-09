@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListClientsComponent } from './list-clients.component';
-import { MatButtonModule, MatDialogModule, MatIconModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatTableModule } from '@angular/material';
+import { MatButtonModule, MatDialogModule, MatIconModule, MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, MatSelectModule, MatTableModule } from '@angular/material';
 import { FlexLayoutModule, FlexModule } from '@angular/flex-layout';
 import { SalesClientModalModule } from '../../components/sales-client-modal/sales-client-modal.module';
 import { SalesClientModalComponent } from '../../components/sales-client-modal/sales-client-modal.component';
@@ -26,7 +26,8 @@ import { ChangeCodeComponent } from '../../components/change-code/change-code.co
     MatInputModule,
     MatIconModule,
     MatMenuModule,ChangeCodeModule,
-    MatSelectModule
+    MatSelectModule,
+    MatProgressSpinnerModule
   ],
   exports:[ListClientsComponent],
   entryComponents:[SalesClientModalComponent,ChangeCodeComponent]

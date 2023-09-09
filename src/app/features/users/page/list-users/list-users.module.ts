@@ -13,6 +13,10 @@ import { AddUserPageComponent } from '../add-user-page/add-user-page.component';
 import { AddUserPageModule } from '../add-user-page/add-user-page.module';
 import {MatSelectModule} from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ModalChangePasswordModule } from '../components/modal-change-password/modal-change-password.module';
+import { ModalChangePasswordComponent } from '../components/modal-change-password/modal-change-password.component';
+
 const routes:Routes=[
   {
     path: "",
@@ -25,6 +29,10 @@ const routes:Routes=[
     },
     {
       path:"register",
+      component: AddUserPageComponent
+    },
+    {
+      path:"details/:uid",
       component: AddUserPageComponent
     }
     ]
@@ -46,7 +54,10 @@ const routes:Routes=[
     MatSelectModule,
     MatCheckboxModule,
     FormsModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    MatDialogModule,
+    ModalChangePasswordModule
+  ],
+  entryComponents:[ModalChangePasswordComponent]
 })
 export class ListUsersModule { }

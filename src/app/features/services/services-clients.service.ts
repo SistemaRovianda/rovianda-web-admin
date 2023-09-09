@@ -32,10 +32,13 @@ export class ServicesClientsService {
   getCatalogCfdi(){
     return this.http.get(`${this.endpoint}/catalogos-de-cfdi`)
   }
-  getListOfClient(page:number,perPage:number,hint:string,type:string){
+  getListOfClient(page:number,perPage:number,hint:string,type:string,sellerId:string){
     let httpParams:HttpParams= new HttpParams().append("page",page.toString()).append("perPage",perPage.toString()).append("type",type);
-    if(hint!=null){
+    if(hint!=null && hint!=""){
       httpParams=httpParams.append("hint",hint);
+    }
+    if(sellerId!="0" && sellerId!=null){
+      httpParams=httpParams.append("sellerId",sellerId);
     }
     return this.http.get(`${this.endpoint}/sae/list-clients`,{params:httpParams,observe:"response"});
   }

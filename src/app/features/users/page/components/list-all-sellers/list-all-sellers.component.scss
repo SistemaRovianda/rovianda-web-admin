@@ -1,0 +1,28 @@
+.list-clients{
+    height: 700px;
+    width: 500px;
+    overflow-y: scroll;
+}
+
+.item-list{
+    background-color: aliceblue;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+.item-list-client{
+    display: block;
+    padding: 10px;
+}
+.item-list-client-details{
+    float:right
+}
+.loading-list-clients{
+    display: flex;
+    justify-content: center;
+}
+
+.add_client{
+    float: right;
+}

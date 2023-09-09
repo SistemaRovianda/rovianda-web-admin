@@ -14,6 +14,8 @@ import {
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { LayoutModule } from "src/app/features/quality/layout/layout.module";
 import { LayoutComponent } from "src/app/features/quality/layout/layout.component";
+import { ListAllSellersModule } from "../components/list-all-sellers/list-all-sellers.module";
+import { ListAllSellersComponent } from "../components/list-all-sellers/list-all-sellers.component";
 
 const routes: Routes = [
   {
@@ -40,10 +42,12 @@ const COMMON_IMPORTS = [
   LayoutModule,
   ReactiveFormsModule,
   MatSelectModule,
+  ListAllSellersModule
 ];
 
 @NgModule({
   declarations: COMMON_DECLARATIONS,
-  imports: COMMON_IMPORTS
+  imports: COMMON_IMPORTS,
+  entryComponents:[ListAllSellersComponent]
 })
 export class AddUserPageModule {}
